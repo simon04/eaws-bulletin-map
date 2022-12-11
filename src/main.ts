@@ -89,7 +89,7 @@ function initMap() {
     attributionControl: false,
     zoomControl: false,
   });
-  L.control.attribution({ prefix: "🌍" }).addTo(map);
+  L.control.attribution({ prefix: "🌍 simon04/eaws-bulletin-map" }).addTo(map);
   L.tileLayer("https://static.avalanche.report/tms/{z}/{x}/{y}.webp", {
     attribution: "albina-euregio",
     maxZoom: 12,
