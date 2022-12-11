@@ -86,6 +86,7 @@ function initMap() {
   const map = L.map(mapElement, {
     center: { lat: 47.3, lng: 11.3 },
     zoom: 5,
+    zoomControl: false,
   });
   L.tileLayer("https://static.avalanche.report/tms/{z}/{x}/{y}.webp", {
     attribution: "albina-euregio",
@@ -106,6 +107,7 @@ function initMap() {
     return div;
   };
   dateControl.addTo(map);
+  L.control.zoom().addTo(map);
   return map;
 }
 
