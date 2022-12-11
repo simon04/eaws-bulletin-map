@@ -86,8 +86,10 @@ function initMap() {
   const map = L.map(mapElement, {
     center: { lat: 47.3, lng: 11.3 },
     zoom: 5,
+    attributionControl: false,
     zoomControl: false,
   });
+  L.control.attribution({ prefix: "false" }).addTo(map);
   L.tileLayer("https://static.avalanche.report/tms/{z}/{x}/{y}.webp", {
     attribution: "albina-euregio",
     maxZoom: 12,
