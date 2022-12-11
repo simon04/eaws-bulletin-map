@@ -12,7 +12,7 @@ if (!date) {
 }
 
 function route(date: Date, replace = false) {
-  const url = "/?date=" + date.toISOString().slice(0, "2006-01-02".length);
+  const url = "?date=" + date.toISOString().slice(0, "2006-01-02".length);
   if (replace) {
     location.replace(url);
   } else {
