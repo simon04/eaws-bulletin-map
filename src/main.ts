@@ -1,5 +1,4 @@
 import * as L from "leaflet";
-import type { PathOptions } from "leaflet";
 
 import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
 
@@ -129,12 +128,34 @@ async function buildMap(
   date: string,
   ampm = ""
 ) {
-  const hidden: PathOptions = Object.freeze({ stroke: false, fill: false });
-  const style = (id: string): PathOptions => {
+  const hidden: L.PathOptions = Object.freeze({ stroke: false, fill: false });
+  const style = (id: string): L.PathOptions => {
     if (ampm) id += ":" + ampm;
     const warnlevel = maxDangerRatings[id];
     if (!warnlevel) return hidden;
     return WARNLEVEL_STYLES[warnlevel];
+  };
+  type StyleFunction = {
+    "micro-regions_elevation": (
+      properties: MicroRegionElevationProperties
+    ) => L.PathOptions;
+    "micro-regions": (properties: MicroRegionProperties) => L.PathOptions;
+    outline: (properties: unknown) => L.PathOptions;
+  };
+  const vectorTileLayerStyles: StyleFunction = {
+    "micro-regions_elevation"(properties) {
+      if (eawsRegionsWithoutElevation.test(properties.id)) return hidden;
+      if (!filterFeature(properties, date)) return hidden;
+      return style(properties.id + ":" + properties.elevation);
+    },
+    "micro-regions"(properties) {
+      if (!eawsRegionsWithoutElevation.test(properties.id)) return hidden;
+      if (!filterFeature(properties, date)) return hidden;
+      return style(properties.id);
+    },
+    outline() {
+      return hidden;
+    },
   };
   L.vectorGrid
     .protobuf("https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf", {
@@ -142,32 +163,15 @@ async function buildMap(
       pane: "overlayPane",
       interactive: false,
       maxNativeZoom: 10,
-      vectorTileLayerStyles: {
-        "micro-regions_elevation"(
-          properties: MicroRegionElevationProperties
-        ): PathOptions {
-          if (eawsRegionsWithoutElevation.test(properties.id)) return hidden;
-          if (!filterFeature({ properties }, date)) return hidden;
-          return style(properties.id + ":" + properties.elevation);
-        },
-        "micro-regions"(properties: MicroRegionProperties): PathOptions {
-          if (!eawsRegionsWithoutElevation.test(properties.id)) return hidden;
-          if (!filterFeature({ properties }, date)) return hidden;
-          return style(properties.id);
-        },
-        outline(): PathOptions {
-          return hidden;
-        },
-      },
+      vectorTileLayerStyles,
     })
     .addTo(map);
 }
 
 function filterFeature(
-  feature: GeoJSON.Feature<GeoJSON.Geometry, MicroRegionProperties>,
+  properties: MicroRegionProperties | MicroRegionElevationProperties,
   today: string = new Date().toISOString().slice(0, "2006-01-02".length)
 ): boolean {
-  const properties: MicroRegionProperties = feature.properties;
   return (
     (!properties.start_date || properties.start_date <= today) &&
     (!properties.end_date || properties.end_date > today)
