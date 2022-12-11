@@ -95,10 +95,15 @@ function initMap() {
   const dateControl = new L.Control({ position: "topleft" });
   dateControl.onAdd = () => {
     const input = L.DomUtil.create("input");
+    input.style.fontSize = "18px";
+    input.style.padding = "2px";
     input.type = "date";
     input.value = date;
     input.onchange = () => route(input.valueAsDate!);
-    return input;
+    const div = L.DomUtil.create("div");
+    div.classList.add("leaflet-bar");
+    div.appendChild(input);
+    return div;
   };
   dateControl.addTo(map);
   return map;
