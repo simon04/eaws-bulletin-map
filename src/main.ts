@@ -9,9 +9,16 @@ import "leaflet/dist/leaflet.css";
 const url = new URL(location.href);
 const date = url.searchParams.get("date") || "";
 if (!date) {
-  location.replace(
-    "/?date=" + new Date().toISOString().slice(0, "2006-01-02".length)
-  );
+  route(new Date(), true);
+}
+
+function route(date: Date, replace = false) {
+  const url = "/?date=" + date.toISOString().slice(0, "2006-01-02".length);
+  if (replace) {
+    location.replace(url);
+  } else {
+    location.assign(url);
+  }
 }
 
 const map = initMap();
@@ -86,6 +93,15 @@ function initMap() {
     maxZoom: 12,
     minZoom: 3,
   }).addTo(map);
+  const dateControl = new L.Control({ position: "topleft" });
+  dateControl.onAdd = () => {
+    const input = L.DomUtil.create("input");
+    input.type = "date";
+    input.value = date;
+    input.onchange = () => route(input.valueAsDate!);
+    return input;
+  };
+  dateControl.addTo(map);
   return map;
 }
 
