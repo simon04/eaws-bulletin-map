@@ -10,6 +10,7 @@ import type {
   MicroRegionProperties,
   Region,
   Regions,
+  StyleFunction,
 } from "./types";
 
 const searchParams = new URL(location.href).searchParams;
@@ -128,13 +129,6 @@ async function buildMap(
     const dangerRating = maxDangerRatings[id];
     if (!dangerRating) return hidden;
     return dangerRatingStyles[dangerRating];
-  };
-  type StyleFunction = {
-    "micro-regions_elevation": (
-      properties: MicroRegionElevationProperties
-    ) => L.PathOptions;
-    "micro-regions": (properties: MicroRegionProperties) => L.PathOptions;
-    outline: (properties: unknown) => L.PathOptions;
   };
   const vectorTileLayerStyles: StyleFunction = {
     "micro-regions_elevation"(properties) {
