@@ -9,11 +9,12 @@ import type {
   MicroRegionElevationProperties,
   MicroRegionProperties,
   Region,
+  Regions,
 } from "./types";
 
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
-const regions = searchParams.get("regions") || "";
+const regions: Regions = searchParams.get("regions") || "";
 if (!date || !regions) {
   route(
     date || new Date(),
@@ -23,7 +24,7 @@ if (!date || !regions) {
   );
 }
 
-function route(date: string | Date, regions: string, replace = false) {
+function route(date: string | Date, regions: Regions, replace = false) {
   if (date instanceof Date) {
     date = date.toISOString().slice(0, "2006-01-02".length);
   }
@@ -37,7 +38,9 @@ function route(date: string | Date, regions: string, replace = false) {
 
 const map = initMap();
 
-Promise.all(regions.split(" ").map((region) => fetchBulletins(date, region)))
+Promise.all(
+  regions.split(" ").map((region: Region) => fetchBulletins(date, region))
+)
   .then((maxDangerRatings) =>
     Object.fromEntries([...maxDangerRatings.flatMap((o) => Object.entries(o))])
   )
@@ -77,12 +80,10 @@ function initMap() {
 
 async function fetchBulletins(
   date: string,
-  region: Region = ""
+  region: Region
 ): Promise<MaxDangerRatings> {
   const res = await fetch(
-    `https://static.avalanche.report/eaws_bulletins/${date}/${date}${
-      region ? "-" + region : ""
-    }.ratings.json`,
+    `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.ratings.json`,
     { cache: "no-cache" }
   );
   if (!res.ok) return {};
@@ -116,7 +117,7 @@ async function buildMap(
       fillOpacity: 1.0,
     })
   );
-  const style = (id: string): L.PathOptions => {
+  const style = (id: Region): L.PathOptions => {
     if (ampm) id += ":" + ampm;
     const dangerRating = maxDangerRatings[id];
     if (!dangerRating) return hidden;
