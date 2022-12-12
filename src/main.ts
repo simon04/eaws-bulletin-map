@@ -82,16 +82,22 @@ async function fetchBulletins(
   date: string,
   region: Region
 ): Promise<MaxDangerRatings> {
-  const res = await fetch(
+  const { maxDangerRatings } = await fetchJSON<{
+    maxDangerRatings: MaxDangerRatings;
+  }>(
     `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.ratings.json`,
-    { cache: "no-cache" }
+    { maxDangerRatings: {} }
   );
-  if (!res.ok) return {};
+  return maxDangerRatings;
+}
+
+async function fetchJSON<T>(url: string, fallback: T): Promise<T> {
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) return fallback;
   try {
-    const json = await res.json();
-    return json.maxDangerRatings;
+    return await res.json();
   } catch {
-    return {};
+    return fallback;
   }
 }
 
