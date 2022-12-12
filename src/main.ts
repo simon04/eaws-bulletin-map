@@ -100,11 +100,27 @@ async function buildMap(
   ampm = ""
 ) {
   const hidden: L.PathOptions = Object.freeze({ stroke: false, fill: false });
+  const dangerRatingColors = [
+    "#ffffff",
+    "#ccff66",
+    "#ffff00",
+    "#ff9900",
+    "#ff0000",
+    "#000000",
+  ];
+  const dangerRatingStyles = dangerRatingColors.map(
+    (fillColor): L.PathOptions => ({
+      stroke: false,
+      fill: true,
+      fillColor,
+      fillOpacity: 1.0,
+    })
+  );
   const style = (id: string): L.PathOptions => {
     if (ampm) id += ":" + ampm;
-    const warnlevel = maxDangerRatings[id];
-    if (!warnlevel) return hidden;
-    return WARNLEVEL_STYLES[warnlevel];
+    const dangerRating = maxDangerRatings[id];
+    if (!dangerRating) return hidden;
+    return dangerRatingStyles[dangerRating];
   };
   type StyleFunction = {
     "micro-regions_elevation": (
@@ -147,21 +163,3 @@ function filterFeature(
     (!properties.end_date || properties.end_date > today)
   );
 }
-
-const WARNLEVEL_COLORS = Object.freeze([
-  "#ffffff",
-  "#ccff66",
-  "#ffff00",
-  "#ff9900",
-  "#ff0000",
-  "#000000",
-]);
-
-const WARNLEVEL_STYLES = WARNLEVEL_COLORS.map((fillColor) =>
-  Object.freeze({
-    stroke: false,
-    fill: true,
-    fillColor,
-    fillOpacity: 1.0,
-  })
-);
