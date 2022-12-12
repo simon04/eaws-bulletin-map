@@ -40,7 +40,7 @@ function route(date: string | Date, regions: Regions, replace = false) {
 const map = initMap();
 
 Promise.all(
-  regions.split(" ").map((region: Region) => fetchBulletins(date, region))
+  regions.split(" ").map((region: Region) => fetchDangerRatings(date, region))
 )
   .then((maxDangerRatings) =>
     Object.fromEntries([...maxDangerRatings.flatMap((o) => Object.entries(o))])
@@ -79,7 +79,7 @@ function initMap() {
   return map;
 }
 
-async function fetchBulletins(
+async function fetchDangerRatings(
   date: string,
   region: Region
 ): Promise<MaxDangerRatings> {
