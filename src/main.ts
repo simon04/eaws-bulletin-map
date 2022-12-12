@@ -4,6 +4,12 @@ import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
 
 import "./style.css";
 import "leaflet/dist/leaflet.css";
+import type {
+  MaxDangerRatings,
+  MicroRegionElevationProperties,
+  MicroRegionProperties,
+  Region,
+} from "./types";
 
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
@@ -36,25 +42,6 @@ Promise.all(regions.split(" ").map((region) => fetchBulletins(date, region)))
     Object.fromEntries([...maxDangerRatings.flatMap((o) => Object.entries(o))])
   )
   .then((maxDangerRatings) => buildMap(maxDangerRatings, date));
-
-type Region = string;
-type WarnLevelNumber = 0 | 1 | 2 | 3 | 4 | 5;
-type MaxDangerRatings = Record<Region, WarnLevelNumber>;
-
-interface MicroRegionElevationProperties {
-  id: string;
-  elevation: "high" | "low" | "low_high";
-  "elevation line_visualization"?: number;
-  threshold?: number;
-  start_date?: string;
-  end_date?: string;
-}
-
-interface MicroRegionProperties {
-  id: string;
-  start_date?: string;
-  end_date?: string;
-}
 
 function initMap() {
   const mapElement = document.querySelector<HTMLDivElement>("#map")!;
