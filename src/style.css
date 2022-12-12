@@ -19,7 +19,7 @@
   height: 100vh;
   width: 100vw;
 }
-.leaflet-pane.leaflet-overlay-pane ,
+.leaflet-pane.leaflet-overlay-pane,
 .leaflet-pane svg {
   mix-blend-mode: multiply;
 }
@@ -103,4 +103,19 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+dl {
+  font-family: monospace;
+}
+
+dt {
+  display: block;
+  font-weight: bold;
+  margin-top: 0.2rem;
+}
+
+dd {
+  display: block;
+  margin-inline-start: 1rem;
 }

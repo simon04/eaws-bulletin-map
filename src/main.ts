@@ -12,6 +12,11 @@ import type {
   Regions,
   StyleFunction,
 } from "./types";
+import type {
+  AvalancheBulletin,
+  AvalancheBulletins,
+  ElevationBoundaryOrBand,
+} from "./caaml";
 
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
@@ -42,6 +47,8 @@ const map = initMap();
 fetchDangerRatings(date).then((maxDangerRatings) =>
   buildMap(maxDangerRatings, date)
 );
+
+fetchBulletins(date).then((bulletins) => buildMarkerMap(bulletins));
 
 function initMap() {
   const mapElement = document.querySelector<HTMLDivElement>("#map")!;
@@ -95,6 +102,22 @@ async function fetchDangerRatings(
     { maxDangerRatings: {} }
   );
   return maxDangerRatings;
+}
+
+async function fetchBulletins(
+  date: string,
+  region: Region = ""
+): Promise<AvalancheBulletin[]> {
+  if (!region) {
+    return Promise.all(
+      regions.split(" ").map((region: Region) => fetchBulletins(date, region))
+    ).then((bulletins) => bulletins.flatMap((b) => b));
+  }
+  const { bulletins } = await fetchJSON<AvalancheBulletins>(
+    `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`,
+    { bulletins: [] }
+  );
+  return bulletins;
 }
 
 async function fetchJSON<T>(url: string, fallback: T): Promise<T> {
@@ -158,6 +181,104 @@ async function buildMap(
       vectorTileLayerStyles,
     })
     .addTo(map);
+}
+
+async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
+  const hidden: L.PathOptions = { stroke: false, fill: false };
+  const selectable: L.PathOptions = {
+    stroke: false,
+    fill: true,
+    fillColor: "black",
+    fillOpacity: 0.0,
+  };
+  const vectorTileLayerStyles: StyleFunction = {
+    "micro-regions_elevation"() {
+      return hidden;
+    },
+    "micro-regions"(properties) {
+      if (!filterFeature(properties, date)) return hidden;
+      return selectable;
+    },
+    outline() {
+      return hidden;
+    },
+  };
+  const layer = L.vectorGrid.protobuf(
+    "https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf",
+    {
+      pane: "markerPane",
+      interactive: true,
+      maxNativeZoom: 10,
+      getFeatureId({ properties }) {
+        return properties.id &&
+          !(properties as MicroRegionElevationProperties).elevation
+          ? properties.id
+          : undefined;
+      },
+      vectorTileLayerStyles: vectorTileLayerStyles as any,
+    }
+  );
+  layer.on("click", (e) => {
+    if (!(e.sourceTarget instanceof L.Layer)) return;
+    const region: Region = (
+      (e.sourceTarget as any).properties as MicroRegionProperties
+    ).id;
+    const bulletin = bulletins.find((b) =>
+      b.regions?.some((r) => r.regionID === region)
+    );
+    if (!bulletin) return;
+    map.openPopup(
+      new L.Popup(e.latlng, {
+        content: formatBulletin(region, bulletin),
+      })
+    );
+  });
+  layer.on("mouseover", (e) => {
+    layer.setFeatureStyle(e.sourceTarget.properties.id, {
+      ...selectable,
+      stroke: true,
+      weight: 0.5,
+      color: "#000000",
+    });
+  });
+  layer.on("mouseout", (e) => {
+    layer.resetFeatureStyle(e.sourceTarget.properties.id);
+  });
+  layer.addTo(map);
+}
+
+function formatBulletin(
+  region: Region,
+  bulletin: AvalancheBulletin
+): HTMLElement {
+  const result = L.DomUtil.create("dl");
+
+  const provider = L.DomUtil.create("dt", "", result);
+  const providerLink = L.DomUtil.create("a", "", provider);
+  providerLink.innerText = bulletin.source?.provider?.name || "";
+  providerLink.href = bulletin.source?.provider?.website || "";
+  providerLink.target = "_blank";
+  providerLink.rel = "external";
+
+  const formatElevation = (e?: ElevationBoundaryOrBand) =>
+    `🏔 ${e?.lowerBound || 0}..${e?.upperBound || "∞"}`;
+  L.DomUtil.create("dd", "", result).innerHTML =
+    region +
+    [bulletin.validTime?.startTime, bulletin.validTime?.endTime]
+      .map((tt) => `<br>📅 ${tt && new Date(tt).toLocaleString()}`)
+      .join("..");
+
+  bulletin.dangerRatings?.forEach((r) => {
+    L.DomUtil.create("dt", "", result).innerText = r.mainValue || "";
+    L.DomUtil.create("dd", "", result).innerText = formatElevation(r.elevation);
+  });
+
+  bulletin.avalancheProblems?.forEach((p) => {
+    L.DomUtil.create("dt", "", result).innerText = p.problemType || "";
+    L.DomUtil.create("dd", "", result).innerHTML =
+      formatElevation(p.elevation) + "<br>🧭 " + p.aspects?.join();
+  });
+  return result;
 }
 
 function filterFeature(
