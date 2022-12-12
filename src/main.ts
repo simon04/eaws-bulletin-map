@@ -5,14 +5,23 @@ import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
 import "./style.css";
 import "leaflet/dist/leaflet.css";
 
-const url = new URL(location.href);
-const date = url.searchParams.get("date") || "";
-if (!date) {
-  route(new Date(), true);
+const searchParams = new URL(location.href).searchParams;
+const date = searchParams.get("date") || "";
+const regions = searchParams.get("regions") || "";
+if (!date || !regions) {
+  route(
+    date || new Date(),
+    regions ||
+      "AD AT-02 AT-03 AT-04 AT-05 AT-06 AT-07 AT-08 CH CZ DE-BY ES-CT-L ES-CT ES FR GB IS IT-21 IT-23 IT-25 IT-32-BZ IT-32-TN IT-34 IT-36 IT-57 NO PL PL-12 SE SI SK",
+    true
+  );
 }
 
-function route(date: Date, replace = false) {
-  const url = "?date=" + date.toISOString().slice(0, "2006-01-02".length);
+function route(date: string | Date, regions: string, replace = false) {
+  if (date instanceof Date) {
+    date = date.toISOString().slice(0, "2006-01-02".length);
+  }
+  const url = "?" + new URLSearchParams({ date, regions });
   if (replace) {
     location.replace(url);
   } else {
@@ -22,41 +31,7 @@ function route(date: Date, replace = false) {
 
 const map = initMap();
 
-const regions = [
-  "AD",
-  "AT-02",
-  "AT-03",
-  "AT-04",
-  "AT-05",
-  "AT-06",
-  "AT-07",
-  "AT-08",
-  "CH",
-  "CZ",
-  "DE-BY",
-  "ES-CT-L",
-  "ES-CT",
-  "ES",
-  "FR",
-  "GB",
-  "IS",
-  "IT-21",
-  "IT-23",
-  "IT-25",
-  "IT-32-BZ",
-  "IT-32-TN",
-  "IT-34",
-  "IT-36",
-  "IT-57",
-  "NO",
-  "PL",
-  "PL-12",
-  "SE",
-  "SI",
-  "SK",
-];
-
-Promise.all(regions.map((region) => fetchBulletins(date, region)))
+Promise.all(regions.split(" ").map((region) => fetchBulletins(date, region)))
   .then((maxDangerRatings) =>
     Object.fromEntries([...maxDangerRatings.flatMap((o) => Object.entries(o))])
   )
@@ -102,7 +77,7 @@ function initMap() {
     input.style.padding = "2px";
     input.type = "date";
     input.value = date;
-    input.onchange = () => route(input.valueAsDate!);
+    input.onchange = () => route(input.valueAsDate!, regions);
     const div = L.DomUtil.create("div");
     div.classList.add("leaflet-bar");
     div.appendChild(input);
