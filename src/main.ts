@@ -39,13 +39,9 @@ function route(date: string | Date, regions: Regions, replace = false) {
 
 const map = initMap();
 
-Promise.all(
-  regions.split(" ").map((region: Region) => fetchDangerRatings(date, region))
-)
-  .then((maxDangerRatings) =>
-    Object.fromEntries([...maxDangerRatings.flatMap((o) => Object.entries(o))])
-  )
-  .then((maxDangerRatings) => buildMap(maxDangerRatings, date));
+fetchDangerRatings(date).then((maxDangerRatings) =>
+  buildMap(maxDangerRatings, date)
+);
 
 function initMap() {
   const mapElement = document.querySelector<HTMLDivElement>("#map")!;
@@ -81,8 +77,17 @@ function initMap() {
 
 async function fetchDangerRatings(
   date: string,
-  region: Region
+  region: Region = ""
 ): Promise<MaxDangerRatings> {
+  if (!region) {
+    return Promise.all(
+      regions
+        .split(" ")
+        .map((region: Region) => fetchDangerRatings(date, region))
+    ).then((maxDangerRatings) =>
+      Object.fromEntries(maxDangerRatings.flatMap((o) => Object.entries(o)))
+    );
+  }
   const { maxDangerRatings } = await fetchJSON<{
     maxDangerRatings: MaxDangerRatings;
   }>(
