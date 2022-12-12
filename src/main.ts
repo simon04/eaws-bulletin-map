@@ -120,9 +120,8 @@ async function buildMap(
         ? style(properties.id)
         : style(properties.id + ":" + properties.elevation);
     },
-    "micro-regions"(properties) {
-      if (!filterFeature(properties, date)) return hidden;
-      return style(properties.id);
+    "micro-regions"() {
+      return hidden;
     },
     outline() {
       return hidden;
