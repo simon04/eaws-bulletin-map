@@ -68,7 +68,7 @@ type MaxDangerRatings = Record<Region, WarnLevelNumber>;
 
 interface MicroRegionElevationProperties {
   id: string;
-  elevation: "high" | "low";
+  elevation: "high" | "low" | "low_high";
   "elevation line_visualization"?: number;
   threshold?: number;
   start_date?: string;
@@ -153,12 +153,12 @@ async function buildMap(
   };
   const vectorTileLayerStyles: StyleFunction = {
     "micro-regions_elevation"(properties) {
-      if (eawsRegionsWithoutElevation.test(properties.id)) return hidden;
       if (!filterFeature(properties, date)) return hidden;
-      return style(properties.id + ":" + properties.elevation);
+      return properties.elevation === "low_high"
+        ? style(properties.id)
+        : style(properties.id + ":" + properties.elevation);
     },
     "micro-regions"(properties) {
-      if (!eawsRegionsWithoutElevation.test(properties.id)) return hidden;
       if (!filterFeature(properties, date)) return hidden;
       return style(properties.id);
     },
@@ -186,8 +186,6 @@ function filterFeature(
     (!properties.end_date || properties.end_date > today)
   );
 }
-const eawsRegionsWithoutElevation =
-  /^(AD|CH|CZ|ES-GA|ES-JA|ES-NA|ES-RI|ES-SO|ES-CT-RF|ES-CT-PA|ES-CT-PP|ES-CT-VN|ES-CT-TF|ES-CT-PR|ES-CT-L-04|FI|FR|GB|IS|NO|PL|SK)/;
 
 const WARNLEVEL_COLORS = Object.freeze([
   "#ffffff",
