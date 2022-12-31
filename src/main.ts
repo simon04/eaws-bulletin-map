@@ -58,9 +58,12 @@ function initMap() {
     attributionControl: false,
     zoomControl: false,
   });
-  L.control.attribution({ prefix: "🌍 simon04/eaws-bulletin-map" }).addTo(map);
+  const prefix =
+    '🌍 <a href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3)';
+  L.control.attribution({ prefix }).addTo(map);
   L.tileLayer("https://static.avalanche.report/tms/{z}/{x}/{y}.webp", {
-    attribution: "albina-euregio",
+    attribution:
+      '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3)',
     maxZoom: 12,
     minZoom: 7,
   }).addTo(map);
@@ -68,8 +71,8 @@ function initMap() {
     "http://stamen-tiles-a.a.ssl.fastly.net/toner/{z}/{x}/{y}@2x.png",
     {
       attribution: [
-        '<a href="https://stamen.com/">Stamen Design</a>',
-        '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        '<a href="https://stamen.com/">Stamen Design</a> (CC BY 3.0)',
+        '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (ODbL)',
       ].join(", "),
       maxZoom: 6,
       minZoom: 0,
@@ -185,7 +188,10 @@ async function buildMap(
   };
   L.vectorGrid
     .protobuf("https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf", {
-      attribution: "eaws/eaws-regions, albina-euregio/pyAvaCore",
+      attribution: [
+        '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
+        '<a href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
+      ].join(", "),
       pane: "overlayPane",
       interactive: false,
       maxNativeZoom: 10,
