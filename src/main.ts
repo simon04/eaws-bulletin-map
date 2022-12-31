@@ -62,8 +62,19 @@ function initMap() {
   L.tileLayer("https://static.avalanche.report/tms/{z}/{x}/{y}.webp", {
     attribution: "albina-euregio",
     maxZoom: 12,
-    minZoom: 3,
+    minZoom: 7,
   }).addTo(map);
+  L.tileLayer(
+    "http://stamen-tiles-a.a.ssl.fastly.net/toner/{z}/{x}/{y}@2x.png",
+    {
+      attribution: [
+        '<a href="https://stamen.com/">Stamen Design</a>',
+        '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      ].join(", "),
+      maxZoom: 6,
+      minZoom: 0,
+    }
+  ).addTo(map);
   const dateControl = new L.Control({ position: "topleft" });
   dateControl.onAdd = () => {
     const input = L.DomUtil.create("input");
