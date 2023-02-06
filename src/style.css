@@ -119,3 +119,10 @@ dd {
   display: block;
   margin-inline-start: 1rem;
 }
+
+span.square {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  text-shadow: 0 0 5px black;
+}
