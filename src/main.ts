@@ -1,9 +1,12 @@
 import * as L from "leaflet";
 
 import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
+import { GeocoderControl } from "leaflet-control-geocoder/src/control";
 
 import "./style.css";
 import "leaflet/dist/leaflet.css";
+import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+
 import type {
   MaxDangerRatings,
   MicroRegionElevationProperties,
@@ -98,6 +101,7 @@ function initMap() {
   };
   dateControl.addTo(map);
   L.control.zoom().addTo(map);
+  new GeocoderControl({ position: "topleft" }).addTo(map);
   return map;
 }
 

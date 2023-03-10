@@ -126,3 +126,8 @@ span.square {
   height: 12px;
   text-shadow: 0 0 5px black;
 }
+
+.leaflet-control-geocoder-form input {
+  color: black;
+  background-color: white;
+}
