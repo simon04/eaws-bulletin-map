@@ -18,6 +18,7 @@ import type {
 import type {
   AvalancheBulletin,
   AvalancheBulletins,
+  DangerRatingValue,
   ElevationBoundaryOrBand,
 } from "./caaml";
 
@@ -153,20 +154,40 @@ async function fetchJSON<T>(url: string, fallback: T): Promise<T> {
   }
 }
 
+const dangerRatingColors = [
+  "#ffffff",
+  "#ccff66",
+  "#ffff00",
+  "#ff9900",
+  "#ff0000",
+  "#000000",
+];
+
+function dangerRatingLink(rating: DangerRatingValue | undefined): string {
+  const texts = {
+    // https://www.avalanches.org/standards/avalanche-danger-scale/
+    low: "Triggering is generally possible only from high additional loads in isolated areas of very steep, extreme terrain. Only small and medium natural avalanches are possible.",
+    moderate:
+      "Triggering is possible, primarily from high additional loads, particularly on the indicated steep slopes. Very large natural avalanches are unlikely.",
+    considerable:
+      "Triggering is possible, even from low additional loads, particularly on the indicated steep slopes. In certain situations some large, and in isolated cases very large natural avalanches are possible.",
+    high: "Triggering is likely, even from low additional loads, on many steep slopes. In some cases, numerous large and often very large natural avalanches can be expected.",
+    very_high:
+      "Numerous very large and often extremely large natural avalanches can be expected, even in moderately steep terrain.",
+  };
+  if (!rating || rating === "no_rating" || rating === "no_snow") return "";
+  const color = dangerRatingColors[Object.keys(texts).indexOf(rating) + 1];
+  return `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
+      <span class="square" style="background: ${color}"></span>
+      <abbr title="${texts[rating]}">${rating}</abbr></a>`;
+}
+
 async function buildMap(
   maxDangerRatings: MaxDangerRatings,
   date: string,
   ampm = ""
 ) {
   const hidden: L.PathOptions = Object.freeze({ stroke: false, fill: false });
-  const dangerRatingColors = [
-    "#ffffff",
-    "#ccff66",
-    "#ffff00",
-    "#ff9900",
-    "#ff0000",
-    "#000000",
-  ];
   const dangerRatingStyles = dangerRatingColors.map(
     (fillColor): L.PathOptions => ({
       stroke: false,
@@ -195,28 +216,14 @@ async function buildMap(
       return hidden;
     },
   };
-  const dangerRatings = Object.entries({
-    // https://www.avalanches.org/standards/avalanche-danger-scale/
-    low: "Triggering is generally possible only from high additional loads in isolated areas of very steep, extreme terrain. Only small and medium natural avalanches are possible.",
-    moderate:
-      "Triggering is possible, primarily from high additional loads, particularly on the indicated steep slopes. Very large natural avalanches are unlikely.",
-    considerable:
-      "Triggering is possible, even from low additional loads, particularly on the indicated steep slopes. In certain situations some large, and in isolated cases very large natural avalanches are possible.",
-    high: "Triggering is likely, even from low additional loads, on many steep slopes. In some cases, numerous large and often very large natural avalanches can be expected.",
-    "very high":
-      "Numerous very large and often extremely large natural avalanches can be expected, even in moderately steep terrain.",
-  }).map(
-    ([rating, text], i) =>
-      `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
-      <span class="square" style="background: ${
-        dangerRatingColors[i + 1]
-      }"></span>
-      <abbr title="${text}">${rating}</abbr></a>`
-  );
   L.vectorGrid
     .protobuf("https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf", {
       attribution: [
-        ...dangerRatings,
+        dangerRatingLink("low"),
+        dangerRatingLink("moderate"),
+        dangerRatingLink("considerable"),
+        dangerRatingLink("high"),
+        dangerRatingLink("very_high"),
         '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
         '<a href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
       ].join(", "),
@@ -316,7 +323,8 @@ function formatBulletin(
       .join("..");
 
   bulletin.dangerRatings?.forEach((r) => {
-    L.DomUtil.create("dt", "", result).innerText = r.mainValue || "";
+    const link = dangerRatingLink(r.mainValue);
+    L.DomUtil.create("dt", "", result).innerHTML = link;
     L.DomUtil.create("dd", "", result).innerText = formatElevation(r.elevation);
   });
 
