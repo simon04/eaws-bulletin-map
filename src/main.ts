@@ -21,6 +21,7 @@ import type {
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
 const regions: Regions = searchParams.get("regions") || "";
+const details = searchParams.get("details") || "";
 if (!date || !regions) {
   route(
     date || new Date(),
@@ -34,7 +35,9 @@ function route(date: string | Date, regions: Regions, replace = false) {
   if (date instanceof Date) {
     date = date.toISOString().slice(0, "2006-01-02".length);
   }
-  const url = "?" + new URLSearchParams({ date, regions });
+  const params = new URLSearchParams({ date, regions, details });
+  params.forEach((value, key) => value || params.delete(key));
+  const url = "?" + params;
   if (replace) {
     location.replace(url);
   } else {
@@ -199,7 +202,9 @@ async function buildMap(
   }).map(
     ([rating, text], i) =>
       `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
-      <span class="square" style="background: ${dangerRatingColors[i + 1]}"></span>
+      <span class="square" style="background: ${
+        dangerRatingColors[i + 1]
+      }"></span>
       <abbr title="${text}">${rating}</abbr></a>`
   );
   L.vectorGrid
@@ -293,6 +298,8 @@ function formatBulletin(
   providerLink.href = bulletin.source?.provider?.website || "";
   providerLink.target = "_blank";
   providerLink.rel = "external";
+
+  if (details === "0") return result;
 
   const formatElevation = (e?: ElevationBoundaryOrBand) =>
     `🏔 ${e?.lowerBound || 0}..${e?.upperBound || "∞"}`;
