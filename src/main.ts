@@ -1,7 +1,7 @@
 import * as L from "leaflet";
 
 import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
-import { GeocoderControl } from "leaflet-control-geocoder/src/control";
+import GeocoderControl  from "leaflet-control-geocoder";
 
 import "./style.css";
 import "leaflet/dist/leaflet.css";
