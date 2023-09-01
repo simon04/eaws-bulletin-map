@@ -1,7 +1,7 @@
 import * as L from "leaflet";
 
 import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
-import GeocoderControl  from "leaflet-control-geocoder";
+import GeocoderControl from "leaflet-control-geocoder";
 
 import "./style.css";
 import "leaflet/dist/leaflet.css";
@@ -33,7 +33,7 @@ if (!date || !regions) {
     date || now,
     regions ||
       "AD AT-02 AT-03 AT-04 AT-05 AT-06 AT-07 AT-08 CH CZ DE-BY ES-CT-L ES-CT ES FI FR GB IS IT-21 IT-23 IT-25 IT-32-BZ IT-32-TN IT-34 IT-36 IT-57 NO PL PL-12 SE SI SK",
-    true
+    true,
   );
 }
 
@@ -54,7 +54,7 @@ function route(date: string | Date, regions: Regions, replace = false) {
 const map = initMap();
 
 fetchDangerRatings(date).then((maxDangerRatings) =>
-  buildMap(maxDangerRatings, date)
+  buildMap(maxDangerRatings, date),
 );
 
 fetchBulletins(date).then((bulletins) => buildMarkerMap(bulletins));
@@ -87,7 +87,7 @@ function initMap() {
       ].join(", "),
       maxZoom: 6,
       minZoom: 0,
-    }
+    },
   ).addTo(map);
   const dateControl = new L.Control({ position: "topleft" });
   dateControl.onAdd = () => {
@@ -110,38 +110,38 @@ function initMap() {
 
 async function fetchDangerRatings(
   date: string,
-  region: Region = ""
+  region: Region = "",
 ): Promise<MaxDangerRatings> {
   if (!region) {
     return Promise.all(
       regions
         .split(" ")
-        .map((region: Region) => fetchDangerRatings(date, region))
+        .map((region: Region) => fetchDangerRatings(date, region)),
     ).then((maxDangerRatings) =>
-      Object.fromEntries(maxDangerRatings.flatMap((o) => Object.entries(o)))
+      Object.fromEntries(maxDangerRatings.flatMap((o) => Object.entries(o))),
     );
   }
   const { maxDangerRatings } = await fetchJSON<{
     maxDangerRatings: MaxDangerRatings;
   }>(
     `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.ratings.json`,
-    { maxDangerRatings: {} }
+    { maxDangerRatings: {} },
   );
   return maxDangerRatings;
 }
 
 async function fetchBulletins(
   date: string,
-  region: Region = ""
+  region: Region = "",
 ): Promise<AvalancheBulletin[]> {
   if (!region) {
     return Promise.all(
-      regions.split(" ").map((region: Region) => fetchBulletins(date, region))
+      regions.split(" ").map((region: Region) => fetchBulletins(date, region)),
     ).then((bulletins) => bulletins.flatMap((b) => b));
   }
   const { bulletins } = await fetchJSON<AvalancheBulletins>(
     `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`,
-    { bulletins: [] }
+    { bulletins: [] },
   );
   return bulletins;
 }
@@ -187,7 +187,7 @@ function dangerRatingLink(rating: DangerRatingValue | undefined): string {
 async function buildMap(
   maxDangerRatings: MaxDangerRatings,
   date: string,
-  ampm = ""
+  ampm = "",
 ) {
   const hidden: L.PathOptions = Object.freeze({ stroke: false, fill: false });
   const dangerRatingStyles = dangerRatingColors.map(
@@ -196,7 +196,7 @@ async function buildMap(
       fill: true,
       fillColor,
       fillOpacity: 1.0,
-    })
+    }),
   );
   const style = (id: Region): L.PathOptions => {
     if (ampm) id += ":" + ampm;
@@ -270,21 +270,21 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
           : undefined;
       },
       vectorTileLayerStyles: vectorTileLayerStyles as any,
-    }
+    },
   );
   layer.on("click", (e) => {
     if (!(e.sourceTarget instanceof L.Layer)) return;
     const region: Region = (
       (e.sourceTarget as any).properties as MicroRegionProperties
     ).id;
-    const bulletin = bulletins.find((b) =>
-      b.regions?.some((r) => r.regionID === region)
+    const bulletin = bulletins.find(
+      (b) => b.regions?.some((r) => r.regionID === region),
     );
     if (!bulletin) return;
     map.openPopup(
       new L.Popup(e.latlng, {
         content: formatBulletin(region, bulletin),
-      })
+      }),
     );
   });
   layer.on("mouseover", (e) => {
@@ -303,7 +303,7 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
 
 function formatBulletin(
   region: Region,
-  bulletin: AvalancheBulletin
+  bulletin: AvalancheBulletin,
 ): HTMLElement {
   const result = L.DomUtil.create("dl");
 
@@ -340,7 +340,7 @@ function formatBulletin(
 
 function filterFeature(
   properties: MicroRegionProperties | MicroRegionElevationProperties,
-  today: string = new Date().toISOString().slice(0, "2006-01-02".length)
+  today: string = new Date().toISOString().slice(0, "2006-01-02".length),
 ): boolean {
   return (
     (!properties.start_date || properties.start_date <= today) &&

@@ -31,7 +31,7 @@ export interface Aws {
 
 export type StyleFunction = {
   "micro-regions_elevation": (
-    properties: MicroRegionElevationProperties
+    properties: MicroRegionElevationProperties,
   ) => L.PathOptions;
   "micro-regions": (properties: MicroRegionProperties) => L.PathOptions;
   outline: (properties: RegionOutlineProperties) => L.PathOptions;
