@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base /eaws-bulletin-map/",
+    "build": "vite build --base /eaws-bulletin-map/",
     "preview": "vite preview"
   },
   "devDependencies": {
