@@ -157,7 +157,7 @@ async function fetchJSON<T>(url: string, fallback: T): Promise<T> {
 }
 
 const dangerRatingColors = [
-  "#ffffff",
+  "#cccccc",
   "#ccff66",
   "#ffff00",
   "#ff9900",
@@ -201,8 +201,7 @@ async function buildMap(
   const style = (id: Region): L.PathOptions => {
     if (ampm) id += ":" + ampm;
     const dangerRating = maxDangerRatings[id];
-    if (!dangerRating) return hidden;
-    return dangerRatingStyles[dangerRating];
+    return dangerRatingStyles[dangerRating ?? 0];
   };
   const vectorTileLayerStyles: StyleFunction = {
     "micro-regions_elevation"(properties) {
