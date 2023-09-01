@@ -1,5 +1,7 @@
 /// <reference types="vite/client" />
 
+export {};
+
 import type {
   InteractiveLayerOptions,
   GridLayerOptions,
