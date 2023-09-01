@@ -77,11 +77,13 @@ function initMap() {
     minZoom: 7,
   }).addTo(map);
   L.tileLayer(
-    "http://stamen-tiles-a.a.ssl.fastly.net/toner/{z}/{x}/{y}@2x.png",
+    "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png",
     {
       attribution: [
-        '<a href="https://stamen.com/">Stamen Design</a> (CC BY 3.0)',
-        '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (ODbL)',
+        '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>',
+        '&copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a>',
+        '&copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>',
+        '&copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a>',
       ].join(", "),
       maxZoom: 6,
       minZoom: 0,
