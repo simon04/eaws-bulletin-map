@@ -74,21 +74,8 @@ function initMap() {
     attribution:
       '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3)',
     maxZoom: 12,
-    minZoom: 7,
+    minZoom: 3,
   }).addTo(map);
-  L.tileLayer(
-    "https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png",
-    {
-      attribution: [
-        '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>',
-        '&copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a>',
-        '&copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>',
-        '&copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a>',
-      ].join(", "),
-      maxZoom: 6,
-      minZoom: 0,
-    },
-  ).addTo(map);
   const dateControl = new L.Control({ position: "topleft" });
   dateControl.onAdd = () => {
     const input = L.DomUtil.create("input");
