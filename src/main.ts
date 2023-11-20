@@ -1,19 +1,30 @@
-import * as L from "leaflet";
-
-import "leaflet.vectorgrid/dist/Leaflet.VectorGrid.bundled.js";
-import GeocoderControl from "leaflet-control-geocoder";
-
+import { Control, defaults as defaultControls } from "ol/control";
+import { fromLonLat } from "ol/proj";
+import Fill from "ol/style/Fill";
+import GeolocationButton from "ol-ext/control/GeolocationButton";
+import Map from "ol/Map";
+import MVT from "ol/format/MVT";
+import Popup from "ol-ext/overlay/Popup";
+import SearchNominatim from "ol-ext/control/SearchNominatim";
+import Stroke from "ol/style/Stroke";
+import Style from "ol/style/Style";
+import TileLayer from "ol/layer/Tile";
+import type { MapBrowserEvent } from "ol";
+import VectorTileLayer from "ol/layer/VectorTile";
+import VectorTileSource from "ol/source/VectorTile";
+import View from "ol/View";
+import XYZ from "ol/source/XYZ";
+import "ol/ol.css";
+import "ol-ext/dist/ol-ext.css";
 import "./style.css";
-import "leaflet/dist/leaflet.css";
-import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 
 import type {
+  FeatureProperties,
   MaxDangerRatings,
   MicroRegionElevationProperties,
   MicroRegionProperties,
   Region,
   Regions,
-  StyleFunction,
 } from "./types";
 import type {
   Aspect,
@@ -52,6 +63,12 @@ function route(date: string | Date, regions: Regions, replace = false) {
   }
 }
 
+const popup = new Popup({
+  popupClass: "default",
+  closeBox: true,
+  positioning: "auto",
+});
+
 const map = initMap();
 
 fetchDangerRatings(date).then((maxDangerRatings) =>
@@ -62,37 +79,58 @@ fetchBulletins(date).then((bulletins) => buildMarkerMap(bulletins));
 
 function initMap() {
   const mapElement = document.querySelector<HTMLDivElement>("#map")!;
-  const map = L.map(mapElement, {
-    center: { lat: 47.3, lng: 11.3 },
-    zoom: 5,
-    attributionControl: false,
-    zoomControl: false,
+
+  class DateControl extends Control {
+    constructor() {
+      const input = document.createElement("input");
+      input.style.fontSize = "18px";
+      input.style.padding = "2px";
+      input.type = "date";
+      input.value = date;
+      input.onchange = () => route(input.valueAsDate!, regions);
+      const div = document.createElement("div");
+      div.className = "ol-date-control ol-unselectable ol-control";
+      div.appendChild(input);
+      super({ element: div });
+    }
+  }
+
+  const map = new Map({
+    target: mapElement,
+    controls: defaultControls().extend([new DateControl()]),
+    keyboardEventTarget: document,
+    overlays: [popup],
+    view: new View({
+      zoom: 5,
+      center: fromLonLat([11.3, 47.3]),
+      enableRotation: false,
+    }),
+    layers: [
+      new TileLayer({
+        source: new XYZ({
+          url: "https://static.avalanche.report/tms/{z}/{x}/{y}.webp",
+          attributions: [
+            '🌍 <a href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3)',
+            '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3)',
+          ],
+          maxZoom: 12,
+          minZoom: 3,
+        }),
+      }),
+    ],
   });
-  const prefix =
-    '🌍 <a href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3)';
-  L.control.attribution({ prefix }).addTo(map);
-  L.tileLayer("https://static.avalanche.report/tms/{z}/{x}/{y}.webp", {
-    attribution:
-      '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3)',
-    maxZoom: 12,
-    minZoom: 3,
-  }).addTo(map);
-  const dateControl = new L.Control({ position: "topleft" });
-  dateControl.onAdd = () => {
-    const input = L.DomUtil.create("input");
-    input.style.fontSize = "18px";
-    input.style.padding = "2px";
-    input.type = "date";
-    input.value = date;
-    input.onchange = () => route(input.valueAsDate!, regions);
-    const div = L.DomUtil.create("div");
-    div.classList.add("leaflet-bar");
-    div.appendChild(input);
-    return div;
-  };
-  dateControl.addTo(map);
-  L.control.zoom().addTo(map);
-  new GeocoderControl({ position: "topleft" }).addTo(map);
+
+  map.addControl(new GeolocationButton());
+
+  const geocoder = new SearchNominatim({});
+  map.addControl(geocoder);
+  geocoder.on("select", (e: any) => {
+    map.getView().animate({
+      center: e.coordinate,
+      zoom: Math.max(map.getView().getZoom() ?? 0, 16),
+    });
+  });
+
   return map;
 }
 
@@ -172,130 +210,115 @@ function dangerRatingLink(rating: DangerRatingValue | undefined): string {
       <abbr title="${texts[rating]}">${rating}</abbr></a>`;
 }
 
+const vectorRegions = new VectorTileSource({
+  url: "https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf",
+  format: new MVT(),
+  attributions: [
+    dangerRatingLink("low"),
+    dangerRatingLink("moderate"),
+    dangerRatingLink("considerable"),
+    dangerRatingLink("high"),
+    dangerRatingLink("very_high"),
+    '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
+    '<a href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
+  ],
+  maxZoom: 10,
+});
+
 async function buildMap(
   maxDangerRatings: MaxDangerRatings,
   date: string,
   ampm = "",
 ) {
-  const hidden: L.PathOptions = Object.freeze({ stroke: false, fill: false });
   const dangerRatingStyles = dangerRatingColors.map(
-    (fillColor): L.PathOptions => ({
-      stroke: false,
-      fill: true,
-      fillColor,
-      fillOpacity: 1.0,
-    }),
+    (color) => new Style({ fill: new Fill({ color }) }),
   );
-  const style = (id: Region): L.PathOptions => {
+  const style = (id: Region): Style => {
     if (ampm) id += ":" + ampm;
     const dangerRating = maxDangerRatings[id];
     return dangerRatingStyles[dangerRating ?? 0];
   };
-  const vectorTileLayerStyles: StyleFunction = {
-    "micro-regions_elevation"(properties) {
-      if (!filterFeature(properties, date)) return hidden;
-      return properties.elevation === "low_high"
-        ? style(properties.id)
-        : style(properties.id + ":" + properties.elevation);
+  const layer = new VectorTileLayer({
+    source: vectorRegions,
+    style(feature): Style | undefined {
+      const properties = feature.getProperties() as FeatureProperties;
+      if (properties.layer !== "micro-regions_elevation") {
+        return;
+      } else if (!filterFeature(properties, date)) {
+        return;
+      } else if (properties.elevation === "low_high") {
+        return style(properties.id);
+      } else {
+        return style(properties.id + ":" + properties.elevation);
+      }
     },
-    "micro-regions"() {
-      return hidden;
-    },
-    outline() {
-      return hidden;
-    },
-  };
-  L.vectorGrid
-    .protobuf("https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf", {
-      attribution: [
-        dangerRatingLink("low"),
-        dangerRatingLink("moderate"),
-        dangerRatingLink("considerable"),
-        dangerRatingLink("high"),
-        dangerRatingLink("very_high"),
-        '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
-        '<a href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
-      ].join(", "),
-      pane: "overlayPane",
-      interactive: false,
-      maxNativeZoom: 10,
-      vectorTileLayerStyles,
-    })
-    .addTo(map);
+  });
+  layer.on("postrender", (e) => {
+    if (e.context instanceof CanvasRenderingContext2D) {
+      e.context.globalCompositeOperation = "multiply";
+    }
+  });
+  map.addLayer(layer);
 }
 
 async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
-  const hidden: L.PathOptions = { stroke: false, fill: false };
-  const selectable: L.PathOptions = {
-    stroke: false,
-    fill: true,
-    fillColor: "black",
-    fillOpacity: 0.0,
-  };
-  const vectorTileLayerStyles: StyleFunction = {
-    "micro-regions_elevation"() {
-      return hidden;
-    },
-    "micro-regions"(properties) {
-      if (!filterFeature(properties, date)) return hidden;
-      return selectable;
-    },
-    outline() {
-      return hidden;
-    },
-  };
-  const layer = L.vectorGrid.protobuf(
-    "https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf",
-    {
-      pane: "markerPane",
-      interactive: true,
-      maxNativeZoom: 10,
-      getFeatureId({ properties }) {
-        return properties.id &&
-          !(properties as MicroRegionElevationProperties).elevation
-          ? properties.id
-          : undefined;
-      },
-      vectorTileLayerStyles: vectorTileLayerStyles as any,
-    },
-  );
-  layer.on("click", (e) => {
-    if (!(e.sourceTarget instanceof L.Layer)) return;
-    const region: Region = (
-      (e.sourceTarget as any).properties as MicroRegionProperties
-    ).id;
-    const bulletin = bulletins.find(
-      (b) => b.regions?.some((r) => r.regionID === region),
-    );
-    if (!bulletin) return;
-    map.openPopup(
-      new L.Popup(e.latlng, {
-        content: formatBulletin(region, bulletin),
-      }),
-    );
-  });
-  layer.on("mouseover", (e) => {
-    layer.setFeatureStyle(e.sourceTarget.properties.id, {
-      ...selectable,
-      stroke: true,
-      weight: 0.5,
+  const selectedStyle = new Style({
+    stroke: new Stroke({
+      width: 0.5,
       color: "#000000",
-    });
+    }),
   });
-  layer.on("mouseout", (e) => {
-    layer.resetFeatureStyle(e.sourceTarget.properties.id);
+
+  const layer = new VectorTileLayer({
+    source: vectorRegions,
+    style(feature): Style | undefined {
+      const properties = feature.getProperties() as FeatureProperties;
+      return properties.layer === "micro-regions" &&
+        properties.id === layer.get("regionID")
+        ? selectedStyle
+        : undefined;
+    },
   });
-  layer.addTo(map);
+  map.addLayer(layer);
+
+  map.on("pointermove", (e) => {
+    const regionID = findMicroRegionID(e);
+    layer.set("regionID", regionID);
+    layer.changed();
+  });
+
+  map.on("click", (e) => {
+    const regionID = findMicroRegionID(e);
+    const bulletin = bulletins.find((b) =>
+      b.regions?.some((r) => r.regionID === regionID),
+    );
+    if (regionID && bulletin) {
+      popup.show(e.coordinate, formatBulletin(regionID, bulletin));
+    }
+  });
+}
+
+function findMicroRegionID(e: MapBrowserEvent<any>): Region | undefined {
+  return map
+    .getFeaturesAtPixel(e.pixel)
+    .map((feature) => {
+      const properties = feature.getProperties() as FeatureProperties;
+      return properties.layer === "micro-regions" ||
+        properties.layer === "micro-regions_elevation"
+        ? properties.id
+        : undefined;
+    })
+    .find((regionID) => !!regionID);
 }
 
 function formatBulletin(
   region: Region,
   bulletin: AvalancheBulletin,
 ): HTMLElement {
-  const result = L.DomUtil.create("dl");
+  const result = document.createElement("dl");
 
-  const provider = L.DomUtil.create("dt", "", result);
-  const providerLink = L.DomUtil.create("a", "", provider);
+  const provider = result.appendChild(document.createElement("dt"));
+  const providerLink = provider.appendChild(document.createElement("a"));
   providerLink.innerText = bulletin.source?.provider?.name || "";
   providerLink.href = bulletin.source?.provider?.website || "";
   providerLink.target = "_blank";
@@ -307,7 +330,7 @@ function formatBulletin(
     `🏔 ${e?.lowerBound || 0}..${e?.upperBound || "∞"}`;
   const formatAspects = (a?: Aspect[]) =>
     Array.isArray(a) ? "🧭 " + a.join() : "";
-  L.DomUtil.create("dd", "", result).innerHTML =
+  result.appendChild(document.createElement("dd")).innerHTML =
     region +
     [bulletin.validTime?.startTime, bulletin.validTime?.endTime]
       .map((tt) => `<br>📅 ${tt && new Date(tt).toLocaleString()}`)
@@ -315,13 +338,15 @@ function formatBulletin(
 
   bulletin.dangerRatings?.forEach((r) => {
     const link = dangerRatingLink(r.mainValue);
-    L.DomUtil.create("dt", "", result).innerHTML = link;
-    L.DomUtil.create("dd", "", result).innerText = formatElevation(r.elevation);
+    result.appendChild(document.createElement("dt")).innerHTML = link;
+    result.appendChild(document.createElement("dd")).innerText =
+      formatElevation(r.elevation);
   });
 
   bulletin.avalancheProblems?.forEach((p) => {
-    L.DomUtil.create("dt", "", result).innerText = p.problemType || "";
-    L.DomUtil.create("dd", "", result).innerHTML =
+    result.appendChild(document.createElement("dt")).innerText =
+      p.problemType || "";
+    result.appendChild(document.createElement("dd")).innerHTML =
       formatElevation(p.elevation) + "<br>" + formatAspects(p.aspects);
   });
   return result;

@@ -131,3 +131,16 @@ span.square {
   color: black;
   background-color: white;
 }
+
+.ol-touch .ol-date-control,
+.ol-date-control {
+  top: 4.5em;
+  left: 0.5em;
+}
+
+.ol-popup {
+  color: #242424;
+  font-size: 0.8em;
+  line-height: 1.25;
+  max-width: 80vh;
+}

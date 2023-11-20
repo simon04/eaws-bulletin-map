@@ -29,10 +29,9 @@ export interface Aws {
   url: { [key: LanguageCode]: string }[];
 }
 
-export type StyleFunction = {
-  "micro-regions_elevation": (
-    properties: MicroRegionElevationProperties,
-  ) => L.PathOptions;
-  "micro-regions": (properties: MicroRegionProperties) => L.PathOptions;
-  outline: (properties: RegionOutlineProperties) => L.PathOptions;
-};
+export type FeatureProperties =
+  | ({
+      layer: "micro-regions_elevation";
+    } & MicroRegionElevationProperties)
+  | ({ layer: "micro-regions" } & MicroRegionProperties)
+  | ({ layer: "outline" } & RegionOutlineProperties);
