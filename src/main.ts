@@ -16,6 +16,7 @@ import type {
   StyleFunction,
 } from "./types";
 import type {
+  Aspect,
   AvalancheBulletin,
   AvalancheBulletins,
   DangerRatingValue,
@@ -304,6 +305,8 @@ function formatBulletin(
 
   const formatElevation = (e?: ElevationBoundaryOrBand) =>
     `🏔 ${e?.lowerBound || 0}..${e?.upperBound || "∞"}`;
+  const formatAspects = (a?: Aspect[]) =>
+    Array.isArray(a) ? "🧭 " + a.join() : "";
   L.DomUtil.create("dd", "", result).innerHTML =
     region +
     [bulletin.validTime?.startTime, bulletin.validTime?.endTime]
@@ -319,7 +322,7 @@ function formatBulletin(
   bulletin.avalancheProblems?.forEach((p) => {
     L.DomUtil.create("dt", "", result).innerText = p.problemType || "";
     L.DomUtil.create("dd", "", result).innerHTML =
-      formatElevation(p.elevation) + "<br>🧭 " + p.aspects?.join();
+      formatElevation(p.elevation) + "<br>" + formatAspects(p.aspects);
   });
   return result;
 }
