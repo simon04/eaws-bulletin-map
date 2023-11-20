@@ -1,4 +1,4 @@
-// Generated using https://app.quicktype.io/ from https://gitlab.com/albina-euregio/albina-caaml/-/blob/e89acbbfe62c720a6fd9d756b87caeccdea596f8/6.0/json/CAAMLv6_BulletinEAWS.json
+// Generated using https://app.quicktype.io/ from https://github.com/canadianavalancheassociation/caaml-bulletin-eaws/blob/05df09b/v6/json/CAAMLv6_BulletinEAWS.json
 
 /**
  * JSON schema for EAWS avalanche bulletin collection following the CAAMLv6 schema
@@ -40,6 +40,11 @@ export interface AvalancheBulletin {
   lang?: string;
   metaData?: MetaData;
   /**
+   * Time and date when the next bulletin will be published by the AWS to the Public. ISO 8601
+   * timestamp in UTC or with time zone information.
+   */
+  nextUpdate?: Date;
+  /**
    * Time and date when the bulletin was issued by the AWS to the Public. ISO 8601 timestamp
    * in UTC or with time zone information.
    */
@@ -60,11 +65,15 @@ export interface AvalancheBulletin {
    * Tendency element for a detailed description of the expected avalanche situation tendency
    * after the bulletin's period of validity.
    */
-  tendency?: Tendency;
+  tendency?: Tendency[];
   /**
    * Texts element with highlight and comment for travel advisory.
    */
   travelAdvisory?: Texts;
+  /**
+   * Flag if bulletin is unscheduled or not.
+   */
+  unscheduled?: boolean;
   /**
    * Date and Time from and until this bulletin is valid. ISO 8601 Timestamp in UTC or with
    * time zone information.
@@ -73,21 +82,28 @@ export interface AvalancheBulletin {
   /**
    * Texts element with highlight and comment for weather forecast information.
    */
-  wxSynopsis?: Texts;
+  weatherForecast?: Texts;
+  /**
+   * Texts element with highlight and comment for weather review information.
+   */
+  weatherReview?: Texts;
 }
 
 /**
  * Texts element with highlight and comment for the avalanche activity.
  *
  * Texts contains a highlight and a comment string, where highlights could also be described
- * as a kind of headline for the longer comment. For text-formatting only the HTML-Tags
- * <br/> for a new line and <b> followed by </b> for a bold text.
+ * as a kind of headline for the longer comment. For text-formatting the HTML-Tags <br/> for
+ * a new line, (<ul>,<ul/>) and (<li>,<li/>) for lists, (<h1>,<h1/>) to (<h6>,<h6/>) for
+ * headings and (<b>,</b>) for a bold text are allowed.
  *
  * Texts element with highlight and comment for details on the snowpack structure.
  *
  * Texts element with highlight and comment for travel advisory.
  *
  * Texts element with highlight and comment for weather forecast information.
+ *
+ * Texts element with highlight and comment for weather review information.
  */
 export interface Texts {
   comment?: string;
@@ -96,19 +112,21 @@ export interface Texts {
 
 /**
  * Defines an avalanche problem, its time, aspect, and elevation constraints. A textual
- * detail about the affected terrain can be given in the terrainFeature field. Also, details
- * about the expected avalanche size, snowpack stability and its frequency can be defined.
+ * detail about the affected terrain can be given in the comment field. Also, details about
+ * the expected avalanche size, snowpack stability and its frequency can be defined. The
+ * implied danger rating value is optional.
  */
 export interface AvalancheProblem {
   aspects?: Aspect[];
   avalancheSize?: number;
+  comment?: string;
   customData?: any;
+  dangerRatingValue?: DangerRatingValue;
   elevation?: ElevationBoundaryOrBand;
   frequency?: ExpectedAvalancheFrequency;
   metaData?: MetaData;
-  problemType?: AvalancheProblemType;
+  problemType: AvalancheProblemType;
   snowpackStability?: ExpectedSnowpackStability;
-  terrainFeature?: string;
   validTimePeriod?: ValidTimePeriod;
 }
 
@@ -186,9 +204,10 @@ export type ValidTimePeriod = "all_day" | "earlier" | "later";
  * dangerRating for all the other cases.
  */
 export interface DangerRating {
+  aspects?: Aspect[];
   customData?: any;
   elevation?: ElevationBoundaryOrBand;
-  mainValue?: DangerRatingValue;
+  mainValue: DangerRatingValue;
   metaData?: MetaData;
   validTimePeriod?: ValidTimePeriod;
 }
@@ -214,7 +233,7 @@ export interface Region {
   customData?: any;
   metaData?: MetaData;
   name?: string;
-  regionID?: string;
+  regionID: string;
 }
 
 /**
@@ -224,7 +243,7 @@ export interface Region {
  * to specify details about the AWS.
  */
 export interface AvalancheBulletinSource {
-  contactPerson?: Person;
+  person?: Person;
   provider?: AvalancheBulletinProvider;
 }
 
@@ -251,20 +270,20 @@ export interface AvalancheBulletinProvider {
 }
 
 /**
- * Tendency element for a detailed description of the expected avalanche situation tendency
- * after the bulletin's period of validity.
- *
  * Texts element with highlight and comment for the avalanche activity.
  *
  * Texts contains a highlight and a comment string, where highlights could also be described
- * as a kind of headline for the longer comment. For text-formatting only the HTML-Tags
- * <br/> for a new line and <b> followed by </b> for a bold text.
+ * as a kind of headline for the longer comment. For text-formatting the HTML-Tags <br/> for
+ * a new line, (<ul>,<ul/>) and (<li>,<li/>) for lists, (<h1>,<h1/>) to (<h6>,<h6/>) for
+ * headings and (<b>,</b>) for a bold text are allowed.
  *
  * Texts element with highlight and comment for details on the snowpack structure.
  *
  * Texts element with highlight and comment for travel advisory.
  *
  * Texts element with highlight and comment for weather forecast information.
+ *
+ * Texts element with highlight and comment for weather review information.
  *
  * Describes the expected tendency of the development of the avalanche situation for a
  * defined time period.
