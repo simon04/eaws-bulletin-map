@@ -236,7 +236,7 @@ async function buildMap(
       }
     },
   });
-  layer.on("postrender", (e) => {
+  layer.on("prerender", (e) => {
     if (e.context instanceof CanvasRenderingContext2D) {
       e.context.globalCompositeOperation = "multiply";
     }
