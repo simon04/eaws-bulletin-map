@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/ol-ext": "npm:@siedlerchr/types-ol-ext",
     "typescript": "^5.2.2",
     "vite": "^5.0.2"
   },
