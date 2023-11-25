@@ -4,7 +4,6 @@ import { fromLonLat } from "ol/proj";
 import Fill from "ol/style/Fill";
 import GeolocationButton from "ol-ext/control/GeolocationButton";
 import Map from "ol/Map";
-import MVT from "ol/format/MVT";
 import Popup from "ol-ext/overlay/Popup";
 import SearchNominatim from "ol-ext/control/SearchNominatim";
 import Stroke from "ol/style/Stroke";
@@ -196,7 +195,6 @@ function dangerRatingLink(
 
 const vectorRegions = new PMTilesVectorSource({
   url: "https://static.avalanche.report/eaws-regions.pmtiles",
-  format: new MVT(),
   attributions: [
     ...Object.values(DANGER_RATINGS).map((rating) => dangerRatingLink(rating)),
     '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
