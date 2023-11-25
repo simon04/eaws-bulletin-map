@@ -33,6 +33,7 @@ import type {
   DangerRatingValue,
   ElevationBoundaryOrBand,
 } from "./caaml";
+import { DANGER_RATINGS, type DangerRatingConfig } from "./danger-ratings";
 
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
@@ -182,43 +183,22 @@ async function fetchJSON<T>(url: string, fallback: T): Promise<T> {
   }
 }
 
-const dangerRatingColors = [
-  "#cccccc",
-  "#ccff66",
-  "#ffff00",
-  "#ff9900",
-  "#ff0000",
-  "#000000",
-];
-
-function dangerRatingLink(rating: DangerRatingValue | undefined): string {
-  const texts = {
-    // https://www.avalanches.org/standards/avalanche-danger-scale/
-    low: "Triggering is generally possible only from high additional loads in isolated areas of very steep, extreme terrain. Only small and medium natural avalanches are possible.",
-    moderate:
-      "Triggering is possible, primarily from high additional loads, particularly on the indicated steep slopes. Very large natural avalanches are unlikely.",
-    considerable:
-      "Triggering is possible, even from low additional loads, particularly on the indicated steep slopes. In certain situations some large, and in isolated cases very large natural avalanches are possible.",
-    high: "Triggering is likely, even from low additional loads, on many steep slopes. In some cases, numerous large and often very large natural avalanches can be expected.",
-    very_high:
-      "Numerous very large and often extremely large natural avalanches can be expected, even in moderately steep terrain.",
-  };
+function dangerRatingLink(
+  rating: DangerRatingValue | DangerRatingConfig | undefined,
+): string {
   if (!rating || rating === "no_rating" || rating === "no_snow") return "";
-  const color = dangerRatingColors[Object.keys(texts).indexOf(rating) + 1];
+  const { color, text } =
+    typeof rating === "string" ? DANGER_RATINGS[rating] : rating;
   return `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
       <span class="square" style="background: ${color}"></span>
-      <abbr title="${texts[rating]}">${rating}</abbr></a>`;
+      <abbr title="${text}">${rating}</abbr></a>`;
 }
 
 const vectorRegions = new PMTilesVectorSource({
   url: "https://static.avalanche.report/eaws-regions.pmtiles",
   format: new MVT(),
   attributions: [
-    dangerRatingLink("low"),
-    dangerRatingLink("moderate"),
-    dangerRatingLink("considerable"),
-    dangerRatingLink("high"),
-    dangerRatingLink("very_high"),
+    ...Object.values(DANGER_RATINGS).map((rating) => dangerRatingLink(rating)),
     '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
     '<a href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
   ],
@@ -230,8 +210,11 @@ async function buildMap(
   date: string,
   ampm = "",
 ) {
-  const dangerRatingStyles = dangerRatingColors.map(
-    (color) => new Style({ fill: new Fill({ color }) }),
+  const dangerRatingStyles = Object.fromEntries(
+    Object.values(DANGER_RATINGS).map(({ warnLevelNumber, color }) => [
+      warnLevelNumber,
+      new Style({ fill: new Fill({ color }) }),
+    ]),
   );
   const style = (id: Region): Style => {
     if (ampm) id += ":" + ampm;
