@@ -1,4 +1,5 @@
 import { Control, defaults as defaultControls } from "ol/control";
+import { PMTilesVectorSource } from "ol-pmtiles";
 import { fromLonLat } from "ol/proj";
 import Fill from "ol/style/Fill";
 import GeolocationButton from "ol-ext/control/GeolocationButton";
@@ -11,7 +12,6 @@ import Style from "ol/style/Style";
 import TileLayer from "ol/layer/Tile";
 import type { MapBrowserEvent } from "ol";
 import VectorTileLayer from "ol/layer/VectorTile";
-import VectorTileSource from "ol/source/VectorTile";
 import View from "ol/View";
 import XYZ from "ol/source/XYZ";
 import "ol/ol.css";
@@ -210,8 +210,8 @@ function dangerRatingLink(rating: DangerRatingValue | undefined): string {
       <abbr title="${texts[rating]}">${rating}</abbr></a>`;
 }
 
-const vectorRegions = new VectorTileSource({
-  url: "https://static.avalanche.report/eaws_pbf/{z}/{x}/{y}.pbf",
+const vectorRegions = new PMTilesVectorSource({
+  url: "https://static.avalanche.report/eaws-regions.pmtiles",
   format: new MVT(),
   attributions: [
     dangerRatingLink("low"),

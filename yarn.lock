@@ -175,6 +175,11 @@ esbuild@^0.18.10:
     "@esbuild/win32-ia32" "0.18.20"
     "@esbuild/win32-x64" "0.18.20"
 
+fflate@^0.8.0:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.8.1.tgz#1ed92270674d2ad3c73f077cd0acf26486dae6c9"
+  integrity sha512-/exOvEuc+/iaUm105QIiOt4LpBdMTWsXxqR0HDF35vx3fmaKzw7354gTilCh5rkzEt8WYyG//ku3h3nRmd7CHQ==
+
 fsevents@~2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
@@ -214,6 +219,13 @@ ol-ext@^4.0.11:
   resolved "https://registry.yarnpkg.com/ol-ext/-/ol-ext-4.0.11.tgz#402334d79bfc0a4705dea4805d080e7bdf79936f"
   integrity sha512-zorUn71RsahiA/kbf+tRDbv19wqdLCclxd3gkjsFMnqCbdgl+P59CSJCqMO4O7b2bvaHrw5FEmep7FNFnGGQXg==
 
+ol-pmtiles@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ol-pmtiles/-/ol-pmtiles-0.3.0.tgz#6a39f0000403f30411093cff474313a15b85c71b"
+  integrity sha512-Ajc5+P6mvjcREOp0rBnTlWOu6wX+pvPlujHd8Fb5K26pGhT3hRMHtJPxhCqyHZT10uNveyNsmH/FJtVo+JCl6Q==
+  dependencies:
+    pmtiles "2.11.0"
+
 ol@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/ol/-/ol-8.2.0.tgz#145153eab0ea3b5d04f51f46d6c69c224cccd5c3"
@@ -248,6 +260,13 @@ picocolors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
   integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
+
+pmtiles@2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/pmtiles/-/pmtiles-2.11.0.tgz#53aac29408e001a73b15b1c8cad0b17c944ab7bd"
+  integrity sha512-dU9SzzaqmCGpdEuTnIba6bDHT6j09ZJFIXxwGpvkiEnce3ZnBB1VKt6+EOmJGueriweaZLAMTUmKVElU2CBe0g==
+  dependencies:
+    fflate "^0.8.0"
 
 postcss@^8.4.27:
   version "8.4.29"
