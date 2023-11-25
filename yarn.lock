@@ -177,10 +177,6 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.5.2.tgz#7e59216d929a6b444304000be40c32d2d127fe4f"
   integrity sha512-pL0RXRHuuGLhvs7ayX/SAHph1hrDPXOM5anyYUQXWJEENxw3nfHkzv8FfVlEVcLyKPAEgDRkd6RKZq2SMqS/yg==
 
-"@types/ol-ext@https://github.com/simon04/types-ol-ext#jspdf":
-  version "3.2.4"
-  resolved "https://github.com/simon04/types-ol-ext#52a4e5127573cb02b2d054525c55d39be81f574d"
-
 color-name@^1.0.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"

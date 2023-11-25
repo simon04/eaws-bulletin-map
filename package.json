@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/ol-ext": "https://github.com/simon04/types-ol-ext#jspdf",
     "typescript": "^5.2.2",
     "vite": "^5.0.2"
   },
