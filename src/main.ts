@@ -324,11 +324,26 @@ function formatBulletin(
       formatElevation(r.elevation);
   });
 
+  const avalancheSizes = [
+    "",
+    "small",
+    "medium",
+    "large",
+    "very large",
+    "extremely large",
+  ];
   bulletin.avalancheProblems?.forEach((p) => {
     result.appendChild(document.createElement("dt")).innerText =
       p.problemType || "";
-    result.appendChild(document.createElement("dd")).innerHTML =
-      formatElevation(p.elevation) + "<br>" + formatAspects(p.aspects);
+    result.appendChild(document.createElement("dd")).innerHTML = [
+      formatElevation(p.elevation),
+      formatAspects(p.aspects),
+      p.snowpackStability && `snowpack stability: ${p.snowpackStability}`,
+      p.frequency && `frequency: ${p.frequency}`,
+      p.avalancheSize && `avalanche size: ${avalancheSizes[p.avalancheSize]}`,
+    ]
+      .filter((line) => !!line)
+      .join("<br>");
   });
   return result;
 }
