@@ -29,6 +29,7 @@ import type {
   Aspect,
   AvalancheBulletin,
   AvalancheBulletins,
+  AvalancheProblemType,
   DangerRatingValue,
   ElevationBoundaryOrBand,
 } from "./caaml";
@@ -193,6 +194,11 @@ function dangerRatingLink(
       <abbr title="${text}">${id}</abbr></a>`;
 }
 
+function avalancheProblemLink(problem: AvalancheProblemType): string {
+  const id = problem.replace(/_/g, "-");
+  return `<a href="https://www.avalanches.org/standards/avalanche-problems/#${id}">${problem}</a>`;
+}
+
 const vectorRegions = new PMTilesVectorSource({
   url: "https://static.avalanche.report/eaws-regions.pmtiles",
   attributions: [
@@ -318,8 +324,8 @@ function formatBulletin(
       .join("..");
 
   bulletin.dangerRatings?.forEach((r) => {
-    const link = dangerRatingLink(r.mainValue);
-    result.appendChild(document.createElement("dt")).innerHTML = link;
+    result.appendChild(document.createElement("dt")).innerHTML =
+      dangerRatingLink(r.mainValue);
     result.appendChild(document.createElement("dd")).innerText =
       formatElevation(r.elevation);
   });
@@ -333,8 +339,8 @@ function formatBulletin(
     "extremely large",
   ];
   bulletin.avalancheProblems?.forEach((p) => {
-    result.appendChild(document.createElement("dt")).innerText =
-      p.problemType || "";
+    result.appendChild(document.createElement("dt")).innerHTML =
+      avalancheProblemLink(p.problemType || "");
     result.appendChild(document.createElement("dd")).innerHTML = [
       formatElevation(p.elevation),
       formatAspects(p.aspects),
