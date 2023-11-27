@@ -186,11 +186,11 @@ function dangerRatingLink(
   rating: DangerRatingValue | DangerRatingConfig | undefined,
 ): string {
   if (!rating || rating === "no_rating" || rating === "no_snow") return "";
-  const { color, text } =
+  const { color, id, text } =
     typeof rating === "string" ? DANGER_RATINGS[rating] : rating;
   return `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
       <span class="square" style="background: ${color}"></span>
-      <abbr title="${text}">${rating}</abbr></a>`;
+      <abbr title="${text}">${id}</abbr></a>`;
 }
 
 const vectorRegions = new PMTilesVectorSource({
