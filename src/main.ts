@@ -217,7 +217,7 @@ async function buildMap(
   const dangerRatingStyles = Object.fromEntries(
     Object.values(DANGER_RATINGS).map(({ warnLevelNumber, color }) => [
       warnLevelNumber,
-      new Style({ fill: new Fill({ color }) }),
+      new Style({ fill: new Fill({ color }), zIndex: warnLevelNumber }),
     ]),
   );
   const style = (id: Region): Style => {
