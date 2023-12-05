@@ -2,7 +2,7 @@
 
 A map of (almost) all avalanche bulletins of Europe.
 
-https://simon04.github.io/eaws-bulletin-map/
+https://eaws-bulletin-map.legner.me/
 
 ## Attribution
 
