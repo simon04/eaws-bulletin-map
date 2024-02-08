@@ -192,10 +192,27 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
       new Style({ fill: new Fill({ color }), zIndex: warnLevelNumber }),
     ]),
   );
-  const style = ({ id, elevation }: MicroRegionElevationProperties): Style => {
+  const style = ({
+    id,
+    elevation,
+    threshold,
+  }: MicroRegionElevationProperties): Style => {
     const dangerRatings =
       bulletins.find((b) => b.regions?.some((r) => r.regionID === id))
         ?.dangerRatings ?? [];
+    if (
+      elevation === "high" &&
+      dangerRatings
+        .map((rating) => rating.elevation?.lowerBound)
+        .some(
+          (bound) =>
+            bound !== undefined &&
+            threshold !== undefined &&
+            +bound > threshold,
+        )
+    ) {
+      elevation = "low";
+    }
     const dangerRating = dangerRatings
       .filter(
         (rating) =>
