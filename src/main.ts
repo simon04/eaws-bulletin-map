@@ -1,4 +1,5 @@
 import { Control, defaults as defaultControls } from "ol/control";
+import { defaults as defaultInteractions } from "ol/interaction";
 import { PMTilesVectorSource } from "ol-pmtiles";
 import { fromLonLat } from "ol/proj";
 import Fill from "ol/style/Fill";
@@ -97,6 +98,9 @@ function initMap() {
   const map = new Map({
     target: mapElement,
     controls: defaultControls().extend([new DateControl()]),
+    interactions: defaultInteractions({
+      mouseWheelZoom: window.self === window.top,
+    }),
     keyboardEventTarget: document,
     overlays: [popup],
     view: new View({
