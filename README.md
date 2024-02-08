@@ -4,6 +4,8 @@ A map of (almost) all avalanche bulletins of Europe.
 
 https://eaws-bulletin-map.legner.me/
 
+Also embedded on the EAWS website https://www.avalanches.org/
+
 ## Attribution
 
 This project is made possible thanks to the following awesome projects:
