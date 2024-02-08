@@ -1,7 +1,6 @@
 export type Region = string;
 export type Regions = string;
 export type WarnLevelNumber = 0 | 1 | 2 | 3 | 4 | 5;
-export type MaxDangerRatings = Record<Region, WarnLevelNumber>;
 export type LanguageCode = string;
 
 export interface MicroRegionElevationProperties {

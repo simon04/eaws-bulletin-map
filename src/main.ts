@@ -19,7 +19,6 @@ import "./style.css";
 
 import type {
   FeatureProperties,
-  MaxDangerRatings,
   MicroRegionElevationProperties,
   MicroRegionProperties,
   Region,
@@ -72,11 +71,10 @@ const popup = new Popup({
 
 const map = initMap();
 
-fetchDangerRatings(date).then((maxDangerRatings) =>
-  buildMap(maxDangerRatings, date),
-);
-
-fetchBulletins(date).then((bulletins) => buildMarkerMap(bulletins));
+fetchBulletins(date).then((bulletins) => {
+  buildMap(bulletins, date);
+  buildMarkerMap(bulletins);
+});
 
 function initMap() {
   const mapElement = document.querySelector<HTMLDivElement>("#map")!;
@@ -135,28 +133,6 @@ function initMap() {
   return map;
 }
 
-async function fetchDangerRatings(
-  date: string,
-  region: Region = "",
-): Promise<MaxDangerRatings> {
-  if (!region) {
-    return Promise.all(
-      regions
-        .split(" ")
-        .map((region: Region) => fetchDangerRatings(date, region)),
-    ).then((maxDangerRatings) =>
-      Object.fromEntries(maxDangerRatings.flatMap((o) => Object.entries(o))),
-    );
-  }
-  const { maxDangerRatings } = await fetchJSON<{
-    maxDangerRatings: MaxDangerRatings;
-  }>(
-    `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.ratings.json`,
-    { maxDangerRatings: {} },
-  );
-  return maxDangerRatings;
-}
-
 async function fetchBulletins(
   date: string,
   region: Region = "",
@@ -209,20 +185,27 @@ const vectorRegions = new PMTilesVectorSource({
   maxZoom: 10,
 });
 
-async function buildMap(
-  maxDangerRatings: MaxDangerRatings,
-  date: string,
-  ampm = "",
-) {
+async function buildMap(bulletins: AvalancheBulletin[], date: string) {
   const dangerRatingStyles = Object.fromEntries(
     Object.values(DANGER_RATINGS).map(({ warnLevelNumber, color }) => [
       warnLevelNumber,
       new Style({ fill: new Fill({ color }), zIndex: warnLevelNumber }),
     ]),
   );
-  const style = (id: Region): Style => {
-    if (ampm) id += ":" + ampm;
-    const dangerRating = maxDangerRatings[id];
+  const style = ({ id, elevation }: MicroRegionElevationProperties): Style => {
+    const dangerRatings =
+      bulletins.find((b) => b.regions?.some((r) => r.regionID === id))
+        ?.dangerRatings ?? [];
+    const dangerRating = dangerRatings
+      .filter(
+        (rating) =>
+          elevation === "low_high" ||
+          (!rating?.elevation?.upperBound && !rating?.elevation?.lowerBound) ||
+          (rating?.elevation?.upperBound && elevation === "low") ||
+          (rating?.elevation?.lowerBound && elevation === "high"),
+      )
+      .map((rating) => DANGER_RATINGS[rating.mainValue].warnLevelNumber)
+      .reduce<number>((a, b) => Math.max(a, b), 0);
     return dangerRatingStyles[dangerRating ?? 0];
   };
   const layer = new VectorTileLayer({
@@ -233,10 +216,8 @@ async function buildMap(
         return;
       } else if (!filterFeature(properties, date)) {
         return;
-      } else if (properties.elevation === "low_high") {
-        return style(properties.id);
       } else {
-        return style(properties.id + ":" + properties.elevation);
+        return style(properties);
       }
     },
   });
