@@ -289,11 +289,10 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
       popup.show(e.coordinate, formatBulletin(regionID, bulletin));
       return;
     }
-    const aws = eawsOutlineProperties
-      .filter((p) => regionID.startsWith(p.id))
-      .reduce((a, b) => (a.id.length > b.id.length ? a : b));
-    if (aws) {
-      popup.show(e.coordinate, formatEawsOutline(aws));
+    const aws = eawsOutlineProperties.filter((p) => regionID.startsWith(p.id));
+    if (aws.length) {
+      const a = aws.reduce((a, b) => (a.id.length > b.id.length ? a : b));
+      popup.show(e.coordinate, formatEawsOutline(a));
       return;
     }
   });
