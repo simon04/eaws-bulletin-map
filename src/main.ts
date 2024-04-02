@@ -17,6 +17,7 @@ import XYZ from "ol/source/XYZ";
 import "ol/ol.css";
 import "ol-ext/dist/ol-ext.css";
 import "./style.css";
+import eawsOutlineProperties from "@eaws/outline_properties/index.json";
 
 import type {
   FeatureProperties,
@@ -278,11 +279,22 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
 
   map.on("click", (e) => {
     const regionID = findMicroRegionID(e);
+    if (!regionID) {
+      return;
+    }
     const bulletin = bulletins.find((b) =>
       b.regions?.some((r) => r.regionID === regionID),
     );
-    if (regionID && bulletin) {
+    if (bulletin) {
       popup.show(e.coordinate, formatBulletin(regionID, bulletin));
+      return;
+    }
+    const aws = eawsOutlineProperties
+      .filter((p) => regionID.startsWith(p.id))
+      .reduce((a, b) => (a.id.length > b.id.length ? a : b));
+    if (aws) {
+      popup.show(e.coordinate, formatEawsOutline(aws));
+      return;
     }
   });
 }
@@ -364,4 +376,21 @@ function filterFeature(
     (!properties.start_date || properties.start_date <= today) &&
     (!properties.end_date || properties.end_date > today)
   );
+}
+
+function formatEawsOutline(
+  aws: (typeof eawsOutlineProperties)[number],
+): HTMLElement {
+  const result = document.createElement("dl");
+  for (const p of aws.aws) {
+    const provider = result.appendChild(document.createElement("dt"));
+    const providerLink = provider.appendChild(document.createElement("a"));
+    providerLink.innerText = p.name;
+    providerLink.href = Object.entries(p.url).find(
+      ([id]) => id.length === 2,
+    )?.[1];
+    providerLink.target = "_blank";
+    providerLink.rel = "external";
+  }
+  return result;
 }
