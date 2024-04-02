@@ -15,9 +15,9 @@
     "vite": "^5.1.0"
   },
   "dependencies": {
-    "ol": "^8.2.0",
-    "ol-ext": "^4.0.14",
-    "ol-pmtiles": "^0.3.0"
+    "ol": "^9.1.0",
+    "ol-ext": "^4.0.17",
+    "ol-pmtiles": "^0.4.0"
   },
   "prettier": {
     "trailingComma": "all"

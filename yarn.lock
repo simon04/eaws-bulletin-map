@@ -293,6 +293,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/geojson@npm:*":
+  version: 7946.0.14
+  resolution: "@types/geojson@npm:7946.0.14"
+  checksum: 10c0/54f3997708fa2970c03eeb31f7e4540a0eb6387b15e9f8a60513a1409c23cafec8d618525404573468b59c6fecbfd053724b3327f7fca416729c26271d799f55
+  languageName: node
+  linkType: hard
+
+"@types/leaflet@npm:^1.9.8":
+  version: 1.9.8
+  resolution: "@types/leaflet@npm:1.9.8"
+  dependencies:
+    "@types/geojson": "npm:*"
+  checksum: 10c0/9a635d8ced35da27d8dfe972954bd5b4c91354beef710d7cfcca0e7bff3d189eb4cfd36ff68dac2bdc4b002d50f9ed5036c2e659683131e50d227a2050c72895
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -482,9 +498,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eaws-bulletin-map@workspace:."
   dependencies:
-    ol: "npm:^8.2.0"
-    ol-ext: "npm:^4.0.14"
-    ol-pmtiles: "npm:^0.3.0"
+    ol: "npm:^9.1.0"
+    ol-ext: "npm:^4.0.17"
+    ol-pmtiles: "npm:^0.4.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.1.0"
   languageName: unknown
@@ -1025,29 +1041,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol-ext@npm:^4.0.14":
-  version: 4.0.14
-  resolution: "ol-ext@npm:4.0.14"
+"ol-ext@npm:^4.0.17":
+  version: 4.0.17
+  resolution: "ol-ext@npm:4.0.17"
   peerDependencies:
     ol: ">= 5.3.0"
-  checksum: 10c0/41ab6aa8ff41d367dd82d30420d7d7ee8b4c77d9f7574106d5b3cca0056ad23e9e42fa4e49bb76fcdfcabe96b8bafad8301bcfe02a1bdc5ab86fb381e18890f4
+  checksum: 10c0/41d4f18ff511f92c3e398c121fac97bb8b5bdb368a06cf01c92a4694722d38b3d2921918f39b38315d65f50348e41ed93b12811196b617c1c1d627dc23f4ced8
   languageName: node
   linkType: hard
 
-"ol-pmtiles@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "ol-pmtiles@npm:0.3.0"
+"ol-pmtiles@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "ol-pmtiles@npm:0.4.0"
   dependencies:
-    pmtiles: "npm:2.11.0"
+    pmtiles: "npm:^3.0.4"
   peerDependencies:
-    ol: ">=7.3.0"
-  checksum: 10c0/9b2d43d4a06a81efecbb2dc5feebe4e2c5d4516cb4936a1d54435682e77175b2ba2dfe774924b6c2d7df79262d695524bdb6a2228ac4fdeb83b20ac6a73e3148
+    ol: ">=9.0.0"
+  checksum: 10c0/f682820955416af611b187f8f7fa059c0d5547fced07ca189cffd2de23e21f6df358e5b734a9f1e703a4ce58c62646105c3c64abbea20355491446ef46c8b6fd
   languageName: node
   linkType: hard
 
-"ol@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "ol@npm:8.2.0"
+"ol@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "ol@npm:9.1.0"
   dependencies:
     color-rgba: "npm:^3.0.0"
     color-space: "npm:^2.0.1"
@@ -1055,7 +1071,7 @@ __metadata:
     geotiff: "npm:^2.0.7"
     pbf: "npm:3.2.1"
     rbush: "npm:^3.0.1"
-  checksum: 10c0/46e1cf2b73da2ab1b30a7e596e2ce2d2c8891e3abf1a3274f933dcf2d76ff0c38ba0a2087a681997977f688a998d933e818975db8a7dfe198b9e2639bdd2d0df
+  checksum: 10c0/f6b158e442a23b934ef24acb6f86748b3a35b93d6b7af5b64b6cb46c6b9f878178087e15dc80c5feb48533b272dd23def608921b6e53cf40f47e092c21eaf290
   languageName: node
   linkType: hard
 
@@ -1118,12 +1134,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pmtiles@npm:2.11.0":
-  version: 2.11.0
-  resolution: "pmtiles@npm:2.11.0"
+"pmtiles@npm:^3.0.4":
+  version: 3.0.5
+  resolution: "pmtiles@npm:3.0.5"
   dependencies:
+    "@types/leaflet": "npm:^1.9.8"
     fflate: "npm:^0.8.0"
-  checksum: 10c0/5ae876184f9bc6a932d8f57e7a6a20ffe6bf90e5b761253e6984692ff8862b07996376c2fc80072e1be2fd63017fea6ad2cc7f9a239c2be44bc0bb5ca8da70c3
+  checksum: 10c0/6a7df9d742b2dd0ecd5d47a9c3da94080e0ebf8da0ab3a525e25cb053b49f7321577e749c2ef20dc9ec81c0de04718605e0f39bf89f4013795c11f17848b5f6a
   languageName: node
   linkType: hard
 
