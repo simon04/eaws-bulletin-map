@@ -1,7 +1,8 @@
 import { Control, defaults as defaultControls } from "ol/control";
-import { defaults as defaultInteractions } from "ol/interaction";
+import { defaults as defaultInteractions, Interaction } from "ol/interaction";
 import { PMTilesVectorSource } from "ol-pmtiles";
 import { fromLonLat } from "ol/proj";
+import EventType from "ol/events/EventType";
 import Fill from "ol/style/Fill";
 import GeolocationButton from "ol-ext/control/GeolocationButton";
 import Map from "ol/Map";
@@ -81,6 +82,21 @@ fetchBulletins(date).then((bulletins) => {
 function initMap() {
   const mapElement = document.querySelector<HTMLDivElement>("#map")!;
 
+  class ClosePopup extends Interaction {
+    handleEvent(mapBrowserEvent: MapBrowserEvent<KeyboardEvent>): boolean {
+      if (
+        mapBrowserEvent.type !== EventType.KEYDOWN &&
+        mapBrowserEvent.type !== EventType.KEYPRESS
+      ) {
+        return true;
+      } else if (mapBrowserEvent.originalEvent.key !== "Escape") {
+        return true;
+      }
+      popup.hide();
+      return false;
+    }
+  }
+
   class DateControl extends Control {
     constructor() {
       const input = document.createElement("input");
@@ -125,6 +141,8 @@ function initMap() {
       }),
     ],
   });
+
+  map.addInteraction(new ClosePopup());
 
   map.addControl(new GeolocationButton());
 
