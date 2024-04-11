@@ -337,8 +337,10 @@ function formatBulletin(
       .join("..");
 
   bulletin.dangerRatings?.forEach((r) => {
-    result.appendChild(document.createElement("dt")).innerHTML =
-      dangerRatingLink(r.mainValue);
+    result.appendChild(document.createElement("dt")).innerHTML = [
+      dangerRatingLink(r.mainValue),
+      r.validTimePeriod || "",
+    ].join(" ");
     result.appendChild(document.createElement("dd")).innerText =
       formatElevation(r.elevation);
   });
@@ -352,8 +354,10 @@ function formatBulletin(
     "extremely large",
   ];
   bulletin.avalancheProblems?.forEach((p) => {
-    result.appendChild(document.createElement("dt")).innerHTML =
-      avalancheProblemLink(p.problemType || "");
+    result.appendChild(document.createElement("dt")).innerHTML = [
+      avalancheProblemLink(p.problemType || ""),
+      p.validTimePeriod || "",
+    ].join(" ");
     result.appendChild(document.createElement("dd")).innerHTML = [
       formatElevation(p.elevation),
       formatAspects(p.aspects),
