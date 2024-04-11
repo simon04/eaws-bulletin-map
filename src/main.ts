@@ -115,7 +115,9 @@ function initMap() {
           url: "https://static.avalanche.report/tms/{z}/{x}/{y}.webp",
           attributions: [
             '🌍 <a href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3)',
-            '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3)',
+            '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3, CC BY 4.0)',
+            '<a href="https://sonny.4lima.de/">Sonny</a> (CC BY 4.0)',
+            '<a href="https://www.eea.europa.eu/en/datahub/datahubitem-view/d08852bc-7b5f-4835-a776-08362e2fbf4b">EU-DEM</a> (CC BY 4.0)',
           ],
           maxZoom: 12,
           minZoom: 3,
