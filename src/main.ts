@@ -393,7 +393,7 @@ function formatBulletin(
 
 function filterFeature(
   properties: MicroRegionProperties | MicroRegionElevationProperties,
-  today: string = new Date().toISOString().slice(0, "2006-01-02".length),
+  today: string,
 ): boolean {
   return (
     (!properties.start_date || properties.start_date <= today) &&
