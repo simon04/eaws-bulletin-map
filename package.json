@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "@eaws/outline_properties": "^6.2.0",
-    "ol": "^9.1.0",
-    "ol-ext": "^4.0.17",
-    "ol-pmtiles": "^0.4.0"
+    "ol": "^9.2.4",
+    "ol-ext": "^4.0.18",
+    "ol-pmtiles": "^0.5.0"
   },
   "prettier": {
     "trailingComma": "all"

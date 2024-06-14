@@ -541,9 +541,9 @@ __metadata:
   resolution: "eaws-bulletin-map@workspace:."
   dependencies:
     "@eaws/outline_properties": "npm:^6.2.0"
-    ol: "npm:^9.1.0"
-    ol-ext: "npm:^4.0.17"
-    ol-pmtiles: "npm:^0.4.0"
+    ol: "npm:^9.2.4"
+    ol-ext: "npm:^4.0.18"
+    ol-pmtiles: "npm:^0.5.0"
     typescript: "npm:^5.4.3"
     vite: "npm:^5.2.7"
   languageName: unknown
@@ -1087,29 +1087,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol-ext@npm:^4.0.17":
-  version: 4.0.17
-  resolution: "ol-ext@npm:4.0.17"
+"ol-ext@npm:^4.0.18":
+  version: 4.0.18
+  resolution: "ol-ext@npm:4.0.18"
   peerDependencies:
     ol: ">= 5.3.0"
-  checksum: 10c0/41d4f18ff511f92c3e398c121fac97bb8b5bdb368a06cf01c92a4694722d38b3d2921918f39b38315d65f50348e41ed93b12811196b617c1c1d627dc23f4ced8
+  checksum: 10c0/54f3524ac8547247e100640940b8f6799a7ba27ee5d2631e7361fbd1f8127390abfd23b80d033d2e1eb495ba1357313010793c79df5870c34cf0d27ad3555696
   languageName: node
   linkType: hard
 
-"ol-pmtiles@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "ol-pmtiles@npm:0.4.0"
+"ol-pmtiles@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "ol-pmtiles@npm:0.5.0"
   dependencies:
     pmtiles: "npm:^3.0.4"
   peerDependencies:
     ol: ">=9.0.0"
-  checksum: 10c0/f682820955416af611b187f8f7fa059c0d5547fced07ca189cffd2de23e21f6df358e5b734a9f1e703a4ce58c62646105c3c64abbea20355491446ef46c8b6fd
+  checksum: 10c0/f7b23ecd3a5f5f0fabe908c24ac99038b8d5e82b9bd221177255c77f99aaa880f6c86034be642f01da7ab6c1987298bd3a6d0098eae402c20d364f63cd3b123c
   languageName: node
   linkType: hard
 
-"ol@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "ol@npm:9.1.0"
+"ol@npm:^9.2.4":
+  version: 9.2.4
+  resolution: "ol@npm:9.2.4"
   dependencies:
     color-rgba: "npm:^3.0.0"
     color-space: "npm:^2.0.1"
@@ -1117,7 +1117,7 @@ __metadata:
     geotiff: "npm:^2.0.7"
     pbf: "npm:3.2.1"
     rbush: "npm:^3.0.1"
-  checksum: 10c0/f6b158e442a23b934ef24acb6f86748b3a35b93d6b7af5b64b6cb46c6b9f878178087e15dc80c5feb48533b272dd23def608921b6e53cf40f47e092c21eaf290
+  checksum: 10c0/6eb288d03908ef7276760011867836b737b7508c56a966013dbee6184e4c6b54a458c2efd2dfec08aa86b5cffc3d90488746737b64ef2c05b772ad6ee9bbbfd5
   languageName: node
   linkType: hard
 
