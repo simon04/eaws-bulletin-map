@@ -40,6 +40,7 @@ import { DANGER_RATINGS, type DangerRatingConfig } from "./danger-ratings";
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
 const regions: Regions = searchParams.get("regions") || "";
+const bbox = searchParams.get("bbox") || "";
 const details = searchParams.get("details") || "";
 if (!date || !regions) {
   const now = new Date();
@@ -56,7 +57,7 @@ function route(date: string | Date, regions: Regions, replace = false) {
   if (date instanceof Date) {
     date = date.toISOString().slice(0, "2006-01-02".length);
   }
-  const params = new URLSearchParams({ date, regions, details });
+  const params = new URLSearchParams({ date, regions, bbox, details });
   params.forEach((value, key) => value || params.delete(key));
   const url = "?" + params;
   if (replace) {
@@ -141,6 +142,13 @@ function initMap() {
       }),
     ],
   });
+
+  if (bbox) {
+    // Austria: bbox=9.47996951665,46.4318173285,16.9796667823,49.0390742051
+    const [left, bottom, right, top] = bbox.split(",").map((v) => +v);
+    const extent = [...fromLonLat([left, bottom]), ...fromLonLat([right, top])];
+    map.getView().fit(extent, { size: map.getSize() });
+  }
 
   map.addInteraction(new ClosePopup());
 
