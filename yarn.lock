@@ -358,6 +358,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/rbush@npm:^3.0.3":
+  version: 3.0.4
+  resolution: "@types/rbush@npm:3.0.4"
+  checksum: 10c0/430f60878b46feb68b2a50ddac684844ed895d73ada8932c421a2b8ef56cca8b9211109250d00a760a1f7a5c4ec6fb05992d1b235f3d48b5ba8528ec517c3861
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -529,10 +536,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"earcut@npm:^2.2.3":
-  version: 2.2.4
-  resolution: "earcut@npm:2.2.4"
-  checksum: 10c0/01ca51830edd2787819f904ae580087d37351f6048b4565e7add4b3da8a86b7bc19262ab2aa7fdc64129ab03af2d9cec8cccee4d230c82275f97ef285c79aafb
+"earcut@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "earcut@npm:3.0.0"
+  checksum: 10c0/20f3d8492f02452648466d2ce98276c9317c4d6980fc2596b1cb119fc3ef2d034724c5721de2af191331fb43610a27995b0f1b611d3386976b770ae9af7b3bbe
   languageName: node
   linkType: hard
 
@@ -548,8 +555,8 @@ __metadata:
   resolution: "eaws-bulletin-map@workspace:."
   dependencies:
     "@eaws/outline_properties": "npm:^6.2.0"
-    ol: "npm:^9.2.4"
-    ol-ext: "npm:^4.0.18"
+    ol: "npm:^10.1.0"
+    ol-ext: "npm:^4.0.23"
     ol-pmtiles: "npm:^0.5.0"
     typescript: "npm:^5.5.4"
     vite: "npm:^5.4.3"
@@ -805,13 +812,6 @@ __metadata:
   dependencies:
     safer-buffer: "npm:>= 2.1.2 < 3.0.0"
   checksum: 10c0/98102bc66b33fcf5ac044099d1257ba0b7ad5e3ccd3221f34dd508ab4070edff183276221684e1e0555b145fce0850c9f7d2b60a9fcac50fbb4ea0d6e845a3b1
-  languageName: node
-  linkType: hard
-
-"ieee754@npm:^1.1.12":
-  version: 1.2.1
-  resolution: "ieee754@npm:1.2.1"
-  checksum: 10c0/b0782ef5e0935b9f12883a2e2aa37baa75da6e66ce6515c168697b42160807d9330de9a32ec1ed73149aea02e0d822e572bca6f1e22bdcbd2149e13b050b17bb
   languageName: node
   linkType: hard
 
@@ -1075,12 +1075,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol-ext@npm:^4.0.18":
-  version: 4.0.18
-  resolution: "ol-ext@npm:4.0.18"
+"ol-ext@npm:^4.0.23":
+  version: 4.0.23
+  resolution: "ol-ext@npm:4.0.23"
   peerDependencies:
     ol: ">= 5.3.0"
-  checksum: 10c0/54f3524ac8547247e100640940b8f6799a7ba27ee5d2631e7361fbd1f8127390abfd23b80d033d2e1eb495ba1357313010793c79df5870c34cf0d27ad3555696
+  checksum: 10c0/e7d0663ec402a0c9408269f74ef071ff6ae93cb7bfd19b3c17acc3fe88edff907cfcb8e0730236e42fe05d21185bc14f1c18893a2d006c4d77416aea53a53c8a
   languageName: node
   linkType: hard
 
@@ -1095,17 +1095,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol@npm:^9.2.4":
-  version: 9.2.4
-  resolution: "ol@npm:9.2.4"
+"ol@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "ol@npm:10.1.0"
   dependencies:
+    "@types/rbush": "npm:^3.0.3"
     color-rgba: "npm:^3.0.0"
     color-space: "npm:^2.0.1"
-    earcut: "npm:^2.2.3"
+    earcut: "npm:^3.0.0"
     geotiff: "npm:^2.0.7"
-    pbf: "npm:3.2.1"
-    rbush: "npm:^3.0.1"
-  checksum: 10c0/6eb288d03908ef7276760011867836b737b7508c56a966013dbee6184e4c6b54a458c2efd2dfec08aa86b5cffc3d90488746737b64ef2c05b772ad6ee9bbbfd5
+    pbf: "npm:4.0.1"
+    rbush: "npm:^4.0.0"
+  checksum: 10c0/9d0342806f20373dd7500cce1ea4bddf44e1626c486800f8fe1da374f923e349a2222d97d5a9d4ea493a87154fab272fdd384361d3521f28a8c3fbcf7f74bff8
   languageName: node
   linkType: hard
 
@@ -1149,15 +1150,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pbf@npm:3.2.1":
-  version: 3.2.1
-  resolution: "pbf@npm:3.2.1"
+"pbf@npm:4.0.1":
+  version: 4.0.1
+  resolution: "pbf@npm:4.0.1"
   dependencies:
-    ieee754: "npm:^1.1.12"
     resolve-protobuf-schema: "npm:^2.1.0"
   bin:
     pbf: bin/pbf
-  checksum: 10c0/63b4a27749a9b5a3cf4260d75f9d91ad8d8b326bcdd2bfafd9460a94d0a297a80f80c70d5481213d6c4ebf03c027aca0ac9287c7d8217d327a6d0456f23b9d3c
+  checksum: 10c0/1a95cc3bdc61ee01d4728f4a57a9f1233732d183a8568818b714a747fd8b957d99b63e1c67f0f72dc5623657c42f88a1a7e44e1fbcd06e2fe2ef9a85a964832e
   languageName: node
   linkType: hard
 
@@ -1220,19 +1220,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"quickselect@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "quickselect@npm:2.0.0"
-  checksum: 10c0/6c8d591bc73beae4c1996b7b7138233a7dbbbdde29b7b6d822a02d08cd220fd27613f47d6e9635989b12e250d42ef9da3448de1ed12ad962974e207ab3c3562c
+"quickselect@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "quickselect@npm:3.0.0"
+  checksum: 10c0/3a0d33b0ec06841d953accdfd735aa3d8b7922cddd12970544a2c4b0278871280d8f5ba496803600693c1e7b7b2fb57c31d2b14d99132f478888006a1be6e6b7
   languageName: node
   linkType: hard
 
-"rbush@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "rbush@npm:3.0.1"
+"rbush@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "rbush@npm:4.0.1"
   dependencies:
-    quickselect: "npm:^2.0.0"
-  checksum: 10c0/55311586c30cdedaa2220de6f1da45fe1fa806263afbf7b6f4c0078983830c2abc7771187896d68bfc9078cb279079fb4c84971831da4b74384aab2c2c417758
+    quickselect: "npm:^3.0.0"
+  checksum: 10c0/1d3c2e2c8b8111a6bcac0b36348ef55c977bc533a7a7bef44c423e24de531e43749bcf5b939008de69d97d3c6e7cf0e9040cecb4492358e6d562ea85165a1620
   languageName: node
   linkType: hard
 
