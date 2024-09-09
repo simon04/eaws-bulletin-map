@@ -3,7 +3,7 @@
   "private": true,
   "license": "GPL-3.0-or-later",
   "version": "0.0.0",
-  "packageManager": "yarn@4.1.0",
+  "packageManager": "yarn@4.4.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,8 +11,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "typescript": "^5.5.1-rc",
-    "vite": "^5.3.0"
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3"
   },
   "dependencies": {
     "@eaws/outline_properties": "^6.2.0",
