@@ -358,10 +358,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/rbush@npm:^3.0.3":
-  version: 3.0.4
-  resolution: "@types/rbush@npm:3.0.4"
-  checksum: 10c0/430f60878b46feb68b2a50ddac684844ed895d73ada8932c421a2b8ef56cca8b9211109250d00a760a1f7a5c4ec6fb05992d1b235f3d48b5ba8528ec517c3861
+"@types/rbush@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@types/rbush@npm:3.0.3"
+  checksum: 10c0/a0c2425eb9cb43f442ef48d9d0221c006e0f7303c35f97d443c9832e7c824572b7206a68f9ffe486ba0789cc19600732c3412729211f0c1a5058e7b3f0fd937d
   languageName: node
   linkType: hard
 
@@ -555,9 +555,9 @@ __metadata:
   resolution: "eaws-bulletin-map@workspace:."
   dependencies:
     "@eaws/outline_properties": "npm:^6.2.0"
-    ol: "npm:^10.1.0"
-    ol-ext: "npm:^4.0.23"
-    ol-pmtiles: "npm:^0.5.0"
+    ol: "npm:^10.2.1"
+    ol-ext: "npm:^4.0.24"
+    ol-pmtiles: "npm:^1.0.2"
     typescript: "npm:^5.5.4"
     vite: "npm:^5.4.3"
   languageName: unknown
@@ -1075,38 +1075,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol-ext@npm:^4.0.23":
-  version: 4.0.23
-  resolution: "ol-ext@npm:4.0.23"
+"ol-ext@npm:^4.0.24":
+  version: 4.0.24
+  resolution: "ol-ext@npm:4.0.24"
   peerDependencies:
     ol: ">= 5.3.0"
-  checksum: 10c0/e7d0663ec402a0c9408269f74ef071ff6ae93cb7bfd19b3c17acc3fe88edff907cfcb8e0730236e42fe05d21185bc14f1c18893a2d006c4d77416aea53a53c8a
+  checksum: 10c0/d8cc6fbe448998d4d1af64ab61835e54d65e8694603fc6af8218071fbcf07c7ba5d5faaf9642272c20c5fbb95c89a41f4fe16f72c90f815e5bad7a3f18b73d67
   languageName: node
   linkType: hard
 
-"ol-pmtiles@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "ol-pmtiles@npm:0.5.0"
+"ol-pmtiles@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "ol-pmtiles@npm:1.0.2"
   dependencies:
-    pmtiles: "npm:^3.0.4"
+    pmtiles: "npm:^3.1.0"
   peerDependencies:
     ol: ">=9.0.0"
-  checksum: 10c0/f7b23ecd3a5f5f0fabe908c24ac99038b8d5e82b9bd221177255c77f99aaa880f6c86034be642f01da7ab6c1987298bd3a6d0098eae402c20d364f63cd3b123c
+  checksum: 10c0/f2dacac4f0b792ca0cfe55bfe6ece9b6113e848ba0828281c67ac07644ee57a757718a9b2895bdfd65bac163a8d34510c7875e313a3f0340da11ce652e9ca3c0
   languageName: node
   linkType: hard
 
-"ol@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "ol@npm:10.1.0"
+"ol@npm:^10.2.1":
+  version: 10.2.1
+  resolution: "ol@npm:10.2.1"
   dependencies:
-    "@types/rbush": "npm:^3.0.3"
+    "@types/rbush": "npm:3.0.3"
     color-rgba: "npm:^3.0.0"
     color-space: "npm:^2.0.1"
     earcut: "npm:^3.0.0"
     geotiff: "npm:^2.0.7"
     pbf: "npm:4.0.1"
     rbush: "npm:^4.0.0"
-  checksum: 10c0/9d0342806f20373dd7500cce1ea4bddf44e1626c486800f8fe1da374f923e349a2222d97d5a9d4ea493a87154fab272fdd384361d3521f28a8c3fbcf7f74bff8
+  checksum: 10c0/2095cedff8009c4bb8593195b5df21ffcbb6f5db1bec2bdc6669de4515206f1877cd6e5142cfe8763a2736d36b2e4f5e5c6843dabf07a55954bb52a564245f09
   languageName: node
   linkType: hard
 
@@ -1168,13 +1168,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pmtiles@npm:^3.0.4":
-  version: 3.0.5
-  resolution: "pmtiles@npm:3.0.5"
+"pmtiles@npm:^3.1.0":
+  version: 3.2.0
+  resolution: "pmtiles@npm:3.2.0"
   dependencies:
     "@types/leaflet": "npm:^1.9.8"
     fflate: "npm:^0.8.0"
-  checksum: 10c0/6a7df9d742b2dd0ecd5d47a9c3da94080e0ebf8da0ab3a525e25cb053b49f7321577e749c2ef20dc9ec81c0de04718605e0f39bf89f4013795c11f17848b5f6a
+  checksum: 10c0/3990a39064a62389442a656fc743da457d33e86d5ebea7fd4b7cb321407dabe1c2b92345b8daa2df0210e0553c13a18cf9e41994577590a6fb20675f37c879e4
   languageName: node
   linkType: hard
 
