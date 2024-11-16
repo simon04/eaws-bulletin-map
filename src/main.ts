@@ -297,12 +297,16 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
         : undefined;
     },
   });
+
+  layer.on("change:regionID", () => {
+    layer.changed();
+  });
+
   map.addLayer(layer);
 
   map.on("pointermove", (e) => {
     const regionID = findMicroRegionID(e);
     layer.set("regionID", regionID);
-    layer.changed();
   });
 
   map.on("click", (e) => {
