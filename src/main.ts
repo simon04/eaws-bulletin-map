@@ -298,7 +298,7 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
     },
   });
 
-  layer.on("change:regionID", () => {
+  layer.on("change:regionID" as unknown as "change", () => {
     layer.changed();
   });
 
