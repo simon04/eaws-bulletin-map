@@ -225,14 +225,15 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
       new Style({ fill: new Fill({ color }), zIndex: warnLevelNumber }),
     ]),
   );
+  const bulletingsByRegionID = Object.fromEntries(
+    bulletins.flatMap(b => (b.regions??[]).map(r => [r.regionID, b]))
+  )
   const style = ({
     id,
     elevation,
     threshold,
   }: MicroRegionElevationProperties): Style => {
-    const dangerRatings =
-      bulletins.find((b) => b.regions?.some((r) => r.regionID === id))
-        ?.dangerRatings ?? [];
+    const dangerRatings = bulletingsByRegionID[id]?.dangerRatings?? [];
     if (
       elevation === "high" &&
       dangerRatings
