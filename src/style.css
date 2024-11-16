@@ -141,9 +141,27 @@ span.square {
   left: 0.5em;
 }
 
-.ol-popup {
+.ol-popup.default {
   color: #242424;
   font-size: 0.8em;
   line-height: 1.25;
   max-width: 80vh;
+}
+
+.ol-popup.default > div {
+  border-color: #646cff;
+  border-radius: 0;
+}
+
+.ol-popup.default > div:hover {
+  border-color: #535bf2;
+}
+
+.ol-popup .closeBox {
+  background-color: #646cff;
+  border-radius: 0;
+}
+
+.ol-popup .closeBox:hover {
+  background-color: #535bf2;
 }
