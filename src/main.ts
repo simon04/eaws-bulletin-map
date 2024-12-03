@@ -263,13 +263,10 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
     source: vectorRegions,
     style(feature): Style | undefined {
       const properties = feature.getProperties() as FeatureProperties;
-      if (properties.layer !== "micro-regions_elevation") {
-        return;
-      } else if (!filterFeature(properties, date)) {
-        return;
-      } else {
-        return style(properties);
-      }
+      return filterFeature(properties, date) &&
+        properties.layer === "micro-regions_elevation"
+        ? style(properties)
+        : undefined;
     },
   });
   layer.on("prerender", (e) => {
@@ -292,7 +289,8 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
     source: vectorRegions,
     style(feature): Style | undefined {
       const properties = feature.getProperties() as FeatureProperties;
-      return properties.layer === "micro-regions" &&
+      return filterFeature(properties, date) &&
+        properties.layer === "micro-regions" &&
         properties.id === layer.get("regionID")
         ? selectedStyle
         : undefined;
@@ -336,8 +334,9 @@ function findMicroRegionID(e: MapBrowserEvent<any>): Region | undefined {
     .getFeaturesAtPixel(e.pixel)
     .map((feature) => {
       const properties = feature.getProperties() as FeatureProperties;
-      return properties.layer === "micro-regions" ||
-        properties.layer === "micro-regions_elevation"
+      return filterFeature(properties, date) &&
+        (properties.layer === "micro-regions" ||
+          properties.layer === "micro-regions_elevation")
         ? properties.id
         : undefined;
     })
