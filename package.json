@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "typescript": "^5.7.2",
-    "vite": "^5.4.11"
+    "vite": "^6.0.2"
   },
   "dependencies": {
     "@eaws/outline_properties": "^7.0.3",
