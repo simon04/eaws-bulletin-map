@@ -226,14 +226,14 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
     ]),
   );
   const bulletingsByRegionID = Object.fromEntries(
-    bulletins.flatMap(b => (b.regions??[]).map(r => [r.regionID, b]))
-  )
+    bulletins.flatMap((b) => (b.regions ?? []).map((r) => [r.regionID, b])),
+  );
   const style = ({
     id,
     elevation,
     threshold,
   }: MicroRegionElevationProperties): Style => {
-    const dangerRatings = bulletingsByRegionID[id]?.dangerRatings?? [];
+    const dangerRatings = bulletingsByRegionID[id]?.dangerRatings ?? [];
     if (
       elevation === "high" &&
       dangerRatings
