@@ -304,8 +304,10 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
   map.addLayer(layer);
 
   map.on("pointermove", (e) => {
-    const regionID = findMicroRegionID(e);
-    layer.set("regionID", regionID);
+    requestAnimationFrame(() => {
+      const regionID = findMicroRegionID(e);
+      layer.set("regionID", regionID);
+    });
   });
 
   map.on("click", (e) => {
