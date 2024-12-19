@@ -20,6 +20,9 @@
     "ol-ext": "^4.0.24",
     "ol-pmtiles": "^1.0.2"
   },
+  "resolutions": {
+    "pmtiles": "^4.1.0"
+  },
   "prettier": {
     "trailingComma": "all"
   }

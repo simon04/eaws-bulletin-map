@@ -363,22 +363,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/geojson@npm:*":
-  version: 7946.0.14
-  resolution: "@types/geojson@npm:7946.0.14"
-  checksum: 10c0/54f3997708fa2970c03eeb31f7e4540a0eb6387b15e9f8a60513a1409c23cafec8d618525404573468b59c6fecbfd053724b3327f7fca416729c26271d799f55
-  languageName: node
-  linkType: hard
-
-"@types/leaflet@npm:^1.9.8":
-  version: 1.9.8
-  resolution: "@types/leaflet@npm:1.9.8"
-  dependencies:
-    "@types/geojson": "npm:*"
-  checksum: 10c0/9a635d8ced35da27d8dfe972954bd5b4c91354beef710d7cfcca0e7bff3d189eb4cfd36ff68dac2bdc4b002d50f9ed5036c2e659683131e50d227a2050c72895
-  languageName: node
-  linkType: hard
-
 "@types/rbush@npm:4.0.0":
   version: 4.0.0
   resolution: "@types/rbush@npm:4.0.0"
@@ -711,10 +695,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fflate@npm:^0.8.0":
-  version: 0.8.1
-  resolution: "fflate@npm:0.8.1"
-  checksum: 10c0/c8e8e118738cdbbe7b38d0afebd9166539ce71bbc42cc78e497b58b173f7b7d2efc80f6ed77199283c3665e2e606e56a9f5019a32ceb4ffe5a6fa680dfd9648b
+"fflate@npm:^0.8.2":
+  version: 0.8.2
+  resolution: "fflate@npm:0.8.2"
+  checksum: 10c0/03448d630c0a583abea594835a9fdb2aaf7d67787055a761515bf4ed862913cfd693b4c4ffd5c3f3b355a70cf1e19033e9ae5aedcca103188aaff91b8bd6e293
   languageName: node
   linkType: hard
 
@@ -1192,13 +1176,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pmtiles@npm:^3.1.0":
-  version: 3.2.0
-  resolution: "pmtiles@npm:3.2.0"
+"pmtiles@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "pmtiles@npm:4.1.0"
   dependencies:
-    "@types/leaflet": "npm:^1.9.8"
-    fflate: "npm:^0.8.0"
-  checksum: 10c0/3990a39064a62389442a656fc743da457d33e86d5ebea7fd4b7cb321407dabe1c2b92345b8daa2df0210e0553c13a18cf9e41994577590a6fb20675f37c879e4
+    fflate: "npm:^0.8.2"
+  checksum: 10c0/46b3becb57f383e37a7b324db086f821b61ed5ce10bdee3c4a2f9ea97183af60d00551e5252658b609b1b8d2772977d6bc49e6d95e1965563ddb8866439cff20
   languageName: node
   linkType: hard
 
