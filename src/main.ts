@@ -17,6 +17,7 @@ import View from "ol/View";
 import XYZ from "ol/source/XYZ";
 import "ol/ol.css";
 import "ol-ext/dist/ol-ext.css";
+import { dropWhile, takeWhile } from "lodash";
 import "./style.css";
 import eawsOutlineProperties from "@eaws/outline_properties/index.json";
 
@@ -362,8 +363,25 @@ function formatBulletin(
 
   const formatElevation = (e?: ElevationBoundaryOrBand) =>
     `🏔 ${e?.lowerBound || 0}..${e?.upperBound || "∞"}`;
-  const formatAspects = (a?: Aspect[]) =>
-    Array.isArray(a) ? "🧭 " + a.join() : "";
+  const formatAspects = (aspects0?: Aspect[]) => {
+    if (!Array.isArray(aspects0) || !aspects0.length) return "";
+    let aspects: Aspect[] = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+    aspects = [...aspects, ...aspects];
+    aspects = dropWhile(aspects, (a) => aspects0.includes(a));
+    aspects = dropWhile(aspects, (a) => !aspects0.includes(a));
+    aspects = takeWhile(aspects, (a) => aspects0.includes(a));
+    if (aspects.length > 3) {
+      const main: Aspect[] = ["N", "S", "W", "E"];
+      aspects = [
+        aspects[0],
+        main.find((a) => aspects0.includes(a))!,
+        aspects[aspects.length - 1],
+      ];
+      return "🧭 " + aspects.join("↷");
+    } else {
+      return "🧭 " + aspects.join(",");
+    }
+  };
   result.appendChild(document.createElement("dd")).innerHTML =
     region +
     [bulletin.validTime?.startTime, bulletin.validTime?.endTime]
