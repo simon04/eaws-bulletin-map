@@ -1,6 +1,6 @@
 import { Control, defaults as defaultControls } from "ol/control";
 import { defaults as defaultInteractions, Interaction } from "ol/interaction";
-import { PMTilesVectorSource } from "ol-pmtiles";
+import { PMTilesVectorSource } from "./ol-pmtiles";
 import { fromLonLat } from "ol/proj";
 import EventType from "ol/events/EventType";
 import Fill from "ol/style/Fill";

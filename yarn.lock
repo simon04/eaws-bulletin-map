@@ -571,7 +571,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     ol: "npm:^10.3.0"
     ol-ext: "npm:^4.0.24"
-    ol-pmtiles: "npm:^1.0.2"
+    pmtiles: "npm:^4.1.0"
     typescript: "npm:^5.7.2"
     vite: "npm:^6.0.2"
   languageName: unknown
@@ -1105,17 +1105,6 @@ __metadata:
   peerDependencies:
     ol: ">= 5.3.0"
   checksum: 10c0/d8cc6fbe448998d4d1af64ab61835e54d65e8694603fc6af8218071fbcf07c7ba5d5faaf9642272c20c5fbb95c89a41f4fe16f72c90f815e5bad7a3f18b73d67
-  languageName: node
-  linkType: hard
-
-"ol-pmtiles@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "ol-pmtiles@npm:1.0.2"
-  dependencies:
-    pmtiles: "npm:^3.1.0"
-  peerDependencies:
-    ol: ">=9.0.0"
-  checksum: 10c0/f2dacac4f0b792ca0cfe55bfe6ece9b6113e848ba0828281c67ac07644ee57a757718a9b2895bdfd65bac163a8d34510c7875e313a3f0340da11ce652e9ca3c0
   languageName: node
   linkType: hard
 
