@@ -20,7 +20,7 @@
     "lodash": "^4.17.21",
     "ol": "^10.3.1",
     "ol-ext": "^4.0.24",
-    "pmtiles": "^4.1.0"
+    "pmtiles": "^4.2.1"
   },
   "prettier": {
     "trailingComma": "all"

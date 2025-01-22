@@ -571,7 +571,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     ol: "npm:^10.3.1"
     ol-ext: "npm:^4.0.24"
-    pmtiles: "npm:^4.1.0"
+    pmtiles: "npm:^4.2.1"
     typescript: "npm:^5.7.2"
     vite: "npm:^6.0.2"
   languageName: unknown
@@ -1181,12 +1181,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pmtiles@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "pmtiles@npm:4.1.0"
+"pmtiles@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "pmtiles@npm:4.2.1"
   dependencies:
     fflate: "npm:^0.8.2"
-  checksum: 10c0/46b3becb57f383e37a7b324db086f821b61ed5ce10bdee3c4a2f9ea97183af60d00551e5252658b609b1b8d2772977d6bc49e6d95e1965563ddb8866439cff20
+  checksum: 10c0/2f950170aa6c15eb7ed972249cf6575bcce28ee75b921e30c6a0af35102fc87d5c2387f86d7b59f9f174195e87c30b838c35124e94723564cb91ae6867f355ee
   languageName: node
   linkType: hard
 
