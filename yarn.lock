@@ -569,7 +569,7 @@ __metadata:
     "@eaws/outline_properties": "npm:^7.0.5"
     "@types/lodash": "npm:^4.17.13"
     lodash: "npm:^4.17.21"
-    ol: "npm:^10.3.0"
+    ol: "npm:^10.3.1"
     ol-ext: "npm:^4.0.24"
     pmtiles: "npm:^4.1.0"
     typescript: "npm:^5.7.2"
@@ -1108,9 +1108,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol@npm:^10.3.0":
-  version: 10.3.0
-  resolution: "ol@npm:10.3.0"
+"ol@npm:^10.3.1":
+  version: 10.3.1
+  resolution: "ol@npm:10.3.1"
   dependencies:
     "@types/rbush": "npm:4.0.0"
     color-rgba: "npm:^3.0.0"
@@ -1119,7 +1119,7 @@ __metadata:
     geotiff: "npm:^2.1.3"
     pbf: "npm:4.0.1"
     rbush: "npm:^4.0.0"
-  checksum: 10c0/b2581c53cb43fd81ee1b59cedc714f428b7745aae44fc73066673421a7c4c189f50a7d81eef34f82220a29103d68f8e02926fac06aeea1d5425a79b2284d949c
+  checksum: 10c0/5039a8117ddefbd0ccaed600b8975ae7963a3bc65e4c4fafcdb4bb2a7bc110e58237bd71ff1537857ac866fe9b7d2ae290b6f70d56f79497cf200cffd2c99f67
   languageName: node
   linkType: hard
 
