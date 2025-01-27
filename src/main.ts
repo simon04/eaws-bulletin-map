@@ -45,7 +45,7 @@ const bbox = searchParams.get("bbox") || "";
 const details = searchParams.get("details") || "";
 if (!date || !regions) {
   const now = new Date();
-  if (now.getHours() >= 16) now.setDate(now.getDate() + 1); // tomorrow
+  if (now.getHours() >= 17) now.setDate(now.getDate() + 1); // tomorrow
   route(
     date || now,
     regions ||
