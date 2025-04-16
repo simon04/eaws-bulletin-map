@@ -1,311 +1,206 @@
-// Generated using https://app.quicktype.io/ from https://github.com/canadianavalancheassociation/caaml-bulletin-eaws/blob/05df09b/v6/json/CAAMLv6_BulletinEAWS.json
+import * as z from "@zod/mini";
 
-/**
- * JSON schema for EAWS avalanche bulletin collection following the CAAMLv6 schema
- */
-export interface AvalancheBulletins {
-  bulletins: AvalancheBulletin[];
-  customData?: any;
-  metaData?: MetaData;
-}
+export const CustomDataSchema = z.optional(z.any());
+export type CustomData = z.infer<typeof CustomDataSchema>;
 
-/**
- * Avalanche Bulletin valid for a given set of regions.
- */
-export interface AvalancheBulletin {
-  /**
-   * Texts element with highlight and comment for the avalanche activity.
-   */
-  avalancheActivity?: Texts;
-  /**
-   * Collection of Avalanche Problem elements for this bulletin.
-   */
-  avalancheProblems?: AvalancheProblem[];
-  /**
-   * Unique ID for the bulletin.
-   */
-  bulletinID?: string;
-  customData?: any;
-  /**
-   * Collection of Danger Rating elements for this bulletin.
-   */
-  dangerRatings?: DangerRating[];
-  /**
-   * Contains an optional short text to highlight an exceptionally dangerous situation.
-   */
-  highlights?: string;
-  /**
-   * Two-letter language code (ISO 639-1).
-   */
-  lang?: string;
-  metaData?: MetaData;
-  /**
-   * Time and date when the next bulletin will be published by the AWS to the Public. ISO 8601
-   * timestamp in UTC or with time zone information.
-   */
-  nextUpdate?: Date;
-  /**
-   * Time and date when the bulletin was issued by the AWS to the Public. ISO 8601 timestamp
-   * in UTC or with time zone information.
-   */
-  publicationTime?: Date;
-  /**
-   * Collection of region elements for which this bulletin is valid.
-   */
-  regions?: Region[];
-  /**
-   * Texts element with highlight and comment for details on the snowpack structure.
-   */
-  snowpackStructure?: Texts;
-  /**
-   * Details about the issuer/AWS of the bulletin.
-   */
-  source?: AvalancheBulletinSource;
-  /**
-   * Tendency element for a detailed description of the expected avalanche situation tendency
-   * after the bulletin's period of validity.
-   */
-  tendency?: Tendency[];
-  /**
-   * Texts element with highlight and comment for travel advisory.
-   */
-  travelAdvisory?: Texts;
-  /**
-   * Flag if bulletin is unscheduled or not.
-   */
-  unscheduled?: boolean;
-  /**
-   * Date and Time from and until this bulletin is valid. ISO 8601 Timestamp in UTC or with
-   * time zone information.
-   */
-  validTime?: ValidTime;
-  /**
-   * Texts element with highlight and comment for weather forecast information.
-   */
-  weatherForecast?: Texts;
-  /**
-   * Texts element with highlight and comment for weather review information.
-   */
-  weatherReview?: Texts;
-}
+export const AspectSchema = z.enum([
+  "E",
+  "N",
+  "n/a",
+  "NE",
+  "NW",
+  "S",
+  "SE",
+  "SW",
+  "W",
+]);
+export type Aspect = z.infer<typeof AspectSchema>;
 
-/**
- * Texts element with highlight and comment for the avalanche activity.
- *
- * Texts contains a highlight and a comment string, where highlights could also be described
- * as a kind of headline for the longer comment. For text-formatting the HTML-Tags <br/> for
- * a new line, (<ul>,<ul/>) and (<li>,<li/>) for lists, (<h1>,<h1/>) to (<h6>,<h6/>) for
- * headings and (<b>,</b>) for a bold text are allowed.
- *
- * Texts element with highlight and comment for details on the snowpack structure.
- *
- * Texts element with highlight and comment for travel advisory.
- *
- * Texts element with highlight and comment for weather forecast information.
- *
- * Texts element with highlight and comment for weather review information.
- */
-export interface Texts {
-  comment?: string;
-  highlights?: string;
-}
+export const DangerRatingValueSchema = z.enum([
+  "considerable",
+  "high",
+  "low",
+  "moderate",
+  "no_rating",
+  "no_snow",
+  "very_high",
+]);
+export type DangerRatingValue = z.infer<typeof DangerRatingValueSchema>;
 
-/**
- * Defines an avalanche problem, its time, aspect, and elevation constraints. A textual
- * detail about the affected terrain can be given in the comment field. Also, details about
- * the expected avalanche size, snowpack stability and its frequency can be defined. The
- * implied danger rating value is optional.
- */
-export interface AvalancheProblem {
-  aspects?: Aspect[];
-  avalancheSize?: number;
-  comment?: string;
-  customData?: any;
-  dangerRatingValue?: DangerRatingValue;
-  elevation?: ElevationBoundaryOrBand;
-  frequency?: ExpectedAvalancheFrequency;
-  metaData?: MetaData;
-  problemType: AvalancheProblemType;
-  snowpackStability?: ExpectedSnowpackStability;
-  validTimePeriod?: ValidTimePeriod;
-}
+export const ExpectedAvalancheFrequencySchema = z.enum([
+  "few",
+  "many",
+  "none",
+  "some",
+]);
+export type ExpectedAvalancheFrequency = z.infer<
+  typeof ExpectedAvalancheFrequencySchema
+>;
 
-/**
- * An aspect can be defined as a set of aspects. The aspects are the expositions as in a
- * eight part (45°) segments. The allowed aspects are the four main cardinal directions and
- * the four intercardinal directions.
- */
-export type Aspect = "E" | "N" | "n/a" | "NE" | "NW" | "S" | "SE" | "SW" | "W";
+export const AvalancheProblemTypeSchema = z.enum([
+  "cornices",
+  "favourable_situation",
+  "gliding_snow",
+  "new_snow",
+  "no_distinct_avalanche_problem",
+  "persistent_weak_layers",
+  "wet_snow",
+  "wind_slab",
+]);
+export type AvalancheProblemType = z.infer<typeof AvalancheProblemTypeSchema>;
 
-/**
- * Elevation describes either an elevation range below a certain bound (only upperBound is
- * set to a value) or above a certain bound (only lowerBound is set to a value). If both
- * values are set to a value, an elevation band is defined by this property. The value uses
- * a numeric value, not more detailed than 100m resolution. Additionally to the numeric
- * values also 'treeline' is allowed.
- */
-export interface ElevationBoundaryOrBand {
-  lowerBound?: string;
-  upperBound?: string;
-}
+export const ExpectedSnowpackStabilitySchema = z.enum([
+  "fair",
+  "good",
+  "poor",
+  "very_poor",
+]);
+export type ExpectedSnowpackStability = z.infer<
+  typeof ExpectedSnowpackStabilitySchema
+>;
 
-/**
- * Expected frequency of lowest snowpack stability, according to the EAWS definition. Three
- * stage scale (few, some, many).
- */
-export type ExpectedAvalancheFrequency = "few" | "many" | "some";
+export const ValidTimePeriodSchema = z.enum(["all_day", "earlier", "later"]);
+export type ValidTimePeriod = z.infer<typeof ValidTimePeriodSchema>;
 
-/**
- * Meta data for various uses. Can be used to link to external files like maps, thumbnails
- * etc.
- */
-export interface MetaData {
-  comment?: string;
-  extFiles?: ExternalFile[];
-}
+export const TendencyTypeSchema = z.enum([
+  "decreasing",
+  "increasing",
+  "steady",
+]);
+export type TendencyType = z.infer<typeof TendencyTypeSchema>;
 
-/**
- * External file is used to link to external files like maps, thumbnails etc.
- */
-export interface ExternalFile {
-  description?: string;
-  fileReferenceURI?: string;
-  fileType?: string;
-}
+export const TextsSchema = z.object({
+  comment: z.optional(z.string()),
+  highlights: z.optional(z.string()),
+});
+export type Texts = z.infer<typeof TextsSchema>;
 
-/**
- * Expected avalanche problem, according to the EAWS avalanche problem definition.
- */
-export type AvalancheProblemType =
-  | "cornices"
-  | "favourable_situation"
-  | "gliding_snow"
-  | "new_snow"
-  | "no_distinct_avalanche_problem"
-  | "persistent_weak_layers"
-  | "wet_snow"
-  | "wind_slab";
+export const ElevationBoundaryOrBandSchema = z.object({
+  lowerBound: z.optional(z.string()),
+  upperBound: z.optional(z.string()),
+});
+export type ElevationBoundaryOrBand = z.infer<
+  typeof ElevationBoundaryOrBandSchema
+>;
 
-/**
- * Snowpack stability, according to the EAWS definition. Four stage scale (very poor, poor,
- * fair, good).
- */
-export type ExpectedSnowpackStability = "fair" | "good" | "poor" | "very_poor";
+export const ExternalFileSchema = z.object({
+  description: z.optional(z.string()),
+  fileReferenceURI: z.optional(z.string()),
+  fileType: z.optional(z.string()),
+});
+export type ExternalFile = z.infer<typeof ExternalFileSchema>;
 
-/**
- * Valid time period can be used to limit the validity of an element to an earlier or later
- * period. It can be used to distinguish danger ratings or avalanche problems.
- */
-export type ValidTimePeriod = "all_day" | "earlier" | "later";
+export const ValidTimeSchema = z.object({
+  endTime: z.optional(z.coerce.date()),
+  startTime: z.optional(z.coerce.date()),
+});
+export type ValidTime = z.infer<typeof ValidTimeSchema>;
 
-/**
- * Defines a danger rating, its elevation constraints and the valid time period. If
- * validTimePeriod or elevation are constrained for a rating, it is expected to define a
- * dangerRating for all the other cases.
- */
-export interface DangerRating {
-  aspects?: Aspect[];
-  customData?: any;
-  elevation?: ElevationBoundaryOrBand;
-  mainValue: DangerRatingValue;
-  metaData?: MetaData;
-  validTimePeriod?: ValidTimePeriod;
-}
+export const MetaDataSchema = z.object({
+  comment: z.optional(z.string()),
+  extFiles: z.optional(z.array(ExternalFileSchema)),
+});
+export type MetaData = z.infer<typeof MetaDataSchema>;
 
-/**
- * Danger rating value, according to EAWS danger scale definition.
- */
-export type DangerRatingValue =
-  | "considerable"
-  | "high"
-  | "low"
-  | "moderate"
-  | "no_rating"
-  | "no_snow"
-  | "very_high";
+export const DangerRatingSchema = z.object({
+  aspects: z.optional(z.array(AspectSchema)),
+  customData: CustomDataSchema,
+  elevation: z.optional(ElevationBoundaryOrBandSchema),
+  mainValue: DangerRatingValueSchema,
+  metaData: z.optional(MetaDataSchema),
+  validTimePeriod: z.optional(ValidTimePeriodSchema),
+});
+export type DangerRating = z.infer<typeof DangerRatingSchema>;
 
-/**
- * Region element describes a (micro) region. The regionID follows the EAWS schema. It is
- * recommended to have the region shape's files with the same IDs in
- * gitlab.com/eaws/eaws-regions. Additionally, the region name can be added.
- */
-export interface Region {
-  customData?: any;
-  metaData?: MetaData;
-  name?: string;
-  regionID: string;
-}
+export const RegionSchema = z.object({
+  customData: CustomDataSchema,
+  metaData: z.optional(MetaDataSchema),
+  name: z.optional(z.string()),
+  regionID: z.string(),
+});
+export type Region = z.infer<typeof RegionSchema>;
 
-/**
- * Details about the issuer/AWS of the bulletin.
- *
- * Information about the bulletin source. Either as in a person or with a provider element
- * to specify details about the AWS.
- */
-export interface AvalancheBulletinSource {
-  person?: Person;
-  provider?: AvalancheBulletinProvider;
-}
+export const PersonSchema = z.object({
+  customData: CustomDataSchema,
+  metaData: z.optional(MetaDataSchema),
+  name: z.optional(z.string()),
+  website: z.optional(z.string()),
+});
+export type Person = z.infer<typeof PersonSchema>;
 
-/**
- * Details on a person.
- */
-export interface Person {
-  customData?: any;
-  metaData?: MetaData;
-  name?: string;
-  website?: string;
-}
+export const AvalancheBulletinProviderSchema = z.object({
+  contactPerson: z.optional(PersonSchema),
+  customData: CustomDataSchema,
+  metaData: z.optional(MetaDataSchema),
+  name: z.optional(z.string()),
+  website: z.optional(z.string()),
+});
+export type AvalancheBulletinProvider = z.infer<
+  typeof AvalancheBulletinProviderSchema
+>;
 
-/**
- * Information about the bulletin provider. Defines the name, website and/or contactPerson
- * (which could be the author) of the issuing AWS.
- */
-export interface AvalancheBulletinProvider {
-  contactPerson?: Person;
-  customData?: any;
-  metaData?: MetaData;
-  name?: string;
-  website?: string;
-}
+export const TendencySchema = z.object({
+  comment: z.optional(z.string()),
+  highlights: z.optional(z.string()),
+  customData: CustomDataSchema,
+  metaData: z.optional(MetaDataSchema),
+  tendencyType: z.optional(TendencyTypeSchema),
+  validTime: z.optional(ValidTimeSchema),
+});
+export type Tendency = z.infer<typeof TendencySchema>;
 
-/**
- * Texts element with highlight and comment for the avalanche activity.
- *
- * Texts contains a highlight and a comment string, where highlights could also be described
- * as a kind of headline for the longer comment. For text-formatting the HTML-Tags <br/> for
- * a new line, (<ul>,<ul/>) and (<li>,<li/>) for lists, (<h1>,<h1/>) to (<h6>,<h6/>) for
- * headings and (<b>,</b>) for a bold text are allowed.
- *
- * Texts element with highlight and comment for details on the snowpack structure.
- *
- * Texts element with highlight and comment for travel advisory.
- *
- * Texts element with highlight and comment for weather forecast information.
- *
- * Texts element with highlight and comment for weather review information.
- *
- * Describes the expected tendency of the development of the avalanche situation for a
- * defined time period.
- */
-export interface Tendency {
-  comment?: string;
-  highlights?: string;
-  customData?: any;
-  metaData?: MetaData;
-  tendencyType?: TendencyType;
-  validTime?: ValidTime;
-}
+export const AvalancheProblemSchema = z.object({
+  aspects: z.optional(z.array(AspectSchema)),
+  avalancheSize: z.optional(z.number()),
+  comment: z.optional(z.string()),
+  customData: CustomDataSchema,
+  dangerRatingValue: z.optional(DangerRatingValueSchema),
+  elevation: z.optional(ElevationBoundaryOrBandSchema),
+  frequency: z.optional(ExpectedAvalancheFrequencySchema),
+  metaData: z.optional(MetaDataSchema),
+  problemType: AvalancheProblemTypeSchema,
+  snowpackStability: z.optional(ExpectedSnowpackStabilitySchema),
+  validTimePeriod: z.optional(ValidTimePeriodSchema),
+});
+export type AvalancheProblem = z.infer<typeof AvalancheProblemSchema>;
 
-export type TendencyType = "decreasing" | "increasing" | "steady";
+export const AvalancheBulletinSourceSchema = z.object({
+  person: z.optional(PersonSchema),
+  provider: z.optional(AvalancheBulletinProviderSchema),
+});
+export type AvalancheBulletinSource = z.infer<
+  typeof AvalancheBulletinSourceSchema
+>;
 
-/**
- * Valid time defines two ISO 8601 timestamps in UTC or with time zone information.
- *
- * Date and Time from and until this bulletin is valid. ISO 8601 Timestamp in UTC or with
- * time zone information.
- */
-export interface ValidTime {
-  endTime?: Date;
-  startTime?: Date;
-}
+export const AvalancheBulletinSchema = z.object({
+  avalancheActivity: z.optional(TextsSchema),
+  avalancheProblems: z.optional(z.array(AvalancheProblemSchema)),
+  bulletinID: z.optional(z.string()),
+  customData: CustomDataSchema,
+  dangerRatings: z.optional(z.array(DangerRatingSchema)),
+  highlights: z.optional(z.string()),
+  lang: z.optional(z.string()),
+  metaData: z.optional(MetaDataSchema),
+  nextUpdate: z.optional(z.coerce.date()),
+  publicationTime: z.coerce.date(),
+  regions: z.optional(z.array(RegionSchema)),
+  snowpackStructure: z.optional(TextsSchema),
+  source: z.optional(AvalancheBulletinSourceSchema),
+  tendency: z.pipe(
+    z.optional(z.union([TendencySchema, z.array(TendencySchema)])),
+    z.transform((t) => (Array.isArray(t) ? t : [t])),
+  ),
+  travelAdvisory: z.optional(TextsSchema),
+  unscheduled: z.optional(z.boolean()),
+  validTime: z.optional(ValidTimeSchema),
+  weatherForecast: z.optional(TextsSchema),
+  weatherReview: z.optional(TextsSchema),
+});
+export type AvalancheBulletin = z.infer<typeof AvalancheBulletinSchema>;
+
+export const AvalancheBulletinsSchema = z.object({
+  bulletins: z.array(AvalancheBulletinSchema),
+  customData: CustomDataSchema,
+  metaData: z.optional(MetaDataSchema),
+});
+export type AvalancheBulletins = z.infer<typeof AvalancheBulletinsSchema>;

@@ -398,6 +398,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@zod/core@npm:0.5.1":
+  version: 0.5.1
+  resolution: "@zod/core@npm:0.5.1"
+  checksum: 10c0/3a48af3aaacfd75c8f40da7d717f70bd5a2c716d1eaba572d6354457a58272011d2a2d7142564e7f3cf1ee2489ad8ac90f8c67ae25b28afd263b12f931b10d31
+  languageName: node
+  linkType: hard
+
+"@zod/mini@npm:^4.0.0-beta.20250415T232143":
+  version: 4.0.0-beta.20250415T232143
+  resolution: "@zod/mini@npm:4.0.0-beta.20250415T232143"
+  dependencies:
+    "@zod/core": "npm:0.5.1"
+  checksum: 10c0/06119e6edc86737f1869551fb51e7bb15ac3be28aa7371e1eac5f991c5a5517a0e9bb21dcfb2acb392f6c0182f1612c689ee9feadf180838b16b4bed9fdb8548
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -563,6 +579,7 @@ __metadata:
   dependencies:
     "@eaws/outline_properties": "npm:^7.0.6"
     "@types/lodash": "npm:^4.17.14"
+    "@zod/mini": "npm:^4.0.0-beta.20250415T232143"
     lodash: "npm:^4.17.21"
     ol: "npm:^10.5.0"
     ol-ext: "npm:^4.0.30"
