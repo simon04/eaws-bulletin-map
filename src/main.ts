@@ -239,8 +239,13 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
       new Style({ fill: new Fill({ color }), zIndex: warnLevelNumber }),
     ]),
   );
+  const regionIDs = regions.split(" ");
   const bulletingsByRegionID = Object.fromEntries(
-    bulletins.flatMap((b) => (b.regions ?? []).map((r) => [r.regionID, b])),
+    bulletins.flatMap((b) =>
+      (b.regions ?? [])
+        .filter((r) => regionIDs.some((id) => r.regionID.startsWith(id)))
+        .map((r) => [r.regionID, b]),
+    ),
   );
   const style = ({
     id,
