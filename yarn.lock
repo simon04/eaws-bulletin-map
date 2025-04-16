@@ -513,36 +513,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:^1.0.0, color-name@npm:~1.1.4":
+"color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: 10c0/a1a3f914156960902f46f7f56bc62effc6c94e84b2cae157a526b1c1f74b677a47ec602bf68a61abfa2b42d15b7c5651c6dbe72a43af720bc588dff885b10f95
-  languageName: node
-  linkType: hard
-
-"color-parse@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "color-parse@npm:2.0.0"
-  dependencies:
-    color-name: "npm:^1.0.0"
-  checksum: 10c0/f489deaea5bb323e05f41436d747e22bbb45928420fce8a989c209a4baa71c7ee90f8b43298d9565844af1d02580743d5d87b506519f755b4b218df6b72eb4a0
-  languageName: node
-  linkType: hard
-
-"color-rgba@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "color-rgba@npm:3.0.0"
-  dependencies:
-    color-parse: "npm:^2.0.0"
-    color-space: "npm:^2.0.0"
-  checksum: 10c0/8f3920cd1dcafde31c9240e54c2aba3c4fc43e350dc15cc00de3ea988800e1a533f85b38aa67867acfd51634a92bfd5e8aa9f06f1b42965c8fa538b5e16d9667
-  languageName: node
-  linkType: hard
-
-"color-space@npm:^2.0.0, color-space@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "color-space@npm:2.0.1"
-  checksum: 10c0/aeeca8d5f99f108a056df9dbadcebfe0e8c352004a5999c858ecc48ef8e52f5d06d137b7f330100d68c61dfb83fd6a7c1c113fcc2dfc37d783351b03536aa33f
   languageName: node
   linkType: hard
 
@@ -590,8 +564,8 @@ __metadata:
     "@eaws/outline_properties": "npm:^7.0.6"
     "@types/lodash": "npm:^4.17.14"
     lodash: "npm:^4.17.21"
-    ol: "npm:^10.3.1"
-    ol-ext: "npm:^4.0.24"
+    ol: "npm:^10.5.0"
+    ol-ext: "npm:^4.0.30"
     pmtiles: "npm:^4.3.0"
     typescript: "npm:^5.8.3"
     vite: "npm:^6.3.0"
@@ -1135,27 +1109,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol-ext@npm:^4.0.24":
-  version: 4.0.24
-  resolution: "ol-ext@npm:4.0.24"
+"ol-ext@npm:^4.0.30":
+  version: 4.0.30
+  resolution: "ol-ext@npm:4.0.30"
   peerDependencies:
     ol: ">= 5.3.0"
-  checksum: 10c0/d8cc6fbe448998d4d1af64ab61835e54d65e8694603fc6af8218071fbcf07c7ba5d5faaf9642272c20c5fbb95c89a41f4fe16f72c90f815e5bad7a3f18b73d67
+  checksum: 10c0/978641c5cfc0d7c21fb6264b3c3b2dabc7b5b7a194c290f2bde191a93fb2612cb7af7e2d09072ce7397ce94652736a7cfa5a8e021be4dab50b8768dca7e69bab
   languageName: node
   linkType: hard
 
-"ol@npm:^10.3.1":
-  version: 10.3.1
-  resolution: "ol@npm:10.3.1"
+"ol@npm:^10.5.0":
+  version: 10.5.0
+  resolution: "ol@npm:10.5.0"
   dependencies:
     "@types/rbush": "npm:4.0.0"
-    color-rgba: "npm:^3.0.0"
-    color-space: "npm:^2.0.1"
     earcut: "npm:^3.0.0"
     geotiff: "npm:^2.1.3"
     pbf: "npm:4.0.1"
     rbush: "npm:^4.0.0"
-  checksum: 10c0/5039a8117ddefbd0ccaed600b8975ae7963a3bc65e4c4fafcdb4bb2a7bc110e58237bd71ff1537857ac866fe9b7d2ae290b6f70d56f79497cf200cffd2c99f67
+  checksum: 10c0/436c81c16684fc7dc0a64c10d59c7aa9a1b7a5d7d2bc266c3bc141856d40f35042f5f55d40244f2e1580b613cb5adc22556583c400b19d6bbe4ea57b39d0cc70
   languageName: node
   linkType: hard
 
