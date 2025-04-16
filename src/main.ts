@@ -274,7 +274,7 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
           (rating?.elevation?.upperBound && elevation === "low") ||
           (rating?.elevation?.lowerBound && elevation === "high"),
       )
-      .map((rating) => DANGER_RATINGS[rating?.mainValue]?.warnLevelNumber ?? 0)
+      .map((rating) => DANGER_RATINGS[rating?.mainValue!]?.warnLevelNumber ?? 0)
       .reduce<number>((a, b) => Math.max(a, b), 0);
     return dangerRatingStyles[dangerRating ?? 0];
   };
