@@ -1,3 +1,4 @@
+import type * as z from "@zod/mini";
 import { Control, defaults as defaultControls } from "ol/control";
 import { defaults as defaultInteractions, Interaction } from "ol/interaction";
 import { PMTilesVectorSource } from "./ol-pmtiles";
@@ -28,13 +29,13 @@ import type {
   Region,
   Regions,
 } from "./types";
-import type {
-  Aspect,
-  AvalancheBulletin,
-  AvalancheBulletins,
-  AvalancheProblemType,
-  DangerRatingValue,
-  ElevationBoundaryOrBand,
+import {
+  AvalancheBulletinsSchema,
+  type Aspect,
+  type AvalancheBulletin,
+  type AvalancheProblemType,
+  type DangerRatingValue,
+  type ElevationBoundaryOrBand,
 } from "./caaml";
 import { DANGER_RATINGS, type DangerRatingConfig } from "./danger-ratings";
 
@@ -176,20 +177,32 @@ async function fetchBulletins(
       regions.split(" ").map((region: Region) => fetchBulletins(date, region)),
     ).then((bulletins) => bulletins.flatMap((b) => b));
   }
-  const { bulletins } = await fetchJSON<AvalancheBulletins>(
+  const { bulletins } = await fetchJSON(
     `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`,
     { bulletins: [] },
+    AvalancheBulletinsSchema,
   );
   return bulletins;
 }
 
-async function fetchJSON<T>(url: string, fallback: T): Promise<T> {
+async function fetchJSON<T extends z.ZodMiniType>(
+  url: string,
+  fallback: z.z.core.output<T>,
+  schema: T,
+): Promise<z.z.core.output<T>> {
   const res = await fetch(url, { cache: "no-cache" });
   if (!res.ok) return fallback;
+  let json;
   try {
-    return await res.json();
-  } catch {
-    return fallback;
+    json = await res.json();
+  } catch (e) {
+    return await schema.parseAsync(fallback);
+  }
+  try {
+    return await schema.parseAsync(json);
+  } catch (e) {
+    console.warn("Failed to validate CAAML", json, e);
+    return await schema.parseAsync(fallback);
   }
 }
 

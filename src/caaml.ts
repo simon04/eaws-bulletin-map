@@ -106,7 +106,7 @@ export const DangerRatingSchema = z.object({
   aspects: z.optional(z.array(AspectSchema)),
   customData: CustomDataSchema,
   elevation: z.optional(ElevationBoundaryOrBandSchema),
-  mainValue: DangerRatingValueSchema,
+  mainValue: z.optional(DangerRatingValueSchema),
   metaData: z.optional(MetaDataSchema),
   validTimePeriod: z.optional(ValidTimePeriodSchema),
 });
