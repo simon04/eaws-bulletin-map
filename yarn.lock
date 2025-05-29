@@ -384,13 +384,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.17.14":
-  version: 4.17.14
-  resolution: "@types/lodash@npm:4.17.14"
-  checksum: 10c0/343c6f722e0b39969036a885ad5aad6578479ead83987128c9b994e6b7f2fb9808244d802d4d332396bb09096f720a6c7060de16a492f5460e06a44560360322
-  languageName: node
-  linkType: hard
-
 "@types/rbush@npm:4.0.0":
   version: 4.0.0
   resolution: "@types/rbush@npm:4.0.0"
@@ -562,8 +555,6 @@ __metadata:
   resolution: "eaws-bulletin-map@workspace:."
   dependencies:
     "@eaws/outline_properties": "npm:^7.0.6"
-    "@types/lodash": "npm:^4.17.14"
-    lodash: "npm:^4.17.21"
     ol: "npm:^10.5.0"
     ol-ext: "npm:^4.0.30"
     pmtiles: "npm:^4.3.0"
@@ -909,13 +900,6 @@ __metadata:
   version: 3.0.0
   resolution: "lerc@npm:3.0.0"
   checksum: 10c0/d2d22cf6545770b94bde4a9d4419b206f9473cdb0111c2ac1b546d54200f44878cb3eee578c33518a157af8473b96942be42b6750d37ceab52747605cdf75ec3
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21"
-  checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
   languageName: node
   linkType: hard
 

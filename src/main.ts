@@ -18,7 +18,6 @@ import View from "ol/View";
 import XYZ from "ol/source/XYZ";
 import "ol/ol.css";
 import "ol-ext/dist/ol-ext.css";
-import { dropWhile, takeWhile } from "lodash";
 import "./style.css";
 import eawsOutlineProperties from "@eaws/outline_properties/index.json";
 
@@ -466,4 +465,20 @@ function formatEawsOutline(
     providerLink.rel = "external";
   }
   return result;
+}
+
+function dropWhile<T>(array: T[], predicate: (value: T) => boolean): T[] {
+  let i = 0;
+  while (i < array.length && predicate(array[i])) {
+    i++;
+  }
+  return array.slice(i);
+}
+
+function takeWhile<T>(array: T[], predicate: (value: T) => boolean): T[] {
+  let i = 0;
+  while (i < array.length && predicate(array[i])) {
+    i++;
+  }
+  return array.slice(0, i);
 }
