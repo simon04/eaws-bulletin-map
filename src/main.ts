@@ -30,7 +30,7 @@ import { type AvalancheBulletin } from "./caaml";
 import { DANGER_RATINGS } from "./danger-ratings";
 import { fetchBulletins } from "./fetchBulletins";
 import { dangerRatingLink, formatBulletin } from "./formatBulletin";
-import { date, regions, route, bbox, details } from "./route";
+import * as route from "./route";
 
 const popup = new Popup({
   popupClass: "default",
@@ -40,8 +40,8 @@ const popup = new Popup({
 
 const map = initMap();
 
-fetchBulletins(date, regions.split(" ")).then((bulletins) => {
-  buildMap(bulletins, date);
+fetchBulletins(route.date, route.regions.split(" ")).then((bulletins) => {
+  buildMap(bulletins, route.date);
   buildMarkerMap(bulletins);
 });
 
@@ -69,8 +69,8 @@ function initMap() {
       input.style.fontSize = "18px";
       input.style.padding = "2px";
       input.type = "date";
-      input.value = date;
-      input.onchange = () => route(input.valueAsDate!, regions);
+      input.value = route.date;
+      input.onchange = () => route.to(input.valueAsDate!, route.regions);
       const div = document.createElement("div");
       div.className = "ol-date-control ol-unselectable ol-control";
       div.appendChild(input);
@@ -108,9 +108,9 @@ function initMap() {
     ],
   });
 
-  if (bbox) {
+  if (route.bbox) {
     // Austria: bbox=9.47996951665,46.4318173285,16.9796667823,49.0390742051
-    const [left, bottom, right, top] = bbox.split(",").map((v) => +v);
+    const [left, bottom, right, top] = route.bbox.split(",").map((v) => +v);
     const extent = [...fromLonLat([left, bottom]), ...fromLonLat([right, top])];
     map.getView().fit(extent, { size: map.getSize() });
   }
@@ -148,7 +148,7 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
       new Style({ fill: new Fill({ color }), zIndex: warnLevelNumber }),
     ]),
   );
-  const regionIDs = regions.split(" ");
+  const regionIDs = route.regions.split(" ");
   const bulletingsByRegionID = Object.fromEntries(
     bulletins.flatMap((b) =>
       (b.regions ?? [])
@@ -217,7 +217,7 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
     source: vectorRegions,
     style(feature): Style | undefined {
       const properties = feature.getProperties() as FeatureProperties;
-      return filterFeature(properties, date) &&
+      return filterFeature(properties, route.date) &&
         properties.layer === "micro-regions" &&
         properties.id === layer.get("regionID")
         ? selectedStyle
@@ -249,7 +249,7 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
     if (bulletin) {
       popup.show(
         e.coordinate,
-        formatBulletin(regionID, bulletin, details !== "0"),
+        formatBulletin(regionID, bulletin, route.details !== "0"),
       );
       return;
     }
@@ -267,7 +267,7 @@ function findMicroRegionID(e: MapBrowserEvent<any>): Region | undefined {
     .getFeaturesAtPixel(e.pixel)
     .map((feature) => {
       const properties = feature.getProperties() as FeatureProperties;
-      return filterFeature(properties, date) &&
+      return filterFeature(properties, route.date) &&
         (properties.layer === "micro-regions" ||
           properties.layer === "micro-regions_elevation")
         ? properties.id
