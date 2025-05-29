@@ -387,16 +387,16 @@ function formatBulletin(
     [, aspects] = takeDropWhile(aspects, (a) => aspects0.includes(a));
     [, aspects] = takeDropWhile(aspects, (a) => !aspects0.includes(a));
     [aspects] = takeDropWhile(aspects, (a) => aspects0.includes(a));
-    if (aspects.length > 3) {
+    if (aspects0.length > 3) {
       const main: Aspect[] = ["N", "S", "W", "E"];
       aspects = [
         aspects[0],
         main.find((a) => aspects0.includes(a))!,
         aspects[aspects.length - 1],
       ];
-      return "🧭 " + aspects.join("↷");
+      return `🧭 <abbr title="${aspects0.join(",")}">${aspects.join("↷")}</abbr>`; 
     } else {
-      return "🧭 " + aspects.join(",");
+      return "🧭 " + aspects0.join(",");
     }
   };
   result.appendChild(document.createElement("dd")).innerHTML =
