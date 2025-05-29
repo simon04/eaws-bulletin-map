@@ -1,6 +1,6 @@
 import type { Regions } from "./types";
 
-const searchParams = new URL(location.search).searchParams;
+const searchParams = new URLSearchParams(location.search);
 export const date = searchParams.get("date") || "";
 export const regions: Regions = searchParams.get("regions") || "";
 export const bbox = searchParams.get("bbox") || "";
