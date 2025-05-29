@@ -1,4 +1,3 @@
-import type * as z from "zod/v4-mini";
 import { Control, defaults as defaultControls } from "ol/control";
 import { defaults as defaultInteractions, Interaction } from "ol/interaction";
 import { PMTilesVectorSource } from "./ol-pmtiles";
@@ -29,7 +28,6 @@ import type {
   Regions,
 } from "./types";
 import {
-  AvalancheBulletinsSchema,
   type Aspect,
   type AvalancheBulletin,
   type AvalancheProblemType,
@@ -37,6 +35,7 @@ import {
   type ElevationBoundaryOrBand,
 } from "./caaml";
 import { DANGER_RATINGS, type DangerRatingConfig } from "./danger-ratings";
+import { fetchBulletins } from "./fetchBulletins";
 
 const searchParams = new URL(location.href).searchParams;
 const date = searchParams.get("date") || "";
@@ -76,7 +75,7 @@ const popup = new Popup({
 
 const map = initMap();
 
-fetchBulletins(date).then((bulletins) => {
+fetchBulletins(date, regions.split(" ")).then((bulletins) => {
   buildMap(bulletins, date);
   buildMarkerMap(bulletins);
 });
@@ -165,44 +164,6 @@ function initMap() {
   });
 
   return map;
-}
-
-async function fetchBulletins(
-  date: string,
-  region: Region = "",
-): Promise<AvalancheBulletin[]> {
-  if (!region) {
-    return Promise.all(
-      regions.split(" ").map((region: Region) => fetchBulletins(date, region)),
-    ).then((bulletins) => bulletins.flatMap((b) => b));
-  }
-  const { bulletins } = await fetchJSON(
-    `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`,
-    { bulletins: [] },
-    AvalancheBulletinsSchema,
-  );
-  return bulletins;
-}
-
-async function fetchJSON<T extends z.ZodMiniType>(
-  url: string,
-  fallback: z.z.core.output<T>,
-  schema: T,
-): Promise<z.z.core.output<T>> {
-  const res = await fetch(url, { cache: "no-cache" });
-  if (!res.ok) return fallback;
-  let json;
-  try {
-    json = await res.json();
-  } catch (e) {
-    return await schema.parseAsync(fallback);
-  }
-  try {
-    return await schema.parseAsync(json);
-  } catch (e) {
-    console.warn("Failed to validate CAAML", json, e);
-    return await schema.parseAsync(fallback);
-  }
 }
 
 function dangerRatingLink(
@@ -394,7 +355,9 @@ function formatBulletin(
         main.find((a) => aspects0.includes(a))!,
         aspects[aspects.length - 1],
       ];
-      return `🧭 <abbr title="${aspects0.join(",")}">${aspects.join("↷")}</abbr>`; 
+      return `🧭 <abbr title="${aspects0.join(",")}">${aspects.join(
+        "↷",
+      )}</abbr>`;
     } else {
       return "🧭 " + aspects0.join(",");
     }
