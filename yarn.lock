@@ -557,7 +557,7 @@ __metadata:
     "@eaws/outline_properties": "npm:^7.0.6"
     ol: "npm:^10.5.0"
     ol-ext: "npm:^4.0.30"
-    pmtiles: "npm:^4.3.0"
+    pmtiles: "patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch"
     typescript: "npm:^5.8.3"
     vite: "npm:^6.3.0"
     zod: "npm:^3.25.36"
@@ -1181,12 +1181,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pmtiles@npm:^4.3.0":
+"pmtiles@npm:4.3.0":
   version: 4.3.0
   resolution: "pmtiles@npm:4.3.0"
   dependencies:
     fflate: "npm:^0.8.2"
   checksum: 10c0/4e3d4195f04c8229e51eaa1cd5bd94ebbeabcb159489100340a0fa6e1f929d52a2e42964acad51f846a91a065e359b9a9fc7ce93530522f634e2d904ed290645
+  languageName: node
+  linkType: hard
+
+"pmtiles@patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch":
+  version: 4.3.0
+  resolution: "pmtiles@patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch::version=4.3.0&hash=544905"
+  dependencies:
+    fflate: "npm:^0.8.2"
+  checksum: 10c0/f150ac01fc65e0c0771162014f6bd0425548afa612923ab6971728ecfb3a6b678f62ffbff4fb98c4ebc89c832d22d30f7cd77efbaba50bc093dd182efbe03288
   languageName: node
   linkType: hard
 
