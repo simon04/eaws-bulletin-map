@@ -384,9 +384,9 @@ function formatBulletin(
     if (!Array.isArray(aspects0) || !aspects0.length) return "";
     let aspects: Aspect[] = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
     aspects = [...aspects, ...aspects];
-    aspects = dropWhile(aspects, (a) => aspects0.includes(a));
-    aspects = dropWhile(aspects, (a) => !aspects0.includes(a));
-    aspects = takeWhile(aspects, (a) => aspects0.includes(a));
+    [, aspects] = takeDropWhile(aspects, (a) => aspects0.includes(a));
+    [, aspects] = takeDropWhile(aspects, (a) => !aspects0.includes(a));
+    [aspects] = takeDropWhile(aspects, (a) => aspects0.includes(a));
     if (aspects.length > 3) {
       const main: Aspect[] = ["N", "S", "W", "E"];
       aspects = [
@@ -467,18 +467,13 @@ function formatEawsOutline(
   return result;
 }
 
-function dropWhile<T>(array: T[], predicate: (value: T) => boolean): T[] {
+function takeDropWhile<T>(
+  array: T[],
+  predicate: (value: T) => boolean,
+): [T[], T[]] {
   let i = 0;
   while (i < array.length && predicate(array[i])) {
     i++;
   }
-  return array.slice(i);
-}
-
-function takeWhile<T>(array: T[], predicate: (value: T) => boolean): T[] {
-  let i = 0;
-  while (i < array.length && predicate(array[i])) {
-    i++;
-  }
-  return array.slice(0, i);
+  return [array.slice(0, i), array.slice(i)];
 }
