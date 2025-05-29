@@ -1,4 +1,4 @@
-import * as z from "@zod/mini";
+import * as z from "zod/v4-mini";
 
 export const CustomDataSchema = z.optional(z.any());
 export type CustomData = z.infer<typeof CustomDataSchema>;

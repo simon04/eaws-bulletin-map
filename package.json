@@ -17,11 +17,11 @@
   },
   "dependencies": {
     "@eaws/outline_properties": "^7.0.6",
-    "@zod/mini": "^4.0.0-beta.20250415T232143",
     "lodash": "^4.17.21",
     "ol": "^10.5.0",
     "ol-ext": "^4.0.30",
-    "pmtiles": "^4.3.0"
+    "pmtiles": "^4.3.0",
+    "zod": "^3.25.36"
   },
   "prettier": {
     "trailingComma": "all"

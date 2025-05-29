@@ -1,4 +1,4 @@
-import type * as z from "@zod/mini";
+import type * as z from "zod/v4-mini";
 import { Control, defaults as defaultControls } from "ol/control";
 import { defaults as defaultInteractions, Interaction } from "ol/interaction";
 import { PMTilesVectorSource } from "./ol-pmtiles";

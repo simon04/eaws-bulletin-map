@@ -398,22 +398,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zod/core@npm:0.5.1":
-  version: 0.5.1
-  resolution: "@zod/core@npm:0.5.1"
-  checksum: 10c0/3a48af3aaacfd75c8f40da7d717f70bd5a2c716d1eaba572d6354457a58272011d2a2d7142564e7f3cf1ee2489ad8ac90f8c67ae25b28afd263b12f931b10d31
-  languageName: node
-  linkType: hard
-
-"@zod/mini@npm:^4.0.0-beta.20250415T232143":
-  version: 4.0.0-beta.20250415T232143
-  resolution: "@zod/mini@npm:4.0.0-beta.20250415T232143"
-  dependencies:
-    "@zod/core": "npm:0.5.1"
-  checksum: 10c0/06119e6edc86737f1869551fb51e7bb15ac3be28aa7371e1eac5f991c5a5517a0e9bb21dcfb2acb392f6c0182f1612c689ee9feadf180838b16b4bed9fdb8548
-  languageName: node
-  linkType: hard
-
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -579,13 +563,13 @@ __metadata:
   dependencies:
     "@eaws/outline_properties": "npm:^7.0.6"
     "@types/lodash": "npm:^4.17.14"
-    "@zod/mini": "npm:^4.0.0-beta.20250415T232143"
     lodash: "npm:^4.17.21"
     ol: "npm:^10.5.0"
     ol-ext: "npm:^4.0.30"
     pmtiles: "npm:^4.3.0"
     typescript: "npm:^5.8.3"
     vite: "npm:^6.3.0"
+    zod: "npm:^3.25.36"
   languageName: unknown
   linkType: soft
 
@@ -1675,6 +1659,13 @@ __metadata:
   version: 4.0.0
   resolution: "yallist@npm:4.0.0"
   checksum: 10c0/2286b5e8dbfe22204ab66e2ef5cc9bbb1e55dfc873bbe0d568aa943eb255d131890dfd5bf243637273d31119b870f49c18fcde2c6ffbb7a7a092b870dc90625a
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.25.36":
+  version: 3.25.36
+  resolution: "zod@npm:3.25.36"
+  checksum: 10c0/9ad8ca759d1a5d19c86d6e49a1bda817b3c0566ea0a8726d45994b9fcaac8d569db45a65218a7b4067ca18b07c5fc636a587a94cd05f76793174ace8b81742e3
   languageName: node
   linkType: hard
 
