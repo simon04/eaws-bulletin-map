@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "typescript": "^5.8.3",
-    "vite": "^6.3.0"
+    "vite": "npm:rolldown-vite@^7.1.4"
   },
   "dependencies": {
     "@eaws/outline_properties": "^7.0.6",
