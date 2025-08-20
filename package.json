@@ -15,7 +15,7 @@
     "vite": "npm:rolldown-vite@^7.1.4"
   },
   "dependencies": {
-    "@eaws/outline_properties": "^7.0.6",
+    "@eaws/outline_properties": "^8.0.0",
     "ol": "^10.5.0",
     "ol-ext": "^4.0.30",
     "pmtiles": "patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch",

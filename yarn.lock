@@ -5,10 +5,10 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@eaws/outline_properties@npm:^7.0.6":
-  version: 7.0.6
-  resolution: "@eaws/outline_properties@npm:7.0.6::__archiveUrl=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F25330421%2Fpackages%2Fnpm%2F%40eaws%2Foutline_properties%2F-%2F%40eaws%2Foutline_properties-7.0.6.tgz"
-  checksum: 10c0/281a0e6595f706dbd325cde4ac05cd1b59877ca7acc990ce42277f2e1c834190d276f00c0b4c742b8d47a16e807ef1e64a1177f2cee83378cc551c63b34ed6a9
+"@eaws/outline_properties@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@eaws/outline_properties@npm:8.0.0::__archiveUrl=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F25330421%2Fpackages%2Fnpm%2F%40eaws%2Foutline_properties%2F-%2F%40eaws%2Foutline_properties-8.0.0.tgz"
+  checksum: 10c0/dcadd91d6bba8dba01dd4d8af07903a687f8b6dd7472f4d839fe5b08f17fc300f10d11db49ef86cd738fb7c827974e498527692c59a4e69a58ff7b9eacb4931a
   languageName: node
   linkType: hard
 
@@ -415,7 +415,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eaws-bulletin-map@workspace:."
   dependencies:
-    "@eaws/outline_properties": "npm:^7.0.6"
+    "@eaws/outline_properties": "npm:^8.0.0"
     ol: "npm:^10.5.0"
     ol-ext: "npm:^4.0.30"
     pmtiles: "patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch"
