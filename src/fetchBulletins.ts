@@ -1,4 +1,4 @@
-import type * as z from "zod/v4-mini";
+import type * as z from "zod/mini";
 import { type AvalancheBulletin, AvalancheBulletinsSchema } from "./caaml";
 import type { Region } from "./types";
 

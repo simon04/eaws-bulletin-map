@@ -560,7 +560,7 @@ __metadata:
     pmtiles: "patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch"
     typescript: "npm:^5.8.3"
     vite: "npm:^6.3.0"
-    zod: "npm:^3.25.36"
+    zod: "npm:^4.0.17"
   languageName: unknown
   linkType: soft
 
@@ -1655,10 +1655,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.25.36":
-  version: 3.25.36
-  resolution: "zod@npm:3.25.36"
-  checksum: 10c0/9ad8ca759d1a5d19c86d6e49a1bda817b3c0566ea0a8726d45994b9fcaac8d569db45a65218a7b4067ca18b07c5fc636a587a94cd05f76793174ace8b81742e3
+"zod@npm:^4.0.17":
+  version: 4.0.17
+  resolution: "zod@npm:4.0.17"
+  checksum: 10c0/c56ef4cc02f8f52be8724c5a8b338266202d68477c7606bee9b7299818b75c9adc27f16f4b6704a372f3e7578bd016f389de19bfec766564b7c39d0d327c540a
   languageName: node
   linkType: hard
 

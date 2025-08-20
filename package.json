@@ -19,7 +19,7 @@
     "ol": "^10.5.0",
     "ol-ext": "^4.0.30",
     "pmtiles": "patch:pmtiles@npm%3A4.3.0#~/.yarn/patches/pmtiles-npm-4.3.0-83c61b44bc.patch",
-    "zod": "^3.25.36"
+    "zod": "^4.0.17"
   },
   "prettier": {
     "trailingComma": "all"
