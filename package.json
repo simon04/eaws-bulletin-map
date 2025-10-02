@@ -19,7 +19,7 @@
     "ol": "10.6.1",
     "ol-ext": "4.0.35",
     "pmtiles": "4.3.0",
-    "zod": "4.0.17"
+    "zod": "4.1.11"
   },
   "patchedDependencies": {
     "pmtiles@4.3.0": "patches/pmtiles@4.3.0.patch"
