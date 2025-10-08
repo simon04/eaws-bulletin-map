@@ -4,8 +4,8 @@
     "": {
       "name": "eaws-bulletin-map",
       "dependencies": {
-        "@eaws/outline_properties": "8.0.5",
-        "@eaws/pmtiles": "8.0.5",
+        "@eaws/outline_properties": "8.0.6",
+        "@eaws/pmtiles": "8.0.6",
         "ol": "10.6.1",
         "ol-ext": "4.0.35",
         "pmtiles": "4.3.0",
@@ -21,9 +21,9 @@
     "pmtiles@4.3.0": "patches/pmtiles@4.3.0.patch",
   },
   "packages": {
-    "@eaws/outline_properties": ["@eaws/outline_properties@8.0.5", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.0.5.tgz", {}, "sha1-mtOCsf9Lky1acTVbhHy00i5Pt4A="],
+    "@eaws/outline_properties": ["@eaws/outline_properties@8.0.6", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.0.6.tgz", {}, "sha1-kW0FeIfD+CgrSkvuqTr3Q+VnBis="],
 
-    "@eaws/pmtiles": ["@eaws/pmtiles@8.0.5", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/pmtiles/-/@eaws/pmtiles-8.0.5.tgz", {}, "sha1-4fU+0XVMTaZvYaG0QFUIpaXimQI="],
+    "@eaws/pmtiles": ["@eaws/pmtiles@8.0.6", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/pmtiles/-/@eaws/pmtiles-8.0.6.tgz", {}, "sha1-vjY7tJD02vvSIIoVtgl6msAk4Lw="],
 
     "@emnapi/core": ["@emnapi/core@1.5.0", "", { "dependencies": { "@emnapi/wasi-threads": "1.1.0", "tslib": "^2.4.0" } }, "sha512-sbP8GzB1WDzacS8fgNPpHlp6C9VZe+SJP3F90W9rLemaQj2PzIuTEl1qDOYQf58YIpyjViI24y9aPWCjEzY2cg=="],
 
