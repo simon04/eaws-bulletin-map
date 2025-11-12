@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@eaws/outline_properties": "8.0.6",
-    "@eaws/pmtiles": "8.0.6",
     "ol": "10.7.0",
     "ol-ext": "4.0.36",
     "pmtiles": "4.3.0",

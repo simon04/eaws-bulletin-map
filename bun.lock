@@ -6,7 +6,6 @@
       "name": "eaws-bulletin-map",
       "dependencies": {
         "@eaws/outline_properties": "8.0.6",
-        "@eaws/pmtiles": "8.0.6",
         "ol": "10.7.0",
         "ol-ext": "4.0.36",
         "pmtiles": "4.3.0",
@@ -23,8 +22,6 @@
   },
   "packages": {
     "@eaws/outline_properties": ["@eaws/outline_properties@8.0.6", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.0.6.tgz", {}, "sha1-kW0FeIfD+CgrSkvuqTr3Q+VnBis="],
-
-    "@eaws/pmtiles": ["@eaws/pmtiles@8.0.6", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/pmtiles/-/@eaws/pmtiles-8.0.6.tgz", {}, "sha1-vjY7tJD02vvSIIoVtgl6msAk4Lw="],
 
     "@emnapi/core": ["@emnapi/core@1.5.0", "", { "dependencies": { "@emnapi/wasi-threads": "1.1.0", "tslib": "^2.4.0" } }, "sha512-sbP8GzB1WDzacS8fgNPpHlp6C9VZe+SJP3F90W9rLemaQj2PzIuTEl1qDOYQf58YIpyjViI24y9aPWCjEzY2cg=="],
 
