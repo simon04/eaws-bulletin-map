@@ -11,6 +11,7 @@ Also embedded on the EAWS website https://www.avalanches.org/
 This project is made possible thanks to the following awesome projects:
 
 - https://gitlab.com/albina-euregio/albina-caaml
+- https://gitlab.com/albina-euregio/linea
 - https://gitlab.com/albina-euregio/pyAvaCore
 - https://gitlab.com/eaws/eaws-regions
 
