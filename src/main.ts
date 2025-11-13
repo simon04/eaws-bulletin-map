@@ -31,6 +31,11 @@ import { DANGER_RATINGS } from "./danger-ratings";
 import { fetchBulletins } from "./fetchBulletins";
 import { dangerRatingLink, formatBulletin } from "./formatBulletin";
 import * as route from "./route";
+import {
+  getWeatherStationPopup,
+  getWeatherStationsLayer,
+  WeatherStationSymbol,
+} from "./weather-stations";
 
 const popup = new Popup({
   popupClass: "default",
@@ -203,6 +208,11 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
     }
   });
   map.addLayer(layer);
+
+  if (route.stations) {
+    const layer = await getWeatherStationsLayer();
+    map.addLayer(layer);
+  }
 }
 
 async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
@@ -239,6 +249,13 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
   });
 
   map.on("click", (e) => {
+    const weatherStation = map
+      .getFeaturesAtPixel(e.pixel)
+      .find((f) => f.get("$type") === WeatherStationSymbol);
+    if (weatherStation) {
+      popup.show(e.coordinate, getWeatherStationPopup(weatherStation));
+      return;
+    }
     const regionID = findMicroRegionID(e);
     if (!regionID) {
       return;

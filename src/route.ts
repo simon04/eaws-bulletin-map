@@ -5,6 +5,7 @@ export const date = searchParams.get("date") || "";
 export const regions: Regions = searchParams.get("regions") || "";
 export const bbox = searchParams.get("bbox") || "";
 export const details = searchParams.get("details") || "";
+export const stations = searchParams.get("stations") || "";
 if (!date || !regions) {
   const now = new Date();
   if (now.getHours() >= 17) now.setDate(now.getDate() + 1); // tomorrow
@@ -19,7 +20,7 @@ export function to(date: string | Date, regions: Regions, replace = false) {
   if (date instanceof Date) {
     date = date.toISOString().slice(0, "2006-01-02".length);
   }
-  const params = new URLSearchParams({ date, regions, bbox, details });
+  const params = new URLSearchParams({ date, regions, bbox, details, stations });
   params.forEach((value, key) => value || params.delete(key));
   const url = "?" + params;
   if (replace) {

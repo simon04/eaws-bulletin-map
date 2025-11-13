@@ -1,2 +1,3 @@
 [install.scopes]
+"@albina-euregio" = "https://gitlab.com/api/v4/packages/npm/"
 "@eaws" = "https://gitlab.com/api/v4/packages/npm/"
