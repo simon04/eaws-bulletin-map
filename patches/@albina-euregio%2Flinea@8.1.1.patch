@@ -1,0 +1,57 @@
+diff --git a/node_modules/@albina-euregio/linea/.bun-tag-fa9885576acc0f40 b/.bun-tag-fa9885576acc0f40
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/src/linea-plot/cursorOpts.ts b/src/linea-plot/cursorOpts.ts
+index ead87ce8af7e67935ba881b0a8e7a82e4f9c0f0b..c72e651194cb9c03865db62e659c92b08cfd5944 100644
+--- a/src/linea-plot/cursorOpts.ts
++++ b/src/linea-plot/cursorOpts.ts
+@@ -1,3 +1,4 @@
++// @ts-nocheck
+ import uPlot from "uplot";
+ 
+ // Create a single sync instance for all charts
+diff --git a/src/linea-plot/opts_HS_PSUM.ts b/src/linea-plot/opts_HS_PSUM.ts
+index 31944ab6e33072ffbce1290922c1dbdc66a749de..381a3cb2eeb6136b1076ac01ac24e873ed0ff99d 100644
+--- a/src/linea-plot/opts_HS_PSUM.ts
++++ b/src/linea-plot/opts_HS_PSUM.ts
+@@ -1,3 +1,4 @@
++// @ts-nocheck
+ import type uPlot from "uplot";
+ import { cursorOpts } from "./cursorOpts";
+ import { timeAxis } from "./timeAxisOpts";
+diff --git a/src/linea-plot/opts_RH_GR.ts b/src/linea-plot/opts_RH_GR.ts
+index f810824028024c16830dd98d924a68629f450308..6e3321a3d3edcde300d5f6b0bc21f4f4ff44326e 100644
+--- a/src/linea-plot/opts_RH_GR.ts
++++ b/src/linea-plot/opts_RH_GR.ts
+@@ -1,3 +1,4 @@
++// @ts-nocheck
+ import type uPlot from "uplot";
+ import { cursorOpts } from "./cursorOpts";
+ import { timeAxis } from "./timeAxisOpts";
+diff --git a/src/linea-plot/opts_TA_TD_TSS.ts b/src/linea-plot/opts_TA_TD_TSS.ts
+index 9ca9d9f4e17ae840e0572cc4753e88c7c44b3082..750bd750fe57d49fb39530a8208f1b5a04e9feb5 100644
+--- a/src/linea-plot/opts_TA_TD_TSS.ts
++++ b/src/linea-plot/opts_TA_TD_TSS.ts
+@@ -1,3 +1,4 @@
++// @ts-nocheck
+ import type uPlot from "uplot";
+ import { cursorOpts } from "./cursorOpts";
+ import { timeAxis } from "./timeAxisOpts";
+diff --git a/src/linea-plot/opts_VW_VWG_DW.ts b/src/linea-plot/opts_VW_VWG_DW.ts
+index 6d8c803e8623b75e3378f6d6d52714c13fb0ff4e..27023efa7da9f4b1e2940a670484e97a17a23190 100644
+--- a/src/linea-plot/opts_VW_VWG_DW.ts
++++ b/src/linea-plot/opts_VW_VWG_DW.ts
+@@ -1,3 +1,4 @@
++// @ts-nocheck
+ import type uPlot from "uplot";
+ import { cursorOpts } from "./cursorOpts";
+ import { timeAxis } from "./timeAxisOpts";
+diff --git a/src/linea-plot.ts b/src/linea-plot.ts
+index b9cb43996e94c5db4594fb23e7e68457448b54d3..754766a48b76f8014c5b0f8cf4bc7fcab7576b01 100644
+--- a/src/linea-plot.ts
++++ b/src/linea-plot.ts
+@@ -1,3 +1,4 @@
++// @ts-nocheck
+ import uPlot from "uplot";
+ import css from "uplot/dist/uPlot.min.css?raw";
+ import { i18n } from "./i18n";

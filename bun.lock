@@ -19,6 +19,7 @@
     },
   },
   "patchedDependencies": {
+    "@albina-euregio/linea@8.1.1": "patches/@albina-euregio%2Flinea@8.1.1.patch",
     "pmtiles@4.3.0": "patches/pmtiles@4.3.0.patch",
   },
   "packages": {
