@@ -6,6 +6,7 @@
       "name": "eaws-bulletin-map",
       "dependencies": {
         "@albina-euregio/linea": "8.1.1",
+        "@eaws/micro-regions_names": "8.0.8",
         "@eaws/outline_properties": "8.0.8",
         "ol": "10.7.0",
         "ol-ext": "4.0.36",
@@ -24,6 +25,8 @@
   },
   "packages": {
     "@albina-euregio/linea": ["@albina-euregio/linea@8.1.1", "https://gitlab.com/api/v4/projects/70517866/packages/npm/@albina-euregio/linea/-/@albina-euregio/linea-8.1.1.tgz", { "dependencies": { "temporal-polyfill": "^0.3.0", "uplot": "^1.6.32" } }, "sha1-TXaljuYw4FvU3az4FxhIb1gNtVk="],
+
+    "@eaws/micro-regions_names": ["@eaws/micro-regions_names@8.0.8", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.0.8.tgz", {}, "sha1-jAcr1ZSzoK1grW6ybsGUobXTDwk="],
 
     "@eaws/outline_properties": ["@eaws/outline_properties@8.0.8", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.0.8.tgz", {}, "sha1-mil0+cio7nFtUuTOjut6ldIx3vk="],
 

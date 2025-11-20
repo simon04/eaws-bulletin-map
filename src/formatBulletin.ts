@@ -7,6 +7,7 @@ import type {
 } from "./caaml";
 import { DANGER_RATINGS, DangerRatingConfig } from "./danger-ratings";
 import type { Region } from "./types";
+import enRegionNames from "@eaws/micro-regions_names/en.json";
 
 export function formatBulletin(
   region: Region,
@@ -48,7 +49,7 @@ export function formatBulletin(
     }
   };
   result.appendChild(document.createElement("dd")).innerHTML =
-    region +
+    `<abbr title="${enRegionNames[region]}">${region}</abbr>` +
     [bulletin.validTime?.startTime, bulletin.validTime?.endTime]
       .map((tt) => `<br>📅 ${tt && new Date(tt).toLocaleString()}`)
       .join("..");
