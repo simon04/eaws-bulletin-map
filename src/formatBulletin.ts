@@ -49,7 +49,7 @@ export function formatBulletin(
     }
   };
   result.appendChild(document.createElement("dd")).innerHTML =
-    `<abbr title="${enRegionNames[region]}">${region}</abbr>` +
+    `<abbr title="${enRegionNames[region as "AT-07"]}">${region}</abbr>` +
     [bulletin.validTime?.startTime, bulletin.validTime?.endTime]
       .map((tt) => `<br>📅 ${tt && new Date(tt).toLocaleString()}`)
       .join("..");
