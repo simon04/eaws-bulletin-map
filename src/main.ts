@@ -19,6 +19,7 @@ import "ol/ol.css";
 import "ol-ext/dist/ol-ext.css";
 import "./style.css";
 import eawsOutlineProperties from "@eaws/outline_properties/index.json";
+import { version } from "@eaws/outline_properties/package.json";
 
 import type {
   FeatureProperties,
@@ -137,7 +138,7 @@ function initMap() {
 }
 
 const vectorRegions = new PMTilesVectorSource({
-  url: "https://static.avalanche.report/eaws-regions.pmtiles",
+  url: `https://static.avalanche.report/eaws-regions.pmtiles?${version}`,
   attributions: [
     ...Object.values(DANGER_RATINGS).map((rating) => dangerRatingLink(rating)),
     '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
