@@ -1,6 +1,7 @@
 import type * as z from "zod/mini";
 import { type AvalancheBulletin, AvalancheBulletinsSchema } from "./caaml";
 import type { Region } from "./types";
+import eawsOutlineProperties from "@eaws/outline_properties/index.json";
 
 export async function fetchBulletins(
   date: string,
@@ -11,8 +12,19 @@ export async function fetchBulletins(
       (bulletins) => bulletins.flatMap((b) => b),
     );
   }
+
+  const aws = eawsOutlineProperties.find((p) => region === p.id)?.aws;
+  let url = aws
+    ?.map(({ url }) => (url as { "api:date"?: string })["api:date"])
+    ?.filter((url) => !url?.startsWith("https://bollettini.aineva.it/")) // CORS not supported
+    ?.find((url) => url?.endsWith("CAAMLv6.json"))
+    ?.replace(/{date}/g, date)
+    ?.replace(/{region}/g, region)
+    ?.replace(/{lang}/g, "en");
+  url ??= `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`;
+
   const { bulletins } = await fetchJSON(
-    `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`,
+    url,
     { bulletins: [] },
     AvalancheBulletinsSchema,
   );
