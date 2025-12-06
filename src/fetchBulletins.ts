@@ -61,7 +61,7 @@ export async function fetchJSON<T extends z.ZodMiniType>(
   try {
     return await schema.parseAsync(json);
   } catch (e) {
-    console.warn("Failed to validate CAAML", json, e);
+    console.warn("Failed to validate CAAML from " + url, json, e);
     return await schema.parseAsync(fallback);
   }
 }
