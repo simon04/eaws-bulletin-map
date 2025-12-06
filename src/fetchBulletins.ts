@@ -13,11 +13,16 @@ export async function fetchBulletins(
     );
   }
 
-  const aws = eawsOutlineProperties.find((p) => region === p.id)?.aws;
-  let url = aws
-    ?.map(({ url }) => (url as { "api:date"?: string })["api:date"])
-    ?.filter((url) => !url?.startsWith("https://bollettini.aineva.it/")) // CORS not supported
-    ?.find((url) => url?.endsWith("CAAMLv6.json"))
+  const aws = eawsOutlineProperties
+    .find((p) => region === p.id)
+    ?.aws.find((aws0) => {
+      const url = (aws0.url as { "api:date"?: string })["api:date"];
+      return (
+        !url?.startsWith("https://bollettini.aineva.it/") && // CORS not supported
+        url?.endsWith("CAAMLv6.json")
+      );
+    });
+  let url = (aws?.url as { "api:date"?: string })?.["api:date"]
     ?.replace(/{date}/g, date)
     ?.replace(/{region}/g, region)
     ?.replace(/{lang}/g, "en");
@@ -28,6 +33,15 @@ export async function fetchBulletins(
     { bulletins: [] },
     AvalancheBulletinsSchema,
   );
+  bulletins.forEach((b) => {
+    if (!aws?.url) return;
+    b.source = {
+      provider: {
+        name: aws?.name,
+        website: (aws.url as { en?: string })?.en ?? Object.values(aws.url)[0],
+      },
+    };
+  });
   return bulletins;
 }
 
