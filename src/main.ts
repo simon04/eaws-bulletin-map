@@ -162,22 +162,13 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
         .map((r) => [r.regionID, b]),
     ),
   );
-  const style = ({
-    id,
-    elevation,
-    threshold,
-  }: MicroRegionElevationProperties): Style => {
+  const style = ({ id, elevation, threshold }: MicroRegionElevationProperties): Style => {
     const dangerRatings = bulletingsByRegionID[id]?.dangerRatings ?? [];
     if (
       elevation === "high" &&
       dangerRatings
         .map((rating) => rating.elevation?.lowerBound)
-        .some(
-          (bound) =>
-            bound !== undefined &&
-            threshold !== undefined &&
-            +bound > threshold,
-        )
+        .some((bound) => bound !== undefined && threshold !== undefined && +bound > threshold)
     ) {
       elevation = "low";
     }
@@ -197,8 +188,7 @@ async function buildMap(bulletins: AvalancheBulletin[], date: string) {
     source: vectorRegions,
     style(feature): Style | undefined {
       const properties = feature.getProperties() as FeatureProperties;
-      return filterFeature(properties, date) &&
-        properties.layer === "micro-regions_elevation"
+      return filterFeature(properties, date) && properties.layer === "micro-regions_elevation"
         ? style(properties)
         : undefined;
     },
@@ -261,14 +251,9 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
     if (!regionID) {
       return;
     }
-    const bulletin = bulletins.find((b) =>
-      b.regions?.some((r) => r.regionID === regionID),
-    );
+    const bulletin = bulletins.find((b) => b.regions?.some((r) => r.regionID === regionID));
     if (bulletin) {
-      popup.show(
-        e.coordinate,
-        formatBulletin(regionID, bulletin, route.details !== "0"),
-      );
+      popup.show(e.coordinate, formatBulletin(regionID, bulletin, route.details !== "0"));
       return;
     }
     const aws = eawsOutlineProperties.filter((p) => regionID.startsWith(p.id));
@@ -286,8 +271,7 @@ function findMicroRegionID(e: MapBrowserEvent<any>): Region | undefined {
     .map((feature) => {
       const properties = feature.getProperties() as FeatureProperties;
       return filterFeature(properties, route.date) &&
-        (properties.layer === "micro-regions" ||
-          properties.layer === "micro-regions_elevation")
+        (properties.layer === "micro-regions" || properties.layer === "micro-regions_elevation")
         ? properties.id
         : undefined;
     })
@@ -304,17 +288,13 @@ function filterFeature(
   );
 }
 
-function formatEawsOutline(
-  aws: (typeof eawsOutlineProperties)[number],
-): HTMLElement {
+function formatEawsOutline(aws: (typeof eawsOutlineProperties)[number]): HTMLElement {
   const result = document.createElement("dl");
   for (const p of aws.aws) {
     const provider = result.appendChild(document.createElement("dt"));
     const providerLink = provider.appendChild(document.createElement("a"));
     providerLink.innerText = p.name;
-    providerLink.href = Object.entries(p.url).find(
-      ([id]) => id.length === 2,
-    )?.[1];
+    providerLink.href = Object.entries(p.url).find(([id]) => id.length === 2)?.[1];
     providerLink.target = "_blank";
     providerLink.rel = "external";
   }

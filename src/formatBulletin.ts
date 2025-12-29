@@ -36,14 +36,8 @@ export function formatBulletin(
     [aspects] = takeDropWhile(aspects, (a) => aspects0.includes(a));
     if (aspects0.length > 3) {
       const main: Aspect[] = ["N", "S", "W", "E"];
-      aspects = [
-        aspects[0],
-        main.find((a) => aspects0.includes(a))!,
-        aspects[aspects.length - 1],
-      ];
-      return `🧭 <abbr title="${aspects0.join(",")}">${aspects.join(
-        "↷",
-      )}</abbr>`;
+      aspects = [aspects[0], main.find((a) => aspects0.includes(a))!, aspects[aspects.length - 1]];
+      return `🧭 <abbr title="${aspects0.join(",")}">${aspects.join("↷")}</abbr>`;
     } else {
       return "🧭 " + aspects0.join(",");
     }
@@ -59,18 +53,10 @@ export function formatBulletin(
       dangerRatingLink(r.mainValue),
       r.validTimePeriod || "",
     ].join(" ");
-    result.appendChild(document.createElement("dd")).innerText =
-      formatElevation(r.elevation);
+    result.appendChild(document.createElement("dd")).innerText = formatElevation(r.elevation);
   });
 
-  const avalancheSizes = [
-    "",
-    "small",
-    "medium",
-    "large",
-    "very large",
-    "extremely large",
-  ];
+  const avalancheSizes = ["", "small", "medium", "large", "very large", "extremely large"];
   bulletin.avalancheProblems?.forEach((p) => {
     result.appendChild(document.createElement("dt")).innerHTML = [
       avalancheProblemLink(p.problemType || ""),
@@ -93,8 +79,7 @@ export function dangerRatingLink(
   rating: DangerRatingValue | DangerRatingConfig | undefined,
 ): string {
   if (!rating || rating === "no_rating" || rating === "no_snow") return "";
-  const { color, id, text } =
-    typeof rating === "string" ? DANGER_RATINGS[rating] : rating;
+  const { color, id, text } = typeof rating === "string" ? DANGER_RATINGS[rating] : rating;
   return `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
       <span class="square" style="background: ${color}"></span>
       <abbr title="${text}">${id}</abbr></a>`;
@@ -105,10 +90,7 @@ function avalancheProblemLink(problem: AvalancheProblemType): string {
   return `<a href="https://www.avalanches.org/standards/avalanche-problems/#${id}">${problem}</a>`;
 }
 
-function takeDropWhile<T>(
-  array: T[],
-  predicate: (value: T) => boolean,
-): [T[], T[]] {
+function takeDropWhile<T>(array: T[], predicate: (value: T) => boolean): [T[], T[]] {
   let i = 0;
   while (i < array.length && predicate(array[i])) {
     i++;

@@ -11,9 +11,7 @@ import { FeatureLike } from "ol/Feature";
 export const WeatherStationSymbol = Symbol();
 
 export async function getWeatherStationsLayer() {
-  const response = await fetch(
-    "https://static.avalanche.report/weather_stations/stations.geojson",
-  );
+  const response = await fetch("https://static.avalanche.report/weather_stations/stations.geojson");
   const geojson = await response.json();
   const format = new GeoJSON({ featureProjection: "EPSG:3857" });
   const features = format.readFeatures(geojson);

@@ -8,8 +8,8 @@ export async function fetchBulletins(
   region: Region | Region[],
 ): Promise<AvalancheBulletin[]> {
   if (Array.isArray(region)) {
-    return Promise.all(region.map((r) => fetchBulletins(date, r))).then(
-      (bulletins) => bulletins.flatMap((b) => b),
+    return Promise.all(region.map((r) => fetchBulletins(date, r))).then((bulletins) =>
+      bulletins.flatMap((b) => b),
     );
   }
 
@@ -28,11 +28,7 @@ export async function fetchBulletins(
     ?.replace(/{lang}/g, "en");
   url ??= `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`;
 
-  const { bulletins } = await fetchJSON(
-    url,
-    { bulletins: [] },
-    AvalancheBulletinsSchema,
-  );
+  const { bulletins } = await fetchJSON(url, { bulletins: [] }, AvalancheBulletinsSchema);
   bulletins.forEach((b) => {
     if (!aws?.url) return;
     b.source = {

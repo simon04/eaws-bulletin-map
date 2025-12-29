@@ -3,17 +3,7 @@ import * as z from "zod/mini";
 export const CustomDataSchema = z.optional(z.any());
 export type CustomData = z.infer<typeof CustomDataSchema>;
 
-export const AspectSchema = z.enum([
-  "E",
-  "N",
-  "n/a",
-  "NE",
-  "NW",
-  "S",
-  "SE",
-  "SW",
-  "W",
-]);
+export const AspectSchema = z.enum(["E", "N", "n/a", "NE", "NW", "S", "SE", "SW", "W"]);
 export type Aspect = z.infer<typeof AspectSchema>;
 
 export const DangerRatingValueSchema = z.enum([
@@ -27,15 +17,8 @@ export const DangerRatingValueSchema = z.enum([
 ]);
 export type DangerRatingValue = z.infer<typeof DangerRatingValueSchema>;
 
-export const ExpectedAvalancheFrequencySchema = z.enum([
-  "few",
-  "many",
-  "none",
-  "some",
-]);
-export type ExpectedAvalancheFrequency = z.infer<
-  typeof ExpectedAvalancheFrequencySchema
->;
+export const ExpectedAvalancheFrequencySchema = z.enum(["few", "many", "none", "some"]);
+export type ExpectedAvalancheFrequency = z.infer<typeof ExpectedAvalancheFrequencySchema>;
 
 export const AvalancheProblemTypeSchema = z.enum([
   "cornices",
@@ -49,24 +32,13 @@ export const AvalancheProblemTypeSchema = z.enum([
 ]);
 export type AvalancheProblemType = z.infer<typeof AvalancheProblemTypeSchema>;
 
-export const ExpectedSnowpackStabilitySchema = z.enum([
-  "fair",
-  "good",
-  "poor",
-  "very_poor",
-]);
-export type ExpectedSnowpackStability = z.infer<
-  typeof ExpectedSnowpackStabilitySchema
->;
+export const ExpectedSnowpackStabilitySchema = z.enum(["fair", "good", "poor", "very_poor"]);
+export type ExpectedSnowpackStability = z.infer<typeof ExpectedSnowpackStabilitySchema>;
 
 export const ValidTimePeriodSchema = z.enum(["all_day", "earlier", "later"]);
 export type ValidTimePeriod = z.infer<typeof ValidTimePeriodSchema>;
 
-export const TendencyTypeSchema = z.enum([
-  "decreasing",
-  "increasing",
-  "steady",
-]);
+export const TendencyTypeSchema = z.enum(["decreasing", "increasing", "steady"]);
 export type TendencyType = z.infer<typeof TendencyTypeSchema>;
 
 export const TextsSchema = z.object({
@@ -79,9 +51,7 @@ export const ElevationBoundaryOrBandSchema = z.object({
   lowerBound: z.optional(z.string()),
   upperBound: z.optional(z.string()),
 });
-export type ElevationBoundaryOrBand = z.infer<
-  typeof ElevationBoundaryOrBandSchema
->;
+export type ElevationBoundaryOrBand = z.infer<typeof ElevationBoundaryOrBandSchema>;
 
 export const ExternalFileSchema = z.object({
   description: z.optional(z.string()),
@@ -135,9 +105,7 @@ export const AvalancheBulletinProviderSchema = z.object({
   name: z.optional(z.string()),
   website: z.optional(z.string()),
 });
-export type AvalancheBulletinProvider = z.infer<
-  typeof AvalancheBulletinProviderSchema
->;
+export type AvalancheBulletinProvider = z.infer<typeof AvalancheBulletinProviderSchema>;
 
 export const TendencySchema = z.object({
   comment: z.optional(z.string()),
@@ -168,9 +136,7 @@ export const AvalancheBulletinSourceSchema = z.object({
   person: z.optional(PersonSchema),
   provider: z.optional(AvalancheBulletinProviderSchema),
 });
-export type AvalancheBulletinSource = z.infer<
-  typeof AvalancheBulletinSourceSchema
->;
+export type AvalancheBulletinSource = z.infer<typeof AvalancheBulletinSourceSchema>;
 
 export const AvalancheBulletinSchema = z.object({
   avalancheActivity: z.optional(TextsSchema),
