@@ -31,6 +31,7 @@ export async function fetchBulletins(
   const { bulletins } = await fetchJSON(url, { bulletins: [] }, AvalancheBulletinsSchema);
   bulletins.forEach((b) => {
     if (!aws?.url) return;
+    b.regions = b.regions?.filter((r) => r.regionID.startsWith(region));
     b.source = {
       provider: {
         name: aws?.name,
