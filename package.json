@@ -19,7 +19,7 @@
     "zod": "4.1.11"
   },
   "devDependencies": {
-    "oxfmt": "^0.21.0",
+    "oxfmt": "0.32.0",
     "typescript": "5.8.3",
     "vite": "^8.0.0-beta.0"
   },
