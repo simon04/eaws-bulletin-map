@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@albina-euregio/linea": "8.1.1",
-    "@eaws/micro-regions_names": "8.1.0",
-    "@eaws/outline_properties": "8.1.0",
+    "@eaws/micro-regions_names": "8.2.0",
+    "@eaws/outline_properties": "8.2.0",
     "ol": "10.8.0",
     "ol-ext": "4.0.37",
     "pmtiles": "4.3.0",

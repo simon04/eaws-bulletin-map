@@ -6,8 +6,8 @@
       "name": "eaws-bulletin-map",
       "dependencies": {
         "@albina-euregio/linea": "8.1.1",
-        "@eaws/micro-regions_names": "8.1.0",
-        "@eaws/outline_properties": "8.1.0",
+        "@eaws/micro-regions_names": "8.2.0",
+        "@eaws/outline_properties": "8.2.0",
         "ol": "10.8.0",
         "ol-ext": "4.0.37",
         "pmtiles": "4.3.0",
@@ -27,9 +27,9 @@
   "packages": {
     "@albina-euregio/linea": ["@albina-euregio/linea@8.1.1", "https://gitlab.com/api/v4/projects/70517866/packages/npm/@albina-euregio/linea/-/@albina-euregio/linea-8.1.1.tgz", { "dependencies": { "temporal-polyfill": "^0.3.0", "uplot": "^1.6.32" } }, "sha1-TXaljuYw4FvU3az4FxhIb1gNtVk="],
 
-    "@eaws/micro-regions_names": ["@eaws/micro-regions_names@8.1.0", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.1.0.tgz", {}, "sha1-nlXs1lsqrelk/zYFgik11UaP+ms="],
+    "@eaws/micro-regions_names": ["@eaws/micro-regions_names@8.2.0", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.2.0.tgz", {}, "sha1-8sfRAtmdJWT052MNMzasReiHmwg="],
 
-    "@eaws/outline_properties": ["@eaws/outline_properties@8.1.0", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.1.0.tgz", {}, "sha1-kQxQSlblrw6WK+Tdy9AEinWfDFw="],
+    "@eaws/outline_properties": ["@eaws/outline_properties@8.2.0", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.2.0.tgz", {}, "sha1-a/4SjfHl+nY28pVHpRo+CJLsO/g="],
 
     "@emnapi/core": ["@emnapi/core@1.7.1", "", { "dependencies": { "@emnapi/wasi-threads": "1.1.0", "tslib": "^2.4.0" } }, "sha512-o1uhUASyo921r2XtHYOHy7gdkGLge8ghBEQHMWmyJFoXlpU58kIrhhN3w26lpQb6dspetweapMn2CSNwQ8I4wg=="],
 
