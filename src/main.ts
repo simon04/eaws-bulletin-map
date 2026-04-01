@@ -37,6 +37,7 @@ import {
   getWeatherStationsLayer,
   WeatherStationSymbol,
 } from "./weather-stations";
+import { throttle } from "es-toolkit";
 
 const popup = new Popup({
   popupClass: "default",
@@ -220,24 +221,26 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
       const properties = feature.getProperties() as FeatureProperties;
       return filterFeature(properties, route.date) &&
         properties.layer === "micro-regions" &&
-        properties.id === layer.get("regionID")
+        layer.get("regionIDs")?.includes(properties.id)
         ? selectedStyle
         : undefined;
     },
   });
 
-  layer.on("change:regionID" as unknown as "change", () => {
+  layer.on("change:regionIDs" as unknown as "change", () => {
     layer.changed();
   });
 
   map.addLayer(layer);
 
-  map.on("pointermove", (e) => {
-    requestAnimationFrame(() => {
-      const regionID = findMicroRegionID(e);
-      layer.set("regionID", regionID);
-    });
-  });
+  map.on(
+    "pointermove",
+    throttle((e) => {
+      requestAnimationFrame(() => {
+        layer.set("regionIDs", findMicroRegionIDs(e));
+      });
+    }, 50),
+  );
 
   map.on("click", (e) => {
     const weatherStation = map
@@ -247,16 +250,17 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
       popup.show(e.coordinate, getWeatherStationPopup(weatherStation));
       return;
     }
-    const regionID = findMicroRegionID(e);
-    if (!regionID) {
+    const regionIDs = findMicroRegionIDs(e);
+    if (!regionIDs.length) {
       return;
     }
-    const bulletin = bulletins.find((b) => b.regions?.some((r) => r.regionID === regionID));
+    const bulletin = bulletins.find((b) => b.regions?.some((r) => regionIDs.includes(r.regionID)));
     if (bulletin) {
-      popup.show(e.coordinate, formatBulletin(regionID, bulletin, route.details !== "0"));
+      const regionID = bulletin.regions?.map((r) => r.regionID).find((r) => regionIDs.includes(r));
+      popup.show(e.coordinate, formatBulletin(regionID!, bulletin, route.details !== "0"));
       return;
     }
-    const aws = eawsOutlineProperties.filter((p) => regionID.startsWith(p.id));
+    const aws = eawsOutlineProperties.filter((p) => regionIDs.some((id) => id.startsWith(p.id)));
     if (aws.length) {
       const a = aws.reduce((a, b) => (a.id.length > b.id.length ? a : b));
       popup.show(e.coordinate, formatEawsOutline(a));
@@ -265,17 +269,18 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
   });
 }
 
-function findMicroRegionID(e: MapBrowserEvent<any>): Region | undefined {
+function findMicroRegionIDs(e: MapBrowserEvent<any>): Region[] {
   return map
     .getFeaturesAtPixel(e.pixel)
-    .map((feature) => {
+    .filter((feature) => {
       const properties = feature.getProperties() as FeatureProperties;
-      return filterFeature(properties, route.date) &&
+      return (
+        filterFeature(properties, route.date) &&
         (properties.layer === "micro-regions" || properties.layer === "micro-regions_elevation")
-        ? properties.id
-        : undefined;
+      );
     })
-    .find((regionID) => !!regionID);
+    .map((feature) => feature.getProperties().id as Region)
+    .sort((id1, id2) => id1.localeCompare(id2));
 }
 
 function filterFeature(

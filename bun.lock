@@ -6,8 +6,9 @@
       "name": "eaws-bulletin-map",
       "dependencies": {
         "@albina-euregio/linea": "8.1.1",
-        "@eaws/micro-regions_names": "8.2.0",
-        "@eaws/outline_properties": "8.2.0",
+        "@eaws/micro-regions_names": "8.3.3",
+        "@eaws/outline_properties": "8.3.3",
+        "es-toolkit": "1.45.1",
         "ol": "10.8.0",
         "ol-ext": "4.0.37",
         "pmtiles": "4.3.0",
@@ -27,9 +28,9 @@
   "packages": {
     "@albina-euregio/linea": ["@albina-euregio/linea@8.1.1", "https://gitlab.com/api/v4/projects/70517866/packages/npm/@albina-euregio/linea/-/@albina-euregio/linea-8.1.1.tgz", { "dependencies": { "temporal-polyfill": "^0.3.0", "uplot": "^1.6.32" } }, "sha1-TXaljuYw4FvU3az4FxhIb1gNtVk="],
 
-    "@eaws/micro-regions_names": ["@eaws/micro-regions_names@8.2.0", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.2.0.tgz", {}, "sha1-8sfRAtmdJWT052MNMzasReiHmwg="],
+    "@eaws/micro-regions_names": ["@eaws/micro-regions_names@8.3.3", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.3.3.tgz", {}, "sha1-Gvf1c0/176OYexwlp+EsXzzghIs="],
 
-    "@eaws/outline_properties": ["@eaws/outline_properties@8.2.0", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.2.0.tgz", {}, "sha1-a/4SjfHl+nY28pVHpRo+CJLsO/g="],
+    "@eaws/outline_properties": ["@eaws/outline_properties@8.3.3", "https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.3.3.tgz", {}, "sha1-NFQoo/PM1Coa2SAj87qx1YsPKyc="],
 
     "@emnapi/core": ["@emnapi/core@1.7.1", "", { "dependencies": { "@emnapi/wasi-threads": "1.1.0", "tslib": "^2.4.0" } }, "sha512-o1uhUASyo921r2XtHYOHy7gdkGLge8ghBEQHMWmyJFoXlpU58kIrhhN3w26lpQb6dspetweapMn2CSNwQ8I4wg=="],
 
@@ -122,6 +123,8 @@
     "detect-libc": ["detect-libc@2.1.2", "", {}, "sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ=="],
 
     "earcut": ["earcut@3.0.2", "", {}, "sha512-X7hshQbLyMJ/3RPhyObLARM2sNxxmRALLKx1+NVFFnQ9gKzmCrxm9+uLIAdBcvc8FNLpctqlQ2V6AE92Ol9UDQ=="],
+
+    "es-toolkit": ["es-toolkit@1.45.1", "", {}, "sha512-/jhoOj/Fx+A+IIyDNOvO3TItGmlMKhtX8ISAHKE90c4b/k1tqaqEZ+uUqfpU8DMnW5cgNJv606zS55jGvza0Xw=="],
 
     "fdir": ["fdir@6.5.0", "", { "peerDependencies": { "picomatch": "^3 || ^4" }, "optionalPeers": ["picomatch"] }, "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg=="],
 
