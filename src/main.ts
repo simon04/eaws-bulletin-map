@@ -260,7 +260,9 @@ async function buildMarkerMap(bulletins: AvalancheBulletin[]) {
       popup.show(e.coordinate, formatBulletin(regionID!, bulletin, route.details !== "0"));
       return;
     }
-    const aws = eawsOutlineProperties.filter((p) => regionIDs.some((id) => id.startsWith(p.id)));
+    const aws = eawsOutlineProperties
+      .filter((p) => regionIDs.some((id) => id.startsWith(p.id)))
+      .filter((p) => p.id !== "ES-AR" || route.date > "2026-10-01");
     if (aws.length) {
       const a = aws.reduce((a, b) => (a.id.length > b.id.length ? a : b));
       popup.show(e.coordinate, formatEawsOutline(a));
