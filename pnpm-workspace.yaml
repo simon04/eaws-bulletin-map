@@ -1,0 +1,3 @@
+patchedDependencies:
+  '@albina-euregio/linea': patches/@albina-euregio%2Flinea@8.1.1.patch
+  pmtiles: patches/pmtiles@4.3.0.patch

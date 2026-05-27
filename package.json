@@ -24,8 +24,5 @@
     "typescript": "5.8.3",
     "vite": "8.0.3"
   },
-  "patchedDependencies": {
-    "@albina-euregio/linea@8.1.1": "patches/@albina-euregio%2Flinea@8.1.1.patch",
-    "pmtiles@4.3.0": "patches/pmtiles@4.3.0.patch"
-  }
+  "packageManager": "pnpm@11.4.0"
 }

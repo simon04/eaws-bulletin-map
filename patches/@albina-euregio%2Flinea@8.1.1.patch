@@ -1,6 +1,3 @@
-diff --git a/node_modules/@albina-euregio/linea/.bun-tag-fa9885576acc0f40 b/.bun-tag-fa9885576acc0f40
-new file mode 100644
-index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/src/linea-plot/cursorOpts.ts b/src/linea-plot/cursorOpts.ts
 index ead87ce8af7e67935ba881b0a8e7a82e4f9c0f0b..c72e651194cb9c03865db62e659c92b08cfd5944 100644
 --- a/src/linea-plot/cursorOpts.ts
