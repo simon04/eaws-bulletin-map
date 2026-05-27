@@ -1,3 +1,17 @@
 patchedDependencies:
-  '@albina-euregio/linea': patches/@albina-euregio%2Flinea@8.1.1.patch
+  "@albina-euregio/linea": patches/@albina-euregio%2Flinea@8.1.1.patch
   pmtiles: patches/pmtiles@4.3.0.patch
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vite-plus: latest
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"

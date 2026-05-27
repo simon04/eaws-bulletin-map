@@ -5,9 +5,10 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build --sourcemap true",
-    "preview": "vite preview"
+    "dev": "vp dev",
+    "build": "tsc && vp build --sourcemap true",
+    "preview": "vp preview",
+    "prepare": "vp config"
   },
   "dependencies": {
     "@albina-euregio/linea": "8.1.1",
@@ -20,9 +21,9 @@
     "zod": "4.1.11"
   },
   "devDependencies": {
-    "oxfmt": "0.42.0",
     "typescript": "5.8.3",
-    "vite": "8.0.3"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   },
   "packageManager": "pnpm@11.4.0"
 }
