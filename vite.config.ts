@@ -1,6 +1,9 @@
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
+  build: {
+    license: { fileName: "assets/license.txt" },
+  },
   staged: {
     "*": "vp check --fix",
   },
