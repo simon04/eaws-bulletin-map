@@ -20,12 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v6
+      - uses: pnpm/setup@v1
         with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          runtime: node@24
+          cache: true
       - run: pnpm vp --version
       - run: pnpm build
       - uses: actions/upload-pages-artifact@v4
