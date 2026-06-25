@@ -18,7 +18,7 @@
     "ol": "10.8.0",
     "ol-ext": "4.0.37",
     "pmtiles": "4.3.0",
-    "zod": "4.1.11"
+    "valibot": "1.4.1"
   },
   "devDependencies": {
     "typescript": "5.8.3",

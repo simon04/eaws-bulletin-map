@@ -1,4 +1,4 @@
-import type * as z from "zod/mini";
+import * as v from "valibot";
 import { type AvalancheBulletin, AvalancheBulletinsSchema } from "./caaml";
 import type { Region } from "./types";
 import eawsOutlineProperties from "@eaws/outline_properties/index.json";
@@ -42,29 +42,29 @@ export async function fetchBulletins(
   return bulletins;
 }
 
-export async function fetchJSON<T extends z.ZodMiniType>(
+export async function fetchJSON<T extends v.GenericSchema>(
   url: string,
-  fallback: z.z.core.output<T>,
+  fallback: v.InferOutput<T>,
   schema: T,
-): Promise<z.z.core.output<T>> {
+): Promise<v.InferOutput<T>> {
   let res;
   try {
     res = await fetch(url, { cache: "no-cache" });
   } catch (e) {
     console.warn("Failed to fetch CAAML from " + url, e);
-    return await schema.parseAsync(fallback);
+    return await v.parseAsync(schema, fallback);
   }
   if (!res.ok) return fallback;
   let json;
   try {
     json = await res.json();
   } catch (e) {
-    return await schema.parseAsync(fallback);
+    return await v.parseAsync(schema, fallback);
   }
   try {
-    return await schema.parseAsync(json);
+    return await v.parseAsync(schema, json);
   } catch (e) {
     console.warn("Failed to validate CAAML from " + url, json, e);
-    return await schema.parseAsync(fallback);
+    return await v.parseAsync(schema, fallback);
   }
 }

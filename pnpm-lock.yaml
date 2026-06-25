@@ -43,9 +43,9 @@ importers:
       pmtiles:
         specifier: 4.3.0
         version: 4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff)
-      zod:
-        specifier: 4.1.11
-        version: 4.1.11
+      valibot:
+        specifier: 1.4.1
+        version: 1.4.1(typescript@5.8.3)
     devDependencies:
       typescript:
         specifier: 5.8.3
@@ -986,6 +986,14 @@ packages:
   uzip-module@1.0.3:
     resolution: {integrity: sha512-AMqwWZaknLM77G+VPYNZLEruMGWGzyigPK3/Whg99B3S6vGHuqsyl5ZrOv1UUF3paGK1U6PM0cnayioaryg/fA==}
 
+  valibot@1.4.1:
+    resolution: {integrity: sha512-klCmFTz2jeDluy9RwX+F884TCiogtdBJ/YaxSx1EOBYXa3NXNWj8kR1jjN8rzluwojJVWWaHJ4r1U5LfICnM3g==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   vite-plus@0.2.1:
     resolution: {integrity: sha512-q5q/Y38UkWFsNg1JO+RyRdPUqoewaSqIlMyK2p83GKNUvf4D38Ntb3PToRTDZbTRh7mWt+B+d0DQBv4nCDpMcQ==}
     engines: {node: ^20.19.0 || ^22.18.0 || >=24.11.0}
@@ -1019,9 +1027,6 @@ packages:
 
   zarrita@0.6.2:
     resolution: {integrity: sha512-8IV+2bWt5yiHNVK9GVEVK1tscpqDcJj8iz5cIKFOiWiWYUsK4V5njgMtnpkvKu6L7K+Og6zUShd8f+dwb6LvTA==}
-
-  zod@4.1.11:
-    resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
 
   zstddec@0.2.0:
     resolution: {integrity: sha512-oyPnDa1X5c13+Y7mA/FDMNJrn4S8UNBe0KCqtDmor40Re7ALrPN6npFwyYVRRh+PqozZQdeg23QtbcamZnG5rA==}
@@ -1669,6 +1674,10 @@ snapshots:
 
   uzip-module@1.0.3: {}
 
+  valibot@1.4.1(typescript@5.8.3):
+    optionalDependencies:
+      typescript: 5.8.3
+
   vite-plus@0.2.1(@voidzero-dev/vite-plus-core@0.2.1(typescript@5.8.3))(typescript@5.8.3):
     dependencies:
       '@oxc-project/types': 0.136.0
@@ -1739,7 +1748,5 @@ snapshots:
     dependencies:
       '@zarrita/storage': 0.1.4
       numcodecs: 0.3.2
-
-  zod@4.1.11: {}
 
   zstddec@0.2.0: {}
