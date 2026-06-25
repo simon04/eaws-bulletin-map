@@ -40,6 +40,9 @@ importers:
       ol-ext:
         specifier: 4.0.37
         version: 4.0.37(ol@10.8.0)
+      ol-pmtiles:
+        specifier: 2.0.2
+        version: 2.0.2(ol@10.8.0)
       pmtiles:
         specifier: 4.3.0
         version: 4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff)
@@ -837,6 +840,11 @@ packages:
     peerDependencies:
       ol: '>= 5.3.0'
 
+  ol-pmtiles@2.0.2:
+    resolution: {integrity: sha512-UVGEHoSi8mCGiDUyfqZmx+lbDwXtSwpEeGNQAzIZskEJ8tQeOGFcezisRTjJc1wu5KnT7ckpDLQePqA6LUi/ow==}
+    peerDependencies:
+      ol: '>=9.0.0'
+
   ol@10.8.0:
     resolution: {integrity: sha512-kLk7jIlJvKyhVMAjORTXKjzlM6YIByZ1H/d0DBx3oq8nSPCG6/gbLr5RxukzPgwbhnAqh+xHNCmrvmFKhVMvoQ==}
 
@@ -1511,6 +1519,11 @@ snapshots:
   ol-ext@4.0.37(ol@10.8.0):
     dependencies:
       ol: 10.8.0
+
+  ol-pmtiles@2.0.2(ol@10.8.0):
+    dependencies:
+      ol: 10.8.0
+      pmtiles: 4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff)
 
   ol@10.8.0:
     dependencies:

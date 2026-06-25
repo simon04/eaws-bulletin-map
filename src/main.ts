@@ -1,6 +1,6 @@
 import { Control, defaults as defaultControls } from "ol/control";
 import { defaults as defaultInteractions, Interaction } from "ol/interaction";
-import { PMTilesVectorSource } from "./ol-pmtiles";
+import { PMTilesRasterSource, PMTilesVectorSource } from "ol-pmtiles";
 import { fromLonLat } from "ol/proj";
 import EventType from "ol/events/EventType";
 import Fill from "ol/style/Fill";
@@ -14,7 +14,6 @@ import TileLayer from "ol/layer/Tile";
 import type { MapBrowserEvent } from "ol";
 import VectorTileLayer from "ol/layer/VectorTile";
 import View from "ol/View";
-import XYZ from "ol/source/XYZ";
 import "ol/ol.css";
 import "ol-ext/dist/ol-ext.css";
 import "./style.css";
@@ -100,8 +99,8 @@ function initMap() {
     }),
     layers: [
       new TileLayer({
-        source: new XYZ({
-          url: "https://static.avalanche.report/tms/{z}/{x}/{y}.webp",
+        source: new PMTilesRasterSource({
+          url: "https://static.avalanche.report/albina-basemap.pmtiles",
           attributions: [
             '🌍 <a href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3, <a href="/assets/license.txt">open source licenses</a>)',
             '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3, CC BY 4.0)',

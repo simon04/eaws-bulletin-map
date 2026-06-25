@@ -17,6 +17,7 @@
     "es-toolkit": "1.45.1",
     "ol": "10.8.0",
     "ol-ext": "4.0.37",
+    "ol-pmtiles": "2.0.2",
     "pmtiles": "4.3.0",
     "valibot": "1.4.1"
   },
