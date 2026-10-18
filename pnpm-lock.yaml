@@ -26,11 +26,11 @@ importers:
         specifier: 8.1.1
         version: 8.1.1(patch_hash=5d39b84bdfd1818d2ce48d4129dc3e96fab067b5f3eb0b97dfab3bddd9bf9a18)
       '@eaws/micro-regions_names':
-        specifier: 8.3.3
-        version: 8.3.3
+        specifier: 8.6.0
+        version: 8.6.0
       '@eaws/outline_properties':
-        specifier: 8.3.3
-        version: 8.3.3
+        specifier: 8.6.0
+        version: 8.6.0
       es-toolkit:
         specifier: 1.45.1
         version: 1.45.1
@@ -80,11 +80,11 @@ packages:
   '@blazediff/core@1.9.1':
     resolution: {integrity: sha512-ehg3jIkYKulZh+8om/O25vkvSsXXwC+skXmyA87FFx6A/45eqOkZsBltMw/TVteb0mloiGT8oGRTcjRAz66zaA==}
 
-  '@eaws/micro-regions_names@8.3.3':
-    resolution: {integrity: sha1-Gvf1c0/176OYexwlp+EsXzzghIs=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.3.3.tgz}
+  '@eaws/micro-regions_names@8.6.0':
+    resolution: {integrity: sha1-LZrPNMsFGUJOofuLso7UuxExacg=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-8.6.0.tgz}
 
-  '@eaws/outline_properties@8.3.3':
-    resolution: {integrity: sha1-NFQoo/PM1Coa2SAj87qx1YsPKyc=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.3.3.tgz}
+  '@eaws/outline_properties@8.6.0':
+    resolution: {integrity: sha1-YJHCT8FdCNTjQjhYNFKmyNJLV38=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-8.6.0.tgz}
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -1058,9 +1058,9 @@ snapshots:
 
   '@blazediff/core@1.9.1': {}
 
-  '@eaws/micro-regions_names@8.3.3': {}
+  '@eaws/micro-regions_names@8.6.0': {}
 
-  '@eaws/outline_properties@8.3.3': {}
+  '@eaws/outline_properties@8.6.0': {}
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
