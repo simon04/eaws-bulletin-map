@@ -19,7 +19,7 @@
     "ol-ext": "4.0.38",
     "ol-pmtiles": "2.0.2",
     "pmtiles": "4.3.0",
-    "valibot": "1.4.1"
+    "valibot": "1.5.0"
   },
   "devDependencies": {
     "typescript": "5.8.3",

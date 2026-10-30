@@ -207,8 +207,8 @@ importers:
         specifier: 4.3.0
         version: 4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff)
       valibot:
-        specifier: 1.4.1
-        version: 1.4.1(typescript@5.8.3)
+        specifier: 1.5.0
+        version: 1.5.0(typescript@5.8.3)
     devDependencies:
       typescript:
         specifier: 5.8.3
@@ -1138,8 +1138,8 @@ packages:
   uplot@1.6.32:
     resolution: {integrity: sha512-KIMVnG68zvu5XXUbC4LQEPnhwOxBuLyW1AHtpm6IKTXImkbLgkMy+jabjLgSLMasNuGGzQm/ep3tOkyTxpiQIw==}
 
-  valibot@1.4.1:
-    resolution: {integrity: sha512-klCmFTz2jeDluy9RwX+F884TCiogtdBJ/YaxSx1EOBYXa3NXNWj8kR1jjN8rzluwojJVWWaHJ4r1U5LfICnM3g==}
+  valibot@1.5.0:
+    resolution: {integrity: sha512-nil6AkP2TChWL43Z5uJ6GTxX01CUA+g8LWUM+N/rB9NBbkUMaUsi9PUNzlUPgoKASgmx9f7eGOYpJ04/fSa6FQ==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -1884,7 +1884,7 @@ snapshots:
 
   uplot@1.6.32: {}
 
-  valibot@1.4.1(typescript@5.8.3):
+  valibot@1.5.0(typescript@5.8.3):
     optionalDependencies:
       typescript: 5.8.3
 
