@@ -14,7 +14,7 @@
     "@albina-euregio/linea": "8.1.1",
     "@eaws/micro-regions_names": "8.7.0",
     "@eaws/outline_properties": "8.7.0",
-    "es-toolkit": "1.45.1",
+    "es-toolkit": "1.53.0",
     "ol": "10.11.0",
     "ol-ext": "4.0.38",
     "ol-pmtiles": "2.0.2",
