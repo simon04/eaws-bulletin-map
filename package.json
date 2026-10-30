@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "typescript": "5.8.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@^0.2.1",
+    "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "packageManager": "pnpm@12.16.1"
