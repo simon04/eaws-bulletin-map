@@ -15,7 +15,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      pmtiles: "pmtiles/src/index.ts",
+      // non-minified sources, bypassing the "exports" of package.json
+      pmtiles: new URL("node_modules/pmtiles/src/index.ts", import.meta.url).pathname,
     },
   },
 });

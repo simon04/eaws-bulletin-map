@@ -176,7 +176,6 @@ overrides:
 
 patchedDependencies:
   '@albina-euregio/linea': 5d39b84bdfd1818d2ce48d4129dc3e96fab067b5f3eb0b97dfab3bddd9bf9a18
-  pmtiles: 3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff
 
 importers:
 
@@ -204,8 +203,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2(ol@10.11.0)
       pmtiles:
-        specifier: 4.3.0
-        version: 4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff)
+        specifier: 4.5.0
+        version: 4.5.0
       valibot:
         specifier: 1.5.0
         version: 1.5.0(typescript@5.8.3)
@@ -1048,8 +1047,8 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  pmtiles@4.3.0:
-    resolution: {integrity: sha512-wnzQeSiYT/MyO63o7AVxwt7+uKqU0QUy2lHrivM7GvecNy0m1A4voVyGey7bujnEW5Hn+ZzLdvHPoFaqrOzbPA==}
+  pmtiles@4.5.0:
+    resolution: {integrity: sha512-CBeD4SoUluFziGdy/8k7FOjQxQy486n+929W/tWophauvMICpkZ26vGBWhDt/6b1FZQWNaf4jFdT/5+q0Wii5w==}
 
   pngjs@7.0.0:
     resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
@@ -1728,7 +1727,7 @@ snapshots:
   ol-pmtiles@2.0.2(ol@10.11.0):
     dependencies:
       ol: 10.11.0
-      pmtiles: 4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff)
+      pmtiles: 4.5.0
 
   ol@10.11.0:
     dependencies:
@@ -1811,7 +1810,7 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  pmtiles@4.3.0(patch_hash=3f19bd07524a4ee72233c1b0f841c9fd54469caafc8748b9d2faac2ab8f55dff):
+  pmtiles@4.5.0:
     dependencies:
       fflate: 0.8.3
 
