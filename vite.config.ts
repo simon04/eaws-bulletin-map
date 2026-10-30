@@ -13,10 +13,4 @@ export default defineConfig({
     rules: { "vite-plus/prefer-vite-plus-imports": "error" },
     options: { typeAware: true, typeCheck: true },
   },
-  resolve: {
-    alias: {
-      // non-minified sources, bypassing the "exports" of package.json
-      pmtiles: new URL("node_modules/pmtiles/src/index.ts", import.meta.url).pathname,
-    },
-  },
 });
