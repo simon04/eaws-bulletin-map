@@ -2,6 +2,12 @@ import { defineConfig } from "vite-plus";
 
 export default defineConfig({
   build: {
+    rolldownOptions: {
+      input: {
+        main: "index.html",
+        "new-ava-times": "new-ava-times.html",
+      },
+    },
     license: { fileName: "assets/license.txt" },
   },
   staged: {

@@ -13,21 +13,7 @@ export async function fetchBulletins(
     );
   }
 
-  const aws = eawsOutlineProperties
-    .find((p) => region === p.id)
-    ?.aws.find((aws0) => {
-      const url = (aws0.url as { "api:date"?: string })["api:date"];
-      return (
-        !url?.startsWith("https://bollettini.aineva.it/") && // CORS not supported
-        url?.endsWith("CAAMLv6.json")
-      );
-    });
-  let url = (aws?.url as { "api:date"?: string })?.["api:date"]
-    ?.replace(/{date}/g, date)
-    ?.replace(/{region}/g, region)
-    ?.replace(/{lang}/g, "en");
-  url ??= `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`;
-
+  const { url, aws } = bulletinURL(date, region);
   const { bulletins } = await fetchJSON(url, { bulletins: [] }, AvalancheBulletinsSchema);
   bulletins.forEach((b) => {
     if (!aws?.url) return;
@@ -40,6 +26,25 @@ export async function fetchBulletins(
     };
   });
   return bulletins;
+}
+
+export function bulletinURL(date: string, region: Region, lang = "en") {
+  const aws = eawsOutlineProperties
+    .find((p) => region === p.id)
+    ?.aws.find((aws0) => {
+      const url = (aws0.url as { "api:date"?: string })["api:date"];
+      return (
+        !url?.startsWith("https://bollettini.aineva.it/") && // CORS not supported
+        url?.endsWith("CAAMLv6.json")
+      );
+    });
+  let url: string | undefined = (aws?.url as { "api:date"?: string })?.["api:date"]
+    ?.replace(/{date}/g, date)
+    ?.replace(/{region}/g, region)
+    ?.replace(/{lang}/g, lang);
+  url ??= `https://static.avalanche.report/eaws_bulletins/${date}/${date}-${region}.json`;
+
+  return { url, aws };
 }
 
 export async function fetchJSON<T extends v.GenericSchema>(
