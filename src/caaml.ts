@@ -153,7 +153,7 @@ export const AvalancheBulletinSchema = v.object({
   snowpackStructure: v.optional(TextsSchema),
   source: v.optional(AvalancheBulletinSourceSchema),
   tendency: v.pipe(
-    v.optional(v.union([TendencySchema, v.array(TendencySchema)])),
+    v.optional(v.union([v.array(TendencySchema), TendencySchema])),
     v.transform((t: Tendency | Tendency[] | undefined) => (Array.isArray(t) ? t : [t])),
   ),
   travelAdvisory: v.optional(TextsSchema),
