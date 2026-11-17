@@ -11,7 +11,7 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@albina-euregio/linea": "8.1.1",
+    "@albina-euregio/linea": "9.1.1",
     "@eaws/micro-regions_names": "9.1.0",
     "@eaws/outline_properties": "9.1.0",
     "es-toolkit": "1.53.2",

@@ -5,7 +5,7 @@ import CircleStyle from "ol/style/Circle";
 import Stroke from "ol/style/Stroke";
 import Fill from "ol/style/Fill";
 import Style from "ol/style/Style";
-import { LineaPlot } from "@albina-euregio/linea/src/linea-plot";
+import "@albina-euregio/linea";
 import { FeatureLike } from "ol/Feature";
 
 export const WeatherStationSymbol = Symbol();
@@ -39,7 +39,7 @@ export async function getWeatherStationsLayer() {
 }
 
 export function getWeatherStationPopup(feature: FeatureLike): HTMLElement {
-  const p = new LineaPlot();
+  const p = document.createElement("linea-plot");
   p.style.display = "block";
   p.style.width = "100%";
   p.style.minHeight = "400px";

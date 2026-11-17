@@ -174,16 +174,13 @@ catalogs:
 overrides:
   vite@*: npm:@voidzero-dev/vite-plus-core@1.6.0
 
-patchedDependencies:
-  '@albina-euregio/linea': 5d39b84bdfd1818d2ce48d4129dc3e96fab067b5f3eb0b97dfab3bddd9bf9a18
-
 importers:
 
   .:
     dependencies:
       '@albina-euregio/linea':
-        specifier: 8.1.1
-        version: 8.1.1(patch_hash=5d39b84bdfd1818d2ce48d4129dc3e96fab067b5f3eb0b97dfab3bddd9bf9a18)
+        specifier: 9.1.1
+        version: 9.1.1(valibot@1.5.0(typescript@5.8.3))
       '@eaws/micro-regions_names':
         specifier: 9.1.0
         version: 9.1.0
@@ -221,8 +218,10 @@ importers:
 
 packages:
 
-  '@albina-euregio/linea@8.1.1':
-    resolution: {integrity: sha1-TXaljuYw4FvU3az4FxhIb1gNtVk=, tarball: https://gitlab.com/api/v4/projects/70517866/packages/npm/@albina-euregio/linea/-/@albina-euregio/linea-8.1.1.tgz}
+  '@albina-euregio/linea@9.1.1':
+    resolution: {integrity: sha1-yO2Cds9fgnVdBudiSPoo2pDmoZk=, tarball: https://gitlab.com/api/v4/projects/70517866/packages/npm/@albina-euregio/linea/-/@albina-euregio/linea-9.1.1.tgz}
+    peerDependencies:
+      valibot: ^1.5.0
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -802,6 +801,9 @@ packages:
   '@zarrita/storage@0.2.0':
     resolution: {integrity: sha512-855ZXqtnds7spnT8vNvD+MXa3QExP1m2GqShe8yt7uZXHnQLgJHgkpVwFjE1B0KDDRO0ki09hmk6OboTaIfPsQ==}
 
+  air-datepicker@3.6.0:
+    resolution: {integrity: sha512-+txUkqa949rXBJDmkQAIb/GehZECJYF4rm9XJxVYtEX22C9WvBpE/XwCUQZBopKIkpg4ycAySJ9lH3JOg9qQTw==}
+
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
@@ -1092,11 +1094,14 @@ packages:
   std-env@4.3.0:
     resolution: {integrity: sha512-OtU/EgQ1kIm5KwqQpBC6ZEMXrZRui11w8zgfTWp8cdO9B8OaPsbA8bTHO2P+HNo1VlUTGMVBwPhydu6poeXiag==}
 
-  temporal-polyfill@0.3.2:
-    resolution: {integrity: sha512-TzHthD/heRK947GNiSu3Y5gSPpeUDH34+LESnfsq8bqpFhsB79HFBX8+Z834IVX68P3EUyRPZK5bL/1fh437Eg==}
+  temporal-polyfill@1.0.8:
+    resolution: {integrity: sha512-RCCGa0GddT099XG49ijdD0tDf86L8vfuZun1+JyJiO4Y2NP9PACQsG0OnvNPXwVLisdvhr/zqL2nhKQmXXx08A==}
 
-  temporal-spec@0.3.1:
-    resolution: {integrity: sha512-B4TUhezh9knfSIMwt7RVggApDRJZo73uZdj8AacL2mZ8RP5KtLianh2MXxL06GN9ESYiIsiuoLQhgVfwe55Yhw==}
+  temporal-spec@1.0.1:
+    resolution: {integrity: sha512-wxVoanmDeavXie1vu2JaQ3WIc3JZnWAOYFBsJyATaVsXsycKYUflGsyBmrRSnoCpZJpwPyr38VpgSUlQ8CbFxg==}
+
+  temporal-utils@1.0.4:
+    resolution: {integrity: sha512-4mAcgbWlaxe+gn23gk8g0iHxCVGVOhKzSCfF5HM3lfvH8BdT+/pBmH/R/E4CrIse+koUgs8ThkPzCLnui6Fi8w==}
 
   tinybench@6.2.2:
     resolution: {integrity: sha512-nIZ2N2dFpjBsg2hgitKu7mA+FvsIJuGJOwysRngmVRRmWgR/UyPjwJj8c/fT/dhm8EkHnF5EOogRf+0Z2qrimA==}
@@ -1238,10 +1243,12 @@ packages:
 
 snapshots:
 
-  '@albina-euregio/linea@8.1.1(patch_hash=5d39b84bdfd1818d2ce48d4129dc3e96fab067b5f3eb0b97dfab3bddd9bf9a18)':
+  '@albina-euregio/linea@9.1.1(valibot@1.5.0(typescript@5.8.3))':
     dependencies:
-      temporal-polyfill: 0.3.2
+      air-datepicker: 3.6.0
+      temporal-polyfill: 1.0.8
       uplot: 1.6.32
+      valibot: 1.5.0(typescript@5.8.3)
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -1592,6 +1599,8 @@ snapshots:
       reference-spec-reader: 0.2.0
       unzipit: 2.0.0
 
+  air-datepicker@3.6.0: {}
+
   ansi-regex@5.0.1: {}
 
   ansi-styles@5.2.0: {}
@@ -1851,11 +1860,14 @@ snapshots:
 
   std-env@4.3.0: {}
 
-  temporal-polyfill@0.3.2:
+  temporal-polyfill@1.0.8:
     dependencies:
-      temporal-spec: 0.3.1
+      temporal-spec: 1.0.1
+      temporal-utils: 1.0.4
 
-  temporal-spec@0.3.1: {}
+  temporal-spec@1.0.1: {}
+
+  temporal-utils@1.0.4: {}
 
   tinybench@6.2.2: {}
 
