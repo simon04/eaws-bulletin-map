@@ -191,11 +191,11 @@ importers:
         specifier: 9.1.1
         version: 9.1.1(valibot@1.5.0(typescript@7.0.2))
       '@eaws/micro-regions_names':
-        specifier: 9.1.0
-        version: 9.1.0
+        specifier: 9.2.0
+        version: 9.2.0
       '@eaws/outline_properties':
-        specifier: 9.1.0
-        version: 9.1.0
+        specifier: 9.2.0
+        version: 9.2.0
       es-toolkit:
         specifier: 1.53.2
         version: 1.53.2
@@ -247,11 +247,11 @@ packages:
   '@blazediff/core@1.10.0':
     resolution: {integrity: sha512-AOQff0zgR7cGsZL+4E7hVkmujoPUpm0J9xzWGWZj5wCjd3gmxESXAPfKyuzs93VdpQNFhHlBhfOjrcZ+XTERtQ==}
 
-  '@eaws/micro-regions_names@9.1.0':
-    resolution: {integrity: sha1-D1rHQB6lAUvy729ayULuMLV1rC4=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-9.1.0.tgz}
+  '@eaws/micro-regions_names@9.2.0':
+    resolution: {integrity: sha1-pnljdNDZd/HB9i+RkBkKgB9Cedo=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/micro-regions_names/-/@eaws/micro-regions_names-9.2.0.tgz}
 
-  '@eaws/outline_properties@9.1.0':
-    resolution: {integrity: sha1-wwimBmSSG6dXaAvHS6oo096Seto=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-9.1.0.tgz}
+  '@eaws/outline_properties@9.2.0':
+    resolution: {integrity: sha1-8dF5QqZENOHq9DLeLy6sFMqE5mk=, tarball: https://gitlab.com/api/v4/projects/25330421/packages/npm/@eaws/outline_properties/-/@eaws/outline_properties-9.2.0.tgz}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -1391,9 +1391,9 @@ snapshots:
 
   '@blazediff/core@1.10.0': {}
 
-  '@eaws/micro-regions_names@9.1.0': {}
+  '@eaws/micro-regions_names@9.2.0': {}
 
-  '@eaws/outline_properties@9.1.0': {}
+  '@eaws/outline_properties@9.2.0': {}
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
