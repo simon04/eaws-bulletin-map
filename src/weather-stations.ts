@@ -22,8 +22,8 @@ export async function getWeatherStationsLayer() {
     f.set("srcSMET", srcSMET);
   });
   const attributions = [
-    '<a href="https://avalanche.report/weather/archive">Weather Station Archive | Avalanche.report</a> (CC BY 4.0</a>)',
-    '<a href="https://gitlab.com/albina-euregio/linea">albina-euregio/linea</a> (LGPLv3)',
+    '<a target="_blank" href="https://avalanche.report/weather/archive">Weather Station Archive | Avalanche.report</a> (CC BY 4.0)',
+    '<a target="_blank" href="https://gitlab.com/albina-euregio/linea">albina-euregio/linea</a> (LGPLv3)',
   ];
   const source = new VectorSource({ features, attributions });
 

@@ -102,10 +102,10 @@ function initMap() {
         source: new PMTilesRasterSource({
           url: "https://static.avalanche.report/albina-basemap.pmtiles",
           attributions: [
-            '🌍 <a href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3, <a href="/assets/license.txt">open source licenses</a>)',
-            '<a href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3, CC BY 4.0)',
-            '<a href="https://sonny.4lima.de/">Sonny</a> (CC BY 4.0)',
-            '<a href="https://www.eea.europa.eu/en/datahub/datahubitem-view/d08852bc-7b5f-4835-a776-08362e2fbf4b">EU-DEM</a> (CC BY 4.0)',
+            '🌍 <a target="_blank" href="https://github.com/simon04/eaws-bulletin-map">simon04/eaws-bulletin-map</a> (GPLv3, <a target="_blank" href="/assets/license.txt">open source licenses</a>)',
+            '<a target="_blank" href="https://gitlab.com/albina-euregio">albina-euregio</a> (GPLv3, CC BY 4.0)',
+            '<a target="_blank" href="https://sonny.4lima.de/">Sonny</a> (CC BY 4.0)',
+            '<a target="_blank" href="https://www.eea.europa.eu/en/datahub/datahubitem-view/d08852bc-7b5f-4835-a776-08362e2fbf4b">EU-DEM</a> (CC BY 4.0)',
           ],
           maxZoom: 12,
           minZoom: 3,
@@ -141,8 +141,8 @@ const vectorRegions = new PMTilesVectorSource({
   url: `https://static.avalanche.report/eaws-regions.pmtiles?${version}`,
   attributions: [
     ...Object.values(DANGER_RATINGS).map((rating) => dangerRatingLink(rating)),
-    '<a href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
-    '<a href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
+    '<a target="_blank" href="https://gitlab.com/eaws/eaws-regions">eaws/eaws-regions</a> (CC0)',
+    '<a target="_blank" href="https://gitlab.com/albina-euregio/pyAvaCore">albina-euregio/pyAvaCore</a> (GPLv3)',
   ],
   maxZoom: 10,
 });

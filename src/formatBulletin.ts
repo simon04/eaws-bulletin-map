@@ -80,7 +80,7 @@ export function dangerRatingLink(
 ): string {
   if (!rating || rating === "no_rating" || rating === "no_snow") return "";
   const { color, id, text } = typeof rating === "string" ? DANGER_RATINGS[rating] : rating;
-  return `<a href="https://www.avalanches.org/standards/avalanche-danger-scale/">
+  return `<a target="_blank" href="https://www.avalanches.org/standards/avalanche-danger-scale/">
       <span class="square" style="background: ${color}"></span>
       <abbr title="${text}">${id}</abbr></a>`;
 }
